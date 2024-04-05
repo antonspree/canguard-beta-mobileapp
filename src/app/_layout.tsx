@@ -17,6 +17,8 @@ export const unstable_settings = {
   initialRouteName: '(tabs)',
 };
 
+import "@/style/global.css";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
