@@ -16,6 +16,9 @@ web-build/
 *.key
 *.mobileprovision
 
+android/
+ios/
+
 # Metro
 .metro-health-check*
 
@@ -39,3 +42,6 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
+
+# credentials
+credentials.json

@@ -1,8 +1,6 @@
-import { axiosPublicInstance } from "@/utils/axios";
+import { axiosPublicInstance } from "@/lib/axios";
 
-import { SignInFormDataType, SignUpFormDataType } from "@/types/auth";
-
-const signIn = async (data: SignInFormDataType) => {
+const signIn = async (data: any) => {
   try {
     const result = await axiosPublicInstance
       .post("/auth/login", { ...data })
@@ -14,10 +12,10 @@ const signIn = async (data: SignInFormDataType) => {
   }
 };
 
-const signUp = async (data: SignUpFormDataType) => {
+const signUp = async (data: any) => {
   try {
     const result = await axiosPublicInstance
-      .post("/auth/register", { ...data })
+      .post("/auth/register", data)
       .then((res) => res.data);
 
     return result;
@@ -26,4 +24,28 @@ const signUp = async (data: SignUpFormDataType) => {
   }
 };
 
-export { signIn, signUp };
+const forgotPass = async (data: any) => {
+  try {
+    const result = await axiosPublicInstance
+      .post("/auth/forgot", { ...data })
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const resetPass = async (data: any) => {
+  try {
+    const result = await axiosPublicInstance
+      .post("/auth/resetPass", data)
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { signIn, signUp, forgotPass, resetPass };

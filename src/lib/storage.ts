@@ -1,29 +1,12 @@
 import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  SignInFormDataType,
-  SignUpFormDataType,
-} from "@/types/auth";
 
-
-
-const saveData = async (
-  index: string,
-  data: SignInFormDataType | SignUpFormDataType | string
-) => {
+const saveData = async (index: string, data: any) => {
   try {
     if (Platform.OS === "web") {
-      if (typeof data === "string") {
-        localStorage.setItem(index, data);
-      } else {
-        localStorage.setItem(index, JSON.stringify(data));
-      }
+      localStorage.setItem(index, JSON.stringify(data));
     } else {
-      if (typeof data === "string") {
-        await AsyncStorage.setItem(index, data);
-      } else {
-        await AsyncStorage.setItem(index, JSON.stringify(data));
-      }
+      await AsyncStorage.setItem(index, JSON.stringify(data));
     }
   } catch (error) {
     console.error("Error saving form data:", error);
@@ -37,9 +20,9 @@ const loadData = async (index: string) => {
     let savedFormData = null;
 
     if (Platform.OS === "web") {
-      savedFormData = localStorage.getItem(index);
+      savedFormData = JSON.parse(localStorage.getItem(index) as any);
     } else {
-      savedFormData = await AsyncStorage.getItem(index);
+      savedFormData = JSON.parse((await AsyncStorage.getItem(index)) as any);
     }
 
     return savedFormData;

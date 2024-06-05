@@ -1,61 +1,53 @@
-// expo
+import React from "react";
+import { Text, View, Pressable } from "react-native";
 import { router } from "expo-router";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
+import { loadData } from "@/lib/storage";
 
-// native
-import {
-  Text,
-  View,
-  ImageBackground,
-  Pressable,
-  ToastAndroid,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-// utils
-import { loadData } from "@/utils/storage";
-
-// assets
-import BackImage from "@/assets/images/welcome.png";
-
-export default function App() {
+const App: React.FC = () => {
   const onPress = async () => {
     const token = await loadData("token");
 
     if (token) {
       router.replace("/(main)/home");
     } else {
-      router.replace("/(auth)/signin");
+      router.replace("/(auth)/login");
     }
   };
 
   return (
-    <SafeAreaView>
-      <ImageBackground className="w-full h-full" source={BackImage}>
-        <View className="w-full h-full flex flex-col justify-end">
-          <LinearGradient
-            colors={["transparent", "rgb(0,0,0)"]}
-            start={[0, 0]}
-            end={[0, 0.4]}
-            className="w-full h-2/3 flex flex-col justify-end "
-          >
-            <View className="w-full px-8 pb-14">
-              <Text className="text-white font-bold text-5xl mb-4">
-                Die Software für deinen Social Club
+    <View className="relative">
+      <Image
+        className="absolute w-full h-full"
+        placeholder="background"
+        source={require("../assets/images/welcome.png")}
+      />
+      <View className="w-full h-full flex justify-end">
+        <LinearGradient
+          className="h-2/3 flex justify-end"
+          colors={["transparent", "#000000"]}
+          start={[0, 0]}
+          end={[0, 0.5]}
+        >
+          <View className="flex flex-col space-y-5 px-10 pb-32">
+            <Text className="font-bold text-5xl text-white">
+              Die Software für deinen Social Club
+            </Text>
+            <Text className="text-white text-lg">
+              Die ideale Softwarelösung für deinen Anbauverein. Organisiere
+              Mitglieder und behalte Anbau sowie Distribution stets im Blick.
+            </Text>
+            <Pressable onPress={onPress} className="bg-[#19A873] rounded-2xl">
+              <Text className="py-4 font-bold text-center text-white">
+                Starten
               </Text>
-              <Text className="text-white font-normal text-base mb-4">
-                Die ideale Softwarelösung für deinen Anbauverein. Organisiere
-                Mitglieder und behalte Anbau sowie Distribution stets im Blick.
-              </Text>
-              <Pressable onPress={onPress} className="bg-[#19A873] rounded-2xl">
-                <Text className="text-white font-bold text-lg text-center py-2">
-                  Starten
-                </Text>
-              </Pressable>
-            </View>
-          </LinearGradient>
-        </View>
-      </ImageBackground>
-    </SafeAreaView>
+            </Pressable>
+          </View>
+        </LinearGradient>
+      </View>
+    </View>
   );
-}
+};
+
+export default App;

@@ -1,12 +1,12 @@
 import React from "react";
-import ForgotScreen from "@/view/auth/ForgotScreen";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ForgotScreen } from "@/screen/auth";
+import { Container } from "@/components";
 
 const SingUp: React.FC = () => {
   return (
-    <SafeAreaView>
+    <Container>
       <ForgotScreen />
-    </SafeAreaView>
+    </Container>
   );
 };
 

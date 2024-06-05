@@ -4,12 +4,13 @@ interface SignInFormDataType {
 }
 
 interface SignUpFormDataType {
-  fullname: string;
   email: string;
   password: string;
 }
 
-export {
-  SignInFormDataType,
-  SignUpFormDataType,
-};
+interface RegisterFormDataType {
+  username: string;
+  birth: string;
+}
+
+export { SignInFormDataType, SignUpFormDataType, RegisterFormDataType };

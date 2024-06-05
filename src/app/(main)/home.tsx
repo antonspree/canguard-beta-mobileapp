@@ -1,12 +1,13 @@
-import { View, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React from "react";
+import { HomeScreen } from "@/screen/main";
+import Container from "@/components/Container";
 
-export default function App() {
+const Home: React.FC = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Hello</Text>
-      </View>
-    </SafeAreaView>
+    <Container>
+      <HomeScreen />
+    </Container>
   );
-}
+};
+
+export default Home;

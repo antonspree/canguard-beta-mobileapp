@@ -1,11 +1,11 @@
 import React from "react";
-import { SignUpScreen } from "@/screen/auth";
+import { ResetPassScreen } from "@/screen/auth";
 import { Container } from "@/components";
 
 const SingUp: React.FC = () => {
   return (
     <Container>
-      <SignUpScreen />
+      <ResetPassScreen />
     </Container>
   );
 };
