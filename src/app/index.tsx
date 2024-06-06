@@ -38,8 +38,11 @@ const App: React.FC = () => {
               Die ideale Softwarelösung für deinen Anbauverein. Organisiere
               Mitglieder und behalte Anbau sowie Distribution stets im Blick.
             </Text>
-            <Pressable onPress={onPress} className="bg-[#19A873] rounded-2xl">
-              <Text className="py-4 font-bold text-center text-white">
+            <Pressable
+              className="py-2 bg-[#19A873] rounded-2xl"
+              onPress={onPress}
+            >
+              <Text className="font-bold text-center text-base text-white">
                 Starten
               </Text>
             </Pressable>

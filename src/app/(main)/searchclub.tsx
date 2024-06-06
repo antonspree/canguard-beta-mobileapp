@@ -1,11 +1,11 @@
-import { Container } from "@/components";
 import React from "react";
-import { Text } from "react-native";
+import { SearchClubScreen } from "@/screen/main";
+import { Container } from "@/components";
 
 const SearchClub: React.FC = () => {
   return (
     <Container>
-      <Text>SearchClub</Text>
+      <SearchClubScreen />
     </Container>
   );
 };

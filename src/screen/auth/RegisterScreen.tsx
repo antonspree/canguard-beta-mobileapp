@@ -4,11 +4,11 @@ import { Text, View, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
 import Checkbox from "expo-checkbox";
-import { AuthInput } from "@/components";
+import { ProfileInput } from "@/components";
 import { signUp } from "@/actions/auth";
 import { clearData, loadData } from "@/lib/storage";
 import message from "@/lib/message";
-import { RegisterFormDataType } from "@/types/auth";
+import { RegisterFormDataType } from "@/types/form";
 
 const RegisterScreen: React.FC = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -63,7 +63,7 @@ const RegisterScreen: React.FC = () => {
           Herzlich Willkommen
           <Text className="text-[#19A873]">{" bei CanGuard!"}</Text>
         </Text>
-        <Text className="text-center font-semibold text-[#919191]">
+        <Text className="text-center font-semibold text-base text-[#919191]">
           Bitte vervollständige dein persönliches Profil und bestätige, dass du
           über 18 Jahre alt bist.
         </Text>
@@ -75,7 +75,7 @@ const RegisterScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View>
-              <AuthInput
+              <ProfileInput
                 value={value}
                 placeholder="Name*"
                 onChange={onChange}
@@ -84,7 +84,7 @@ const RegisterScreen: React.FC = () => {
           )}
         />
         {errors.username && (
-          <Text className="text-xs m-1 text-red-500">
+          <Text className="m-1 text-xs text-red-500">
             Dieses Feld muss ausgefüllt werden.
           </Text>
         )}
@@ -94,17 +94,17 @@ const RegisterScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View className="mt-4">
-              <AuthInput
+              <ProfileInput
                 value={value}
                 type="date"
-                placeholder="jjjj.mm.tt*"
+                placeholder="tt.mm.jjjj*"
                 onChange={onChange}
               />
             </View>
           )}
         />
         {errors.birth && (
-          <Text className="text-xs m-1 text-red-500">
+          <Text className="m-1 text-xs text-red-500">
             Dieses Feld muss ausgefüllt werden.
           </Text>
         )}
@@ -122,7 +122,7 @@ const RegisterScreen: React.FC = () => {
           </Text>
         </View>
         {showErr && (
-          <Text className="text-xs m-1 text-red-500">
+          <Text className="m-1 text-xs text-red-500">
             Dieses Feld muss ausgewählt werden.
           </Text>
         )}

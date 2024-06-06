@@ -4,10 +4,10 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
-import { AuthInputProps } from "@/types/component";
+import { ProfileInputProps } from "@/types/component";
 import { formatedate, getMaxDate } from "@/lib/function";
 
-const AuthInput: React.FC<AuthInputProps> = ({
+const ProfileInput: React.FC<ProfileInputProps> = ({
   type = "text",
   value = "",
   placeholder = "",
@@ -29,10 +29,18 @@ const AuthInput: React.FC<AuthInputProps> = ({
 
   return (
     <View className="flex flex-row justify-between items-center w-full py-2 border border-[#EAEAEA] rounded-md">
-      {type !== "date" ? (
+      {type === "text" && (
+        <TextInput
+          className="px-3 outline-none"
+          value={value}
+          placeholder={placeholder}
+          onChangeText={onChange}
+        />
+      )}
+      {type === "password" && (
         <>
           <TextInput
-            className="flex-1 px-4 outline-none"
+            className="flex-1 px-3 outline-none"
             value={value}
             placeholder={placeholder}
             onChangeText={onChange}
@@ -53,15 +61,18 @@ const AuthInput: React.FC<AuthInputProps> = ({
             </Pressable>
           )}
         </>
-      ) : (
+      )}
+      {type === "date" && (
         <>
-          <Pressable onPress={() => setShowPicker((prev) => !prev)}>
+          <Pressable
+            className="w-full"
+            onPress={() => setShowPicker((prev) => !prev)}
+          >
             <TextInput
-              className="px-4 outline-none"
+              className="px-3 outline-none"
               value={value === "" ? value : formatedate(value)}
               placeholder={placeholder}
               editable={false}
-              onPressIn={() => setShowPicker((prev) => !prev)}
             />
           </Pressable>
           {showPicker && (
@@ -75,8 +86,19 @@ const AuthInput: React.FC<AuthInputProps> = ({
           )}
         </>
       )}
+      {type === "textarea" && (
+        <TextInput
+          className="px-3 outline-none"
+          style={{ textAlignVertical: "top" }}
+          multiline
+          numberOfLines={5}
+          value={value}
+          placeholder={placeholder}
+          onChangeText={onChange}
+        />
+      )}
     </View>
   );
 };
 
-export default AuthInput;
+export default ProfileInput;

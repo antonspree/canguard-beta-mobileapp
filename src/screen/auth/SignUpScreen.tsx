@@ -3,9 +3,9 @@ import { useForm, Controller } from "react-hook-form";
 import { Text, View, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
-import { AuthInput } from "@/components";
+import { ProfileInput } from "@/components";
 import { saveData } from "@/lib/storage";
-import { SignUpFormDataType } from "@/types/auth";
+import { SignUpFormDataType } from "@/types/form";
 
 const SignUpScreen: React.FC = () => {
   const {
@@ -30,7 +30,7 @@ const SignUpScreen: React.FC = () => {
         />
         <Text className="font-bold text-3xl">Registrieren</Text>
         <View className="flex flex-row items-center">
-          <Text className="font-semibold text-center text-[#919191]">
+          <Text className="font-semibold text-center text-base text-[#919191]">
             Erstelle jetzt deinen CanGuard Account. Wenn du dich bereits
             registriert hast, kannst du dich ganz normal
             <Text className="text-black">{" einloggen."}</Text>
@@ -44,7 +44,7 @@ const SignUpScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View>
-              <AuthInput
+              <ProfileInput
                 value={value}
                 placeholder="E-Mail Adresse*"
                 onChange={onChange}
@@ -63,7 +63,7 @@ const SignUpScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View className="mt-4">
-              <AuthInput
+              <ProfileInput
                 value={value}
                 type="password"
                 placeholder="Passwort*"

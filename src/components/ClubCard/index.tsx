@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { router } from "expo-router";
+import Card from "../Card";
 import { ClubCardPropsInterface } from "@/types/component";
 
 const ClubCard: React.FC<ClubCardPropsInterface> = ({
@@ -12,7 +13,7 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
   route,
 }) => {
   return (
-    <View className="flex flex-col space-y-3 mt-5 p-5 border border-[#EAEAEA] rounded-md">
+    <Card className="flex flex-col space-y-3 mt-5">
       <View className="flex flex-col space-y-2">
         {icon}
         <Text className="text-xl font-semibold">{title}</Text>
@@ -25,7 +26,7 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
         {btnIcon}
         <Text className="text-sm text-white">{btnText}</Text>
       </Pressable>
-    </View>
+    </Card>
   );
 };
 

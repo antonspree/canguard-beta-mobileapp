@@ -3,11 +3,11 @@ import { useForm, Controller } from "react-hook-form";
 import { Text, View, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
-import { AuthInput } from "@/components";
+import { ProfileInput } from "@/components";
 import { signIn } from "@/actions/auth";
 import { saveData } from "@/lib/storage";
 import message from "@/lib/message";
-import { SignInFormDataType } from "@/types/auth";
+import { SignInFormDataType } from "@/types/form";
 
 const LoginScreen: React.FC = () => {
   const {
@@ -38,8 +38,8 @@ const LoginScreen: React.FC = () => {
         />
         <Text className="font-bold text-3xl">Einloggen</Text>
         <View className="flex flex-row items-center">
-          <Text className="font-semibold text-[#919191]">oder kostenlos</Text>
-          <Text className="font-semibold">{" registrieren"}</Text>
+          <Text className="font-semibold text-base text-[#919191]">oder kostenlos</Text>
+          <Text className="font-semibold text-base">{" registrieren"}</Text>
         </View>
       </View>
       <View className="w-full">
@@ -49,7 +49,7 @@ const LoginScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View>
-              <AuthInput
+              <ProfileInput
                 value={value}
                 placeholder="E-Mail Adresse*"
                 onChange={onChange}
@@ -68,7 +68,7 @@ const LoginScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View className="mt-4">
-              <AuthInput
+              <ProfileInput
                 value={value}
                 type="password"
                 placeholder="Passwort*"

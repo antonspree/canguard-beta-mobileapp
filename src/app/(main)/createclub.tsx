@@ -1,11 +1,11 @@
 import React from "react";
-import { Text } from "react-native";
+import { CreateClubScreen } from "@/screen/main";
 import { Container } from "@/components";
 
 const CreateClub: React.FC = () => {
   return (
     <Container>
-      <Text>CreateClub</Text>
+      <CreateClubScreen />
     </Container>
   );
 };
