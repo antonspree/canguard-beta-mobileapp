@@ -73,6 +73,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
               value={value === "" ? value : formatedate(value)}
               placeholder={placeholder}
               editable={false}
+              onPressIn={() => setShowPicker((prev) => !prev)}
             />
           </Pressable>
           {showPicker && (

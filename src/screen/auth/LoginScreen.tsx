@@ -38,8 +38,12 @@ const LoginScreen: React.FC = () => {
         />
         <Text className="font-bold text-3xl">Einloggen</Text>
         <View className="flex flex-row items-center">
-          <Text className="font-semibold text-base text-[#919191]">oder kostenlos</Text>
-          <Text className="font-semibold text-base">{" registrieren"}</Text>
+          <Text className="font-semibold text-base text-[#919191]">
+            {"oder kostenlos "}
+          </Text>
+          <Pressable onPress={() => router.push("/(auth)/signup")}>
+            <Text className="font-semibold text-base text-[#19A873] underline">registrieren</Text>
+          </Pressable>
         </View>
       </View>
       <View className="w-full">
@@ -86,21 +90,12 @@ const LoginScreen: React.FC = () => {
       <Pressable onPress={() => router.push("/(auth)/forgot")}>
         <Text className="text-sm text-[#919191]">Passwort vergessen?</Text>
       </Pressable>
-      <View className="flex flex-col space-y-4">
-        <Pressable
-          className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
-          onPress={handleSubmit(onSubmit)}
-        >
-          <Text className="text-lg font-bold text-white">Einloggen</Text>
-        </Pressable>
-        <View className="flex flex-row justify-end">
-          <Pressable onPress={() => router.push("/(auth)/signup")}>
-            <Text className="text-sm text-[#919191] underline">
-              Gehen Sie zur Registrieren
-            </Text>
-          </Pressable>
-        </View>
-      </View>
+      <Pressable
+        className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
+        onPress={handleSubmit(onSubmit)}
+      >
+        <Text className="text-lg font-bold text-white">Einloggen</Text>
+      </Pressable>
     </View>
   );
 };

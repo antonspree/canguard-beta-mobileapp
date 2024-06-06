@@ -98,7 +98,7 @@ const SignUpScreen: React.FC = () => {
         </Pressable>
         <View className="flex flex-row justify-end">
           <Pressable onPress={() => router.push("/(auth)/login")}>
-            <Text className="text-sm text-[#919191] underline">
+            <Text className="text-sm text-[#19A873] underline">
               Ich habe bereits einen Account.
             </Text>
           </Pressable>
