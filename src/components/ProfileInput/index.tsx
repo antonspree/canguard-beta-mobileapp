@@ -28,10 +28,10 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
   };
 
   return (
-    <View className="flex flex-row justify-between items-center w-full py-2 border border-[#EAEAEA] rounded-md">
+    <View className="flex flex-row justify-between items-center w-full py-1.5 border border-[#EAEAEA] rounded-md">
       {type === "text" && (
         <TextInput
-          className="px-3 outline-none"
+          className="px-2 outline-none"
           value={value}
           placeholder={placeholder}
           onChangeText={onChange}
@@ -40,7 +40,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
       {type === "password" && (
         <>
           <TextInput
-            className="flex-1 px-3 outline-none"
+            className="flex-1 px-2 outline-none"
             value={value}
             placeholder={placeholder}
             onChangeText={onChange}
@@ -69,7 +69,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
             onPress={() => setShowPicker((prev) => !prev)}
           >
             <TextInput
-              className="px-3 outline-none"
+              className="px-2 outline-none"
               value={value === "" ? value : formatedate(value)}
               placeholder={placeholder}
               editable={false}
@@ -89,7 +89,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
       )}
       {type === "textarea" && (
         <TextInput
-          className="px-3 outline-none"
+          className="px-2 outline-none"
           style={{ textAlignVertical: "top" }}
           multiline
           numberOfLines={5}

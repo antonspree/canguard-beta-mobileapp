@@ -36,18 +36,18 @@ const CreateClubScreen: React.FC = () => {
 
   return (
     <ScrollView>
-      <View className="p-5">
+      <View className="m-5">
         <Card className="p-0">
           <View className="flex flex-col items-center space-y-2 p-5 border-b border-[#EAEAEA]">
-            <Text className="font-bold text-center text-2xl">
+            <Text className="font-bold text-xl">
               Lege deine Club-Daten fest
             </Text>
-            <Text className="text-center text-base text-[#919191]">
+            <Text className="text-base text-[#919191]">
               Du kannst alle Daten, später in den Einstellungen anpassen
             </Text>
           </View>
           <View className="space-y-5 p-5">
-            <View className="space-y-4">
+            <View className="space-y-3">
               <View className="space-y-2">
                 <Text>Name*</Text>
                 <View>

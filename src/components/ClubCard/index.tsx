@@ -13,7 +13,7 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
   route,
 }) => {
   return (
-    <Card className="flex flex-col space-y-3 mt-5">
+    <Card className="flex flex-col space-y-3">
       <View className="flex flex-col space-y-2">
         {icon}
         <Text className="text-xl font-semibold">{title}</Text>

@@ -20,16 +20,16 @@ const SearchClubScreen: React.FC = () => {
 
   return (
     <ScrollView>
-      <View className="flex flex-col p-5">
+      <View className="flex flex-col space-y-5 m-5">
         <View className="h-[200px] bg-slate-500 rounded-md" />
-        <View className="mt-5 py-2 border border-[#EAEAEA] rounded-md">
+        <View className="py-2 border border-[#EAEAEA] rounded-md">
           <TextInput
             className="px-3 outline-none"
             placeholder="Suchen"
             onChangeText={setSearch}
           />
         </View>
-        <View className="flex flex-col">
+        <View className="flex flex-col space-y-3">
           {clubData
             .filter(
               (f: any) =>
@@ -42,24 +42,25 @@ const SearchClubScreen: React.FC = () => {
                   .includes(String(search).toLowerCase())
             )
             .map((item: any, key: number) => (
-              <Club
-                key={key}
-                clubname={item.clubname}
-                badge={item.badge}
-                avatar={item.avatar}
-                users={item.users}
-                maxUser={item.maxUser}
-                description={item.description}
-                email={item.email}
-                phone={item.phone}
-                website={item.website}
-                instagram={item.instagram}
-                discord={item.discord}
-                facebook={item.facebook}
-                youtube={item.youtube}
-                clubID={item.clubID}
-                allowRequest={item.allow_request}
-              />
+              <View key={key}>
+                <Club
+                  clubname={item.clubname}
+                  badge={item.badge}
+                  avatar={item.avatar}
+                  users={item.users}
+                  maxUser={item.maxUser}
+                  description={item.description}
+                  email={item.email}
+                  phone={item.phone}
+                  website={item.website}
+                  instagram={item.instagram}
+                  discord={item.discord}
+                  facebook={item.facebook}
+                  youtube={item.youtube}
+                  clubID={item.clubID}
+                  allowRequest={item.allow_request}
+                />
+              </View>
             ))}
         </View>
       </View>

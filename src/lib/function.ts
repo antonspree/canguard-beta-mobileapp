@@ -44,3 +44,40 @@ export const isEmpty = (value: any) => {
 
   return false;
 };
+
+export const getCleanDate = (param: string, type: number) => {
+  const date = new Date(param);
+
+  const monthNames = [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ];
+
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()];
+  const year = date.getFullYear();
+
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - year;
+  const ageString = `(${age} Jahre)`;
+
+  let cleanDate;
+
+  if (type === 1) {
+    cleanDate = `${day}. ${month} ${year} ${ageString}`;
+  } else {
+    cleanDate = `${day}. ${month} ${year}`;
+  }
+
+  return cleanDate;
+};

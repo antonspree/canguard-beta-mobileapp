@@ -94,7 +94,7 @@ const LoginScreen: React.FC = () => {
         className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
         onPress={handleSubmit(onSubmit)}
       >
-        <Text className="text-lg font-bold text-white">Einloggen</Text>
+        <Text className="text-base font-bold text-white">Einloggen</Text>
       </Pressable>
     </View>
   );

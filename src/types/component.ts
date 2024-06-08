@@ -36,8 +36,16 @@ export interface ClubPropsInterface {
   allowRequest?: boolean;
 }
 
-export interface BadgeProps {
-  className?: string;
-  variant?: "default" | "secondary" | "destructive" | "outline";
-  children: React.ReactNode;
+export interface AnalyticPropsInterface {
+  title: string;
+  content: string | number;
+  info: string;
+  icon: React.ReactNode;
+  isComingSoon?: boolean;
+}
+
+export interface ClubStatusPropsInterface {
+  done: boolean;
+  title: string;
+  content: string;
 }

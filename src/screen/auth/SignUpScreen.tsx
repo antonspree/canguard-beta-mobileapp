@@ -94,7 +94,7 @@ const SignUpScreen: React.FC = () => {
           className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
           onPress={handleSubmit(onSubmit)}
         >
-          <Text className="text-lg font-bold text-white">Registrieren</Text>
+          <Text className="text-base font-bold text-white">Registrieren</Text>
         </Pressable>
         <View className="flex flex-row justify-end">
           <Pressable onPress={() => router.push("/(auth)/login")}>

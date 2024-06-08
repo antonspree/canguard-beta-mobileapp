@@ -1,9 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useAppSelector } from "@/store/hook";
 import { ClubCard, Container } from "@/components";
 import { clubCardData } from "@/lib/constant";
 import { isEmpty } from "@/lib/function";
+import OwnerScreen from "./OwnerScreen";
+import MemberScreen from "./MemberScreen";
 
 const HomeScreen: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -13,25 +15,26 @@ const HomeScreen: React.FC = () => {
       {!isEmpty(user?.club) ? (
         user?.role === "owner" ? (
           <Container>
-            <Text>Owner</Text>
+            <OwnerScreen />
           </Container>
         ) : (
           <Container>
-            <Text>Member</Text>
+            <MemberScreen />
           </Container>
         )
       ) : (
-        <View className="flex flex-col px-5">
+        <View className="flex flex-col space-y-5 m-5">
           {clubCardData.map((item, key) => (
-            <ClubCard
-              key={key}
-              title={item.title}
-              icon={item.icon}
-              content={item.content}
-              btnIcon={item.btnIcon}
-              btnText={item.btnText}
-              route={item.route}
-            />
+            <View key={key}>
+              <ClubCard
+                title={item.title}
+                icon={item.icon}
+                content={item.content}
+                btnIcon={item.btnIcon}
+                btnText={item.btnText}
+                route={item.route}
+              />
+            </View>
           ))}
         </View>
       )}

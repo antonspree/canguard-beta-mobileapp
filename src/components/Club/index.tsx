@@ -14,7 +14,6 @@ import { isEmpty } from "@/lib/function";
 import { cn } from "@/lib/utils";
 import { UPLOAD_URI } from "@/config/env";
 import { ClubPropsInterface } from "@/types/component";
-import Badge from "../Badge";
 
 const Club: React.FC<ClubPropsInterface> = ({
   clubname,
@@ -59,8 +58,8 @@ const Club: React.FC<ClubPropsInterface> = ({
   };
 
   return (
-    <View className="mt-5">
-      <View className="w-full overflow-hidden border border-[#EAEAEA] rounded-2xl">
+    <>
+      <View className="w-full overflow-hidden border border-[#EAEAEA] rounded-md">
         <View className="h-[100px] bg-[#EAEAEA]">
           {badge === undefined ? (
             <View className="w-full h-full flex justify-center items-center bg-[#F8F8F8]">
@@ -94,10 +93,10 @@ const Club: React.FC<ClubPropsInterface> = ({
               <Text className="font-bold text-base">{clubname}</Text>
             </Pressable>
             <View className="flex flex-row space-x-5">
-              <View>
-                <Badge className="w-[135px]" variant="secondary">
+              <View className="inline-flex items-center p-1 bg-[#F4F4F5] border border-transparent rounded-md">
+                <Text className="text-xs font-semibold text-[#18181B]">
                   {users}/{maxUser} Mitglieder
-                </Badge>
+                </Text>
               </View>
               <View className="flex flex-row space-x-2 items-center">
                 {email && (
@@ -170,7 +169,7 @@ const Club: React.FC<ClubPropsInterface> = ({
             onPress={() => setOpen(false)}
           />
           <View className="w-full h-1/2 overflow-hidden flex justify-center items-center p-3 bg-white">
-            <View className="w-full overflow-hidden border border-[#EAEAEA] rounded-2xl">
+            <View className="w-full overflow-hidden border border-[#EAEAEA] rounded-md">
               <View className="h-[100px] bg-[#EAEAEA]">
                 {badge === undefined ? (
                   <View className="w-full h-full flex justify-center items-center bg-[#F8F8F8]">
@@ -202,10 +201,10 @@ const Club: React.FC<ClubPropsInterface> = ({
                 <View className="space-y-2 p-5 pt-7">
                   <Text className="font-bold text-base">{clubname}</Text>
                   <View className="flex flex-row space-x-5">
-                    <View>
-                      <Badge className="w-[135px]" variant="secondary">
+                    <View className="inline-flex items-center p-1 bg-[#F4F4F5] border border-transparent rounded-md">
+                      <Text className="text-xs font-semibold text-[#18181B]">
                         {users}/{maxUser} Mitglieder
-                      </Badge>
+                      </Text>
                     </View>
                     <View className="flex flex-row space-x-2 items-center">
                       {email && (
@@ -321,7 +320,7 @@ const Club: React.FC<ClubPropsInterface> = ({
           </View>
         </View>
       </Modal>
-    </View>
+    </>
   );
 };
 

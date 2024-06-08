@@ -132,7 +132,7 @@ const RegisterScreen: React.FC = () => {
           className="w-full flex justify-center items-center py-2 bg-[#19A873] rounded-md"
           onPress={handleSubmit(onSubmit)}
         >
-          <Text className="text-lg font-bold text-white">Let's go!</Text>
+          <Text className="text-base font-bold text-white">Let's go!</Text>
         </Pressable>
       </View>
     </View>
