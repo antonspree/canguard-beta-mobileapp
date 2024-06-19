@@ -40,7 +40,7 @@ const updateUser = async (data: any) => {
   }
 };
 
-const CancelRequest = async () => {
+const cancelRequest = async () => {
   try {
     const result = await axiosPrivateInstance
       .get("/user/cancel")
@@ -80,7 +80,7 @@ export {
   getData,
   getUser,
   updateUser,
-  CancelRequest,
+  cancelRequest,
   terminateMember,
   removeAccount,
 };

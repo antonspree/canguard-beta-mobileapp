@@ -7,7 +7,7 @@ import { clearData, loadData } from "@/lib/storage";
 
 const App: React.FC = () => {
   const onPress = async () => {
-    await clearData("token");
+    // await clearData("token");
     const token = await loadData("token");
 
     if (token) {

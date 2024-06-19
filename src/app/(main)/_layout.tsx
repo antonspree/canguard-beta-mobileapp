@@ -1,5 +1,6 @@
 import React from "react";
-import { Stack, useFocusEffect } from "expo-router";
+import { Tabs, useFocusEffect } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
 import { useAppDispatch } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
 import { clubActions } from "@/store/reducers/clubReducer";
@@ -28,11 +29,26 @@ const MainLayout: React.FC = () => {
   );
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="home" />
-      <Stack.Screen name="createclub" />
-      <Stack.Screen name="searchclub" />
-    </Stack>
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen
+        name="(home)"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="home" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="(club)"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="cog" color={color} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 };
 export default MainLayout;

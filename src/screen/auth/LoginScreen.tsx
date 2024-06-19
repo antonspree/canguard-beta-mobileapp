@@ -24,7 +24,7 @@ const LoginScreen: React.FC = () => {
     if (result.success) {
       await saveData("token", result.token);
 
-      router.replace("/(main)/home");
+      router.replace("/(main)/(home)/");
     }
   };
 
@@ -42,7 +42,9 @@ const LoginScreen: React.FC = () => {
             {"oder kostenlos "}
           </Text>
           <Pressable onPress={() => router.push("/(auth)/signup")}>
-            <Text className="font-semibold text-base text-[#19A873] underline">registrieren</Text>
+            <Text className="font-semibold text-base text-[#19A873] underline">
+              registrieren
+            </Text>
           </Pressable>
         </View>
       </View>
