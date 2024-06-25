@@ -16,15 +16,15 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
     <Card className="flex flex-col space-y-3">
       <View className="flex flex-col space-y-2">
         {icon}
-        <Text className="text-xl font-semibold">{title}</Text>
-        <Text className="text-sm text-[#919191]">{content}</Text>
+        <Text className="text-base font-semibold">{title}</Text>
+        <Text className="text-xs text-[#919191]">{content}</Text>
       </View>
       <Pressable
-        className="w-[150px] flex flex-row items-center space-x-2 px-4 py-2 bg-[#19A873] rounded-md"
+        className="w-[150px] flex flex-row justify-center items-center space-x-2 px-4 py-2 bg-[#19A873] rounded-md"
         onPress={() => router.push(route)}
       >
         {btnIcon}
-        <Text className="text-sm text-white">{btnText}</Text>
+        <Text className="text-xs text-white">{btnText}</Text>
       </Pressable>
     </Card>
   );

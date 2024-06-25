@@ -7,13 +7,13 @@ import { clearData, loadData } from "@/lib/storage";
 
 const App: React.FC = () => {
   const onPress = async () => {
-    // await clearData("token");
+    await clearData("token");
     const token = await loadData("token");
 
     if (token) {
-      router.replace("/(main)/home");
+      router.replace("/dashboard");
     } else {
-      router.replace("/(auth)/login");
+      router.replace("/guest/login");
     }
   };
 
@@ -31,11 +31,11 @@ const App: React.FC = () => {
           start={[0, 0]}
           end={[0, 0.5]}
         >
-          <View className="flex flex-col space-y-5 px-10 pb-32">
-            <Text className="font-bold text-5xl text-white">
+          <View className="flex flex-col space-y-5 px-10 pb-24">
+            <Text className="font-bold text-4xl text-white">
               Die Software für deinen Social Club
             </Text>
-            <Text className="text-white text-lg">
+            <Text className="text-white text-base">
               Die ideale Softwarelösung für deinen Anbauverein. Organisiere
               Mitglieder und behalte Anbau sowie Distribution stets im Blick.
             </Text>

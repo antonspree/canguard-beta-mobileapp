@@ -2,6 +2,12 @@ export interface ContainerProps {
   children?: React.ReactNode;
 }
 
+export interface DetailContainerProps {
+  children?: React.ReactNode;
+  backLink?: string;
+  title: string;
+}
+
 export interface ProfileInputProps {
   type?: "text" | "password" | "date" | "textarea";
   value?: string;
