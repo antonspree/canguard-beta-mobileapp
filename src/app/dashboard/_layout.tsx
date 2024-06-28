@@ -1,12 +1,11 @@
 import React from "react";
-import { Slot, Stack, Tabs, useFocusEffect } from "expo-router";
+import { Slot, useFocusEffect } from "expo-router";
 import { useAppDispatch } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
 import { clubActions } from "@/store/reducers/clubReducer";
 import { membersActions } from "@/store/reducers/membersReducer";
 import { membershipActions } from "@/store/reducers/membershipReducer";
 import { getData } from "@/actions/user";
-import { Text, View } from "react-native";
 import DashboardLayout from "@/screens/dashboard/Layout";
 
 export const unstable_setting = {
@@ -21,7 +20,7 @@ const MainLayout: React.FC = () => {
       (async () => {
         const result = await getData();
 
-        if (result.success) {
+        if (result && result.success) {
           dispatch(userActions.setUser({ user: result.user }));
           dispatch(clubActions.setClub({ club: result.club }));
           dispatch(membersActions.setMembers({ members: result.members }));

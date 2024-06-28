@@ -6,8 +6,8 @@ import { Image } from "expo-image";
 import { ProfileInput } from "@/components";
 import { signIn } from "@/actions/auth";
 import { saveData } from "@/lib/storage";
-import message from "@/lib/message";
 import { SignInFormDataType } from "@/types/form";
+import Toast from "react-native-toast-message";
 
 const LoginScreen: React.FC = () => {
   const {
@@ -19,12 +19,16 @@ const LoginScreen: React.FC = () => {
   const onSubmit = async (data: SignInFormDataType) => {
     const result = await signIn(data);
 
-    message({ message: result.msg });
+    Toast.show({
+      type: "error",
+      text1: "Error de inicio de sesion",
+      text2: result.msg,
+    });
 
     if (result.success) {
       await saveData("token", result.token);
 
-      router.replace("/dashboard");
+      router.push("/dashboard");
     }
   };
 

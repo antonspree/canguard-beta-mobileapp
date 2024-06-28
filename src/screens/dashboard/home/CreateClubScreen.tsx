@@ -30,7 +30,7 @@ const CreateClubScreen: React.FC = () => {
       dispatch(userActions.setUser({ user: result.user }));
       dispatch(membersActions.setMembers({ members: result.members }));
 
-      router.replace("/(main)/(club)/");
+      router.replace("/dashboard");
     }
   };
 

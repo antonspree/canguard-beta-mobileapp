@@ -7,8 +7,8 @@ import Checkbox from "expo-checkbox";
 import { ProfileInput } from "@/components";
 import { signUp } from "@/actions/auth";
 import { clearData, loadData } from "@/lib/storage";
-import message from "@/lib/message";
 import { RegisterFormDataType } from "@/types/form";
+import Toast from "react-native-toast-message";
 
 const RegisterScreen: React.FC = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -41,7 +41,11 @@ const RegisterScreen: React.FC = () => {
     } else {
       const result = await signUp({ ...userInfo, ...data });
 
-      message({ message: result.msg });
+      Toast.show({
+        type: "error",
+        text1: "Registro fallido",
+        text2: result.msg,
+      });
 
       if (result.success) {
         await clearData("userinfo");

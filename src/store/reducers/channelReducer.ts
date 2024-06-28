@@ -10,10 +10,12 @@ export interface IChannel {
 
 interface InitialStateType {
   channel: IChannel[];
+  selectedChannel: IChannel | null;
 }
 
 const initialState: InitialStateType = {
   channel: [],
+  selectedChannel: null,
 };
 
 const channelSlice = createSlice({
@@ -28,6 +30,9 @@ const channelSlice = createSlice({
       state.channel = state.channel.filter(
         (item) => item.channelID !== channelID
       );
+    },
+    setSelectedChannel: (state, action) => {
+      state.selectedChannel = action.payload;
     },
   },
 });
