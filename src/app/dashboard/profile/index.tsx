@@ -1,60 +1,49 @@
+import { Pressable, View, Text } from "react-native";
+import QRCode from "react-qr-code";
+import { FontAwesome } from "@expo/vector-icons";
 import { Container } from "@/components";
-import {
-  ExternalLink,
-  LogOut,
-  Mail,
-  MousePointer,
-  MousePointerClick,
-  Plus,
-  Send,
-} from "lucide-react-native";
-import { Pressable, Text, View } from "react-native";
+import { Ticket, UserRound } from "lucide-react-native";
+import { useAppSelector } from "@/store/hook";
+import { router } from "expo-router";
 
-const Profile: React.FC = () => {
+const Club: React.FC = () => {
+  const { user } = useAppSelector((store) => store.user);
+
+  if (!user) return null;
+
+  const redirectPersonalProfile = () => {
+    router.push("/dashboard/profile/personal");
+  };
+
   return (
     <Container>
       <View className="px-5">
-        <View className="bg-white rounded-3xl mb-4">
-          <Text className="font-semibold text-lg px-4 py-4 border-b border-gray-100">
-            Mein Account
-          </Text>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
-            <Mail size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">E-Mail / Passwort ändern</Text>
-          </Pressable>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
-            <LogOut size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">Logout</Text>
-          </Pressable>
-        </View>
-        <View className="bg-white rounded-3xl">
-          <Text className="font-semibold text-lg px-4 py-4 border-b border-gray-100">
-            Feedback & Kontakt
-          </Text>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
-            <Send size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">Fehler melden</Text>
-          </Pressable>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
-            <MousePointerClick size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">Support kontaktieren</Text>
-          </Pressable>
+        <View className="flex flex-col items-center bg-white rounded-3xl mb-4 py-8">
+          <QRCode
+            size={120}
+            style={{ height: "auto", maxWidth: 50, width: 50 }}
+            value={"sdfsdfsdf"}
+            viewBox={`0 0 256 256`}
+          />
         </View>
         <View className="bg-white rounded-3xl mb-4">
-          <Text className="font-semibold text-lg px-4 py-4 border-b border-gray-100">
-            Rechtliches
-          </Text>
+          <View className="px-4 py-3 border-b border-gray-100">
+            <View className="flex flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2">
+              <FontAwesome name="user" color={"#8E8E8E"} size={32} />
+            </View>
+            <Text className="font-bold text-lg">{user.username}</Text>
+            <Text className="text-xs text-[#8E8E8E]">{user.email}</Text>
+          </View>
           <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
-            <ExternalLink size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">Datenschutzerklärung</Text>
+            <Ticket size={16} color={"#8E8E8E"} />
+            <Text className="text-[#8E8E8E]">Mitgliedschaft</Text>
           </Pressable>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
-            <ExternalLink size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">Impressum</Text>
-          </Pressable>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
-            <ExternalLink size={16} color={"#8E8E8E"} />
-            <Text className="text-[#8E8E8E]">AGB</Text>
+          <Pressable
+            className="flex flex-row items-center space-x-2 px-4 py-3"
+            onPress={redirectPersonalProfile}
+          >
+            <UserRound size={16} color={"#8E8E8E"} />
+            <Text className="text-[#8E8E8E]">Profil bearbeiten</Text>
           </Pressable>
         </View>
       </View>
@@ -62,4 +51,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default Club;

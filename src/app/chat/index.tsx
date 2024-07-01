@@ -1,8 +1,9 @@
-import { Container } from "@/components";
-import { Plus } from "lucide-react-native";
 import { Pressable, Text } from "react-native";
+import { Plus } from "lucide-react-native";
+import { Container } from "@/components";
 
 const Chat: React.FC = () => {
+
   return (
     <Container>
       <Pressable className="flex flex-row items-center">

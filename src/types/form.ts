@@ -23,9 +23,15 @@ interface CreateClubFormDataType {
   description: string;
 }
 
+interface ChannelFormSchema {
+  channelname: string;
+  channeldesc: string;
+}
+
 export {
   SignInFormDataType,
   SignUpFormDataType,
   RegisterFormDataType,
   CreateClubFormDataType,
+  ChannelFormSchema
 };

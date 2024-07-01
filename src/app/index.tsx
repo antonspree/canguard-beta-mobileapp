@@ -3,11 +3,10 @@ import { Text, View, Pressable } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { clearData, loadData } from "@/lib/storage";
+import { loadData } from "@/lib/storage";
 
 const App: React.FC = () => {
   const onPress = async () => {
-    await clearData("token");
     const token = await loadData("token");
 
     if (token) {

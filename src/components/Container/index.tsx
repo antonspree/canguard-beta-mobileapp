@@ -4,7 +4,7 @@ import { ContainerProps } from "@/types/component";
 
 const Container: React.FC<ContainerProps> = ({ children = <></> }) => {
   return (
-    <SafeAreaView className="h-full w-full mx-auto">
+    <SafeAreaView className="relative h-full w-full mx-auto">
       {children}
     </SafeAreaView>
   );

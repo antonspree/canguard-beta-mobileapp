@@ -49,7 +49,7 @@ const Club: React.FC<ClubPropsInterface> = ({
       dispatch(clubActions.setClub({ club: result.club }));
       dispatch(membersActions.setMembers({ members: result.members }));
 
-      router.replace("/(main)/home");
+      router.replace("/dashboard");
     }
   };
 
