@@ -19,16 +19,21 @@ const LoginScreen: React.FC = () => {
   const onSubmit = async (data: SignInFormDataType) => {
     const result = await signIn(data);
 
-    Toast.show({
-      type: "error",
-      text1: "Error de inicio de sesion",
-      text2: result.msg,
-    });
-
     if (result.success) {
       await saveData("token", result.token);
+      Toast.show({
+        type: "success",
+        text1: "Glückwunsch",
+        text2: result.msg,
+      });
 
       router.push("/dashboard");
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Error de inicio de sesion",
+        text2: result.msg,
+      });
     }
   };
 

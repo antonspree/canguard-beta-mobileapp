@@ -6,6 +6,7 @@ import { Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
 import { store } from "@/store/store";
+import { MenuProvider } from "react-native-popup-menu";
 import Toast, {
   BaseToast,
   BaseToastProps,
@@ -13,6 +14,7 @@ import Toast, {
   InfoToast,
 } from "react-native-toast-message";
 import "@/style/global.css";
+import { clearData } from "@/lib/storage";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,15 +35,22 @@ const RootLayout: React.FC = () => {
     SplashScreen.hideAsync();
   }, []);
 
+  useEffect(() => {
+    clearData("token");
+    clearData("userinfo");
+  }, []);
+
   return (
     <StoreProvider store={store}>
-      <RootSiblingParent>
-        <SafeAreaProvider>
-          <StatusBar style="auto" />
-          <Slot screenOptions={{ headerShown: false }} />
-          <Toast config={toastConfig} topOffset={100} />
-        </SafeAreaProvider>
-      </RootSiblingParent>
+      <MenuProvider>
+        <RootSiblingParent>
+          <SafeAreaProvider>
+            <StatusBar style="auto" />
+            <Slot screenOptions={{ headerShown: false }} />
+            <Toast config={toastConfig} topOffset={100} />
+          </SafeAreaProvider>
+        </RootSiblingParent>
+      </MenuProvider>
     </StoreProvider>
   );
 };

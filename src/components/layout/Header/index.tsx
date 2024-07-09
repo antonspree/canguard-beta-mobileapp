@@ -1,5 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { User } from "lucide-react-native";
 import { View, Text, Pressable } from "react-native";
 
 const LogoImg = require("@/assets/images/logo.png");
@@ -11,8 +12,8 @@ const DashboardHeader: React.FC = () => {
         <Image className="w-6 h-6" placeholder="background" source={LogoImg} />
         <Text className="font-bold">CANGUARD</Text>
       </View>
-      <Pressable>
-        <FontAwesome size={18} name="bars" color={"black"} />
+      <Pressable className="w-10 h-10 bg-gray-200 rounded-full items-center justify-center">
+        <User size={18} color={"black"} />
       </Pressable>
     </View>
   );
