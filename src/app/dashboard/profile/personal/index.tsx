@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
             <Text className="text-[#8E8E8E]">Logout</Text>
           </Pressable>
         </View>
-        <View className="bg-white rounded-3xl">
+        <View className="bg-white rounded-3xl mb-4">
           <Text className="font-semibold text-lg px-4 py-4 border-b border-gray-100">
             Feedback & Kontakt
           </Text>

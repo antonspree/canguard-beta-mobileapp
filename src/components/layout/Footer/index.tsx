@@ -8,6 +8,7 @@ import {
   Users,
   User,
   LayoutGrid,
+  Group,
 } from "lucide-react-native";
 import { View, Text, Pressable } from "react-native";
 
@@ -89,24 +90,22 @@ const DashbordFooter: React.FC = () => {
             Profil
           </Text>
         </Pressable>
-        {/* <Pressable
-          onPress={() => router.push("/club/create")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <Plus color={pathname === "/dashboard" ? "#19A873" : "#19A87350"} />
-          <Text className={`text-[9px] ${
-              pathname === "/dashboard" ? "text-gray-500" : "text-gray-500/40"
-            }`}>Create club</Text>
-        </Pressable>
         <Pressable
-          onPress={() => router.push("/club/create")}
+          onPress={() => router.push("/dashboard/community")}
           className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
         >
-          <Plus color={pathname === "/dashboard" ? "#19A873" : "#19A87350"} />
-          <Text className={`text-[9px] ${
+          <Group
+            color={pathname === "/dashboard/profile" ? "#19A873" : "#19A87350"}
+            size={24}
+          />
+          <Text
+            className={`text-[9px] ${
               pathname === "/dashboard" ? "text-gray-500" : "text-gray-500/40"
-            }`}>Create club</Text>
-        </Pressable> */}
+            }`}
+          >
+            Community
+          </Text>
+        </Pressable>
         <View className="flex justify-center items-center bg-white h-full w-2 border-t border-gray-100"></View>
       </View>
     </View>

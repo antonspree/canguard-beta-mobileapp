@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Slot, useFocusEffect } from "expo-router";
 import { useAppDispatch } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
