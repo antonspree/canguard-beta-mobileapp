@@ -28,10 +28,37 @@ interface ChannelFormSchema {
   channeldesc: string;
 }
 
+interface ClubProfileFormSchema {
+  clubname: string;
+  website: string;
+  email: string;
+  phone: string;
+  street: string;
+  address: string;
+  postcode: string;
+  city: string;
+  country: string;
+  lat: number;
+  lng: number;
+  description: string;
+  prevent_info: string;
+  discord: string;
+  tiktok: string;
+  youtube: string;
+  twitch: string;
+  instagram: string;
+  twitter: string;
+  facebook: string;
+  imprint: string;
+  maxUser: number;
+  minAge: number;
+}
+
 export {
   SignInFormDataType,
   SignUpFormDataType,
   RegisterFormDataType,
   CreateClubFormDataType,
-  ChannelFormSchema
+  ChannelFormSchema,
+  ClubProfileFormSchema,
 };

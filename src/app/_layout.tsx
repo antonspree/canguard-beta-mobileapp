@@ -1,22 +1,28 @@
 import React, { useEffect } from "react";
+import { Slot, SplashScreen } from "expo-router";
 import { Provider as StoreProvider } from "react-redux";
+import { Theme, ThemeProvider } from "@react-navigation/native";
 import { RootSiblingParent } from "react-native-root-siblings";
+import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Slot } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import * as SplashScreen from "expo-splash-screen";
-import { store } from "@/store/store";
-import { MenuProvider } from "react-native-popup-menu";
 import Toast, {
   BaseToast,
   BaseToastProps,
   ErrorToast,
   InfoToast,
 } from "react-native-toast-message";
-import "@/style/global.css";
+import { StatusBar } from "expo-status-bar";
+import { store } from "@/store/store";
 import { clearData } from "@/lib/storage";
+import { NAV_THEME } from "@/lib/constant";
 
-SplashScreen.preventAutoHideAsync();
+import "@/globals.css";
+import { MenuProvider } from "react-native-popup-menu";
+
+const LIGHT_THEME: Theme = {
+  dark: false,
+  colors: NAV_THEME.light,
+};
 
 const toastConfig = {
   success: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => (
@@ -30,7 +36,7 @@ const toastConfig = {
   ),
 };
 
-const RootLayout: React.FC = () => {
+const RootLayout = () => {
   useEffect(() => {
     SplashScreen.hideAsync();
   }, []);
@@ -42,15 +48,19 @@ const RootLayout: React.FC = () => {
 
   return (
     <StoreProvider store={store}>
-      <MenuProvider>
-        <RootSiblingParent>
-          <SafeAreaProvider>
-            <StatusBar style="auto" />
-            <Slot screenOptions={{ headerShown: false }} />
-            <Toast config={toastConfig} topOffset={100} />
-          </SafeAreaProvider>
-        </RootSiblingParent>
-      </MenuProvider>
+      <PaperProvider>
+        <ThemeProvider value={LIGHT_THEME}>
+          <MenuProvider>
+            <RootSiblingParent>
+              <SafeAreaProvider>
+                <StatusBar style="auto" />
+                <Slot screenOptions={{ headerShown: false }} />
+                <Toast config={toastConfig} topOffset={100} />
+              </SafeAreaProvider>
+            </RootSiblingParent>
+          </MenuProvider>
+        </ThemeProvider>
+      </PaperProvider>
     </StoreProvider>
   );
 };

@@ -1,6 +1,7 @@
-import { useAppSelector } from "@/store/hook";
-import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import { View, Text, Pressable } from "react-native";
 import { router, usePathname } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
 import {
   Plus,
   Search,
@@ -9,8 +10,66 @@ import {
   User,
   LayoutGrid,
   Group,
+  Settings,
+  CalendarClock,
 } from "lucide-react-native";
-import { View, Text, Pressable } from "react-native";
+import { useAppSelector } from "@/store/hook";
+
+const privateNavs = [
+  {
+    name: "Home",
+    path: "/dashboard",
+    icon: ({ color }: { color: string }) => (
+      <LayoutGrid size={24} color={color} />
+    ),
+  },
+  {
+    name: "Mitglieder",
+    path: "/dashboard/members",
+    icon: ({ color }: { color: string }) => <Users size={24} color={color} />,
+  },
+  {
+    name: "Ereignisse",
+    path: "/events",
+    icon: ({ color }: { color: string }) => (
+      <CalendarClock size={24} color={color} />
+    ),
+  },
+  {
+    name: "Einstellungen",
+    path: "/settings",
+    icon: ({ color }: { color: string }) => (
+      <Settings size={24} color={color} />
+    ),
+  },
+  {
+    name: "Chat",
+    path: "/dashboard/messages",
+    icon: ({ color }: { color: string }) => (
+      <MessageCircle size={24} color={color} />
+    ),
+  },
+  {
+    name: "Club",
+    path: "/dashboard/club",
+    icon: ({ color }: { color: string }) => <Users size={24} color={color} />,
+  },
+  {
+    name: "Profil",
+    path: "/dashboard/profile",
+    icon: ({ color }: { color: string }) => <User size={24} color={color} />,
+  },
+  {
+    name: "Community",
+    path: "/dashboard/community",
+    icon: ({ color }: { color: string }) => <Group size={24} color={color} />,
+  },
+  {
+    name: "Community",
+    path: "/dashboard/profile",
+    icon: ({ color }: { color: string }) => <Group size={24} color={color} />,
+  },
+];
 
 const DashbordFooter: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -20,92 +79,29 @@ const DashbordFooter: React.FC = () => {
     <View className="absolute bottom-0 left-0 z-10 flex flex-row items-center justify-between h-16 w-full">
       <View className="flex-1 flex flex-row h-16 pt-3">
         <View className="flex justify-center items-center bg-white h-full w-2 border-t border-gray-100"></View>
-        <Pressable
-          onPress={() => router.push("/dashboard")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <LayoutGrid
-            color={pathname === "/dashboard" ? "#19A873" : "#19A87350"}
-            size={24}
-          />
-          <Text
-            className={`text-[9px] ${
-              pathname === "/dashboard" ? "text-gray-500" : "text-gray-500/40"
-            }`}
-          >
-            Home
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => router.push("/dashboard/messages")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <MessageCircle
-            color={pathname === "/dashboard/messages" ? "#19A873" : "#19A87350"}
-            size={24}
-          />
-          <Text
-            className={`text-[9px] ${
-              pathname === "/dashboard/messages"
-                ? "text-gray-500"
-                : "text-gray-500/40"
-            }`}
-          >
-            Chat
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => router.push("/dashboard/club")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <Users
-            color={pathname === "/dashboard/club" ? "#19A873" : "#19A87350"}
-            size={24}
-          />
-          <Text
-            className={`text-[9px] ${
-              pathname === "/dashboard/club"
-                ? "text-gray-500"
-                : "text-gray-500/40"
-            }`}
-          >
-            Club
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => router.push("/dashboard/profile")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <User
-            color={pathname === "/dashboard/profile" ? "#19A873" : "#19A87350"}
-            size={24}
-          />
-          <Text
-            className={`text-[9px] ${
-              pathname === "/dashboard/profile"
-                ? "text-gray-500"
-                : "text-gray-500/40"
-            }`}
-          >
-            Profil
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => router.push("/dashboard/community")}
-          className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
-        >
-          <Group
-            color={pathname === "/dashboard/profile" ? "#19A873" : "#19A87350"}
-            size={24}
-          />
-          <Text
-            className={`text-[9px] ${
-              pathname === "/dashboard" ? "text-gray-500" : "text-gray-500/40"
-            }`}
-          >
-            Community
-          </Text>
-        </Pressable>
+        {privateNavs.map((nav, index) => {
+          const { name, path, icon } = nav;
+          const Icon = icon;
+
+          return (
+            <Pressable
+              key={index}
+              onPress={() => router.push(path)}
+              className="flex-1 flex justify-center items-center bg-white h-full border-t border-gray-100"
+            >
+              <Icon color={pathname === path ? "#19A873" : "#19A87350"} />
+              <Text
+                className={`text-[9px] ${
+                  pathname === "/dashboard"
+                    ? "text-gray-500"
+                    : "text-gray-500/40"
+                }`}
+              >
+                {name}
+              </Text>
+            </Pressable>
+          );
+        })}
         <View className="flex justify-center items-center bg-white h-full w-2 border-t border-gray-100"></View>
       </View>
     </View>
