@@ -14,6 +14,7 @@ import { userActions } from "@/store/reducers/userReducer";
 import { clubActions } from "@/store/reducers/clubReducer";
 import { membersActions } from "@/store/reducers/membersReducer";
 import { membershipActions } from "@/store/reducers/membershipReducer";
+import { Button } from "react-native-paper";
 
 const SignInScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const SignInScreen: React.FC = () => {
       }
 
       if (userData.user.club) {
-        router.push("/(app)/(dashboard)");
+        router.push("/(app)/(dashboard)/home");
       } else {
         router.push("/(app)/(noclub)");
       }
@@ -81,55 +82,63 @@ const SignInScreen: React.FC = () => {
         </View>
       </View>
       <View className="w-full">
-        <Controller
-          name="email"
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, value } }) => (
-            <View>
-              <ProfileInput
-                value={value}
-                placeholder="E-Mail Adresse*"
-                onChange={onChange}
-              />
-            </View>
+        <View>
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, value } }) => (
+              <View>
+                <ProfileInput
+                  value={value}
+                  placeholder="E-Mail Adresse*"
+                  onChange={onChange}
+                />
+              </View>
+            )}
+          />
+          {errors.email && (
+            <Text className="m-1 text-xs text-red-500">
+              Dieses Feld muss ausgefüllt werden.
+            </Text>
           )}
-        />
-        {errors.email && (
-          <Text className="m-1 text-xs text-red-500">
-            Dieses Feld muss ausgefüllt werden.
-          </Text>
-        )}
-        <Controller
-          name="password"
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, value } }) => (
-            <View className="mt-4">
-              <ProfileInput
-                value={value}
-                type="password"
-                placeholder="Passwort*"
-                onChange={onChange}
-              />
-            </View>
+        </View>
+        <View>
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, value } }) => (
+              <View className="mt-4">
+                <ProfileInput
+                  value={value}
+                  type="password"
+                  placeholder="Passwort*"
+                  onChange={onChange}
+                />
+              </View>
+            )}
+          />
+          {errors.password && (
+            <Text className="m-1 text-xs text-red-500">
+              Dieses Feld muss ausgefüllt werden.
+            </Text>
           )}
-        />
-        {errors.password && (
-          <Text className="m-1 text-xs text-red-500">
-            Dieses Feld muss ausgefüllt werden.
-          </Text>
-        )}
+        </View>
       </View>
       <Pressable onPress={() => router.push("/(guest)/forgot")}>
         <Text className="text-sm text-[#919191]">Passwort vergessen?</Text>
       </Pressable>
-      <Pressable
-        className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
+      <Button
+        mode="contained"
+        buttonColor="#19A873"
         onPress={handleSubmit(onSubmit)}
+        className="rounded-md"
       >
-        <Text className="text-base font-bold text-white">Einloggen</Text>
-      </Pressable>
+        <Text className="font-bold text-center text-base text-white">
+          Starten
+        </Text>
+      </Button>
     </View>
   );
 };

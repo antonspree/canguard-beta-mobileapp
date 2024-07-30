@@ -6,6 +6,7 @@ import { Image } from "expo-image";
 import { saveData } from "@/lib/storage";
 import ProfileInput from "@/components/ProfileInput";
 import { SignUpFormDataType } from "@/types/form";
+import { Button } from "react-native-paper";
 
 const SignUpScreen: React.FC = () => {
   const {
@@ -90,12 +91,16 @@ const SignUpScreen: React.FC = () => {
         </Text>
       </View>
       <View className="flex flex-col space-y-4">
-        <Pressable
-          className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
+        <Button
+          mode="contained"
+          buttonColor="#19A873"
           onPress={handleSubmit(onSubmit)}
+          className="rounded-md"
         >
-          <Text className="text-base font-bold text-white">Registrieren</Text>
-        </Pressable>
+          <Text className="font-bold text-center text-base text-white">
+            Registrieren
+          </Text>
+        </Button>
         <View className="flex flex-row justify-end">
           <Pressable onPress={() => router.push("/(guest)/signin")}>
             <Text className="text-sm text-[#19A873] underline">

@@ -19,7 +19,7 @@ const ProfileScreen: React.FC = () => {
   return (
     <Container>
       <View className="px-5">
-        <View className="flex flex-col items-center bg-white rounded-3xl mb-4 py-8">
+        <View className="flex flex-col items-center bg-white rounded-2xl mb-4 py-8">
           <QRCode
             size={120}
             style={{ height: "auto", maxWidth: 50, width: 50 }}
@@ -27,7 +27,7 @@ const ProfileScreen: React.FC = () => {
             viewBox={`0 0 256 256`}
           />
         </View>
-        <View className="bg-white rounded-3xl mb-4">
+        <View className="bg-white rounded-2xl mb-4">
           <View className="px-4 py-3 border-b border-gray-100">
             <View className="flex flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2">
               <FontAwesome name="user" color={"#8E8E8E"} size={32} />

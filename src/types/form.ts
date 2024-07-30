@@ -28,6 +28,10 @@ interface ChannelFormSchema {
   channeldesc: string;
 }
 
+interface ChatFormSchema {
+  message: string;
+}
+
 interface ClubProfileFormSchema {
   clubname: string;
   website: string;
@@ -60,5 +64,6 @@ export {
   RegisterFormDataType,
   CreateClubFormDataType,
   ChannelFormSchema,
+  ChatFormSchema,
   ClubProfileFormSchema,
 };

@@ -19,9 +19,9 @@ import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { IChannel, channelActions } from "@/store/reducers/channelReducer";
 import { IChat, chatActions } from "@/store/reducers/chatReducer";
 import Socket from "@/lib/socket";
-import message from "@/lib/message";
 import { ChannelFormSchema } from "@/types/form";
 import { LogBox } from "react-native";
+import { Button } from "react-native-paper";
 
 LogBox.ignoreLogs([
   "Warning: TRenderEngineProvider:",
@@ -127,14 +127,15 @@ const ChatScreen: React.FC = () => {
   const { user } = useAppSelector((state) => state.user);
   const { channel } = useAppSelector((state) => state.channel);
 
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-
   const {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<ChannelFormSchema>();
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const onSubmit = async (data: ChannelFormSchema) => {
     setLoading(true);
@@ -156,7 +157,12 @@ const ChatScreen: React.FC = () => {
           channel: any;
           channelID: string;
         }) => {
-          data.userID === user?._id && message({ message: data.msg });
+          data.userID === user?._id &&
+            Toast.show({
+              type: "success",
+              text1: "Glückwunsch",
+              text2: data.msg,
+            });
 
           data.userID === user?._id && setLoading(false);
 
@@ -169,7 +175,8 @@ const ChatScreen: React.FC = () => {
 
             await dispatch(channelActions.setSelectedChannel(data));
 
-            data.userID === user?._id && router.push("/chat/channel/");
+            data.userID === user?._id &&
+              router.push("/(app)/(dashboard)/chat/detail");
           }
         }
       );
@@ -189,6 +196,12 @@ const ChatScreen: React.FC = () => {
       }
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (open === false) {
+      reset();
+    }
+  }, [open]);
 
   return (
     <Container>
@@ -222,7 +235,7 @@ const ChatScreen: React.FC = () => {
               <Text className="mb-2 text-lg font-semibold">
                 Erstellen eines Chats
               </Text>
-              <View className="mb-2">
+              <View>
                 <Controller
                   name="channelname"
                   control={control}
@@ -238,7 +251,7 @@ const ChatScreen: React.FC = () => {
                   )}
                 />
               </View>
-              <View className="mb-2">
+              <View className="mb-4">
                 <Controller
                   name="channeldesc"
                   control={control}
@@ -246,6 +259,7 @@ const ChatScreen: React.FC = () => {
                   render={({ field: { onChange, value } }) => (
                     <View>
                       <ProfileInput
+                        type="textarea"
                         value={value}
                         placeholder="Descripción del chat*"
                         onChange={onChange}
@@ -254,12 +268,16 @@ const ChatScreen: React.FC = () => {
                   )}
                 />
               </View>
-              <Pressable
+              <Button
+                mode="contained"
+                buttonColor="#19A873"
                 onPress={handleSubmit(onSubmit)}
-                className="flex justify-center items-center px-4 py-3 border border-[#EAEAEA] rounded-md bg-[#919191]"
+                className="rounded-md"
               >
-                <Text className="text-white">Erstellen</Text>
-              </Pressable>
+                <Text className="font-bold text-center text-base text-white">
+                  Erstellen
+                </Text>
+              </Button>
             </View>
           </View>
         </View>

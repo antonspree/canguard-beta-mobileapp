@@ -22,7 +22,7 @@ export default function AppLayout() {
       }}
     >
       <MaterialBottomTabs.Screen
-        name="index"
+        name="home"
         options={{
           tabBarLabel: "Home",
           tabBarIcon(props) {
@@ -52,7 +52,7 @@ export default function AppLayout() {
         }}
       />
       <MaterialBottomTabs.Screen
-        name="club/index"
+        name="club"
         options={{
           tabBarLabel: "Club",
           tabBarIcon(props) {
@@ -61,7 +61,7 @@ export default function AppLayout() {
         }}
       />
       <MaterialBottomTabs.Screen
-        name="profile/index"
+        name="profile"
         options={{
           tabBarLabel: "Profil",
           tabBarIcon(props) {
@@ -73,6 +73,38 @@ export default function AppLayout() {
         name="community"
         options={{
           tabBarLabel: "Community",
+          tabBarIcon(props) {
+            return (
+              <MaterialCommunityIcons
+                color={props.color}
+                size={24}
+                name={props.focused ? "handshake" : "handshake-outline"}
+              />
+            );
+          },
+        }}
+        redirect
+      />
+      <MaterialBottomTabs.Screen
+        name="setting"
+        options={{
+          tabBarLabel: "Setting",
+          tabBarIcon(props) {
+            return (
+              <MaterialCommunityIcons
+                color={props.color}
+                size={24}
+                name={props.focused ? "handshake" : "handshake-outline"}
+              />
+            );
+          },
+        }}
+        redirect
+      />
+      <MaterialBottomTabs.Screen
+        name="event"
+        options={{
+          tabBarLabel: "Ereignisse",
           tabBarIcon(props) {
             return (
               <MaterialCommunityIcons

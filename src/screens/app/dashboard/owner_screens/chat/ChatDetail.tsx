@@ -1,27 +1,44 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { View, FlatList, Text, TextInput, Pressable } from "react-native";
+import {
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { useDispatch } from "react-redux";
-import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
 import MessageBox from "@/components/MessageBox";
 import { useAppSelector } from "@/store/hook";
 import { chatActions } from "@/store/reducers/chatReducer";
 import Socket from "@/lib/socket";
 import Container from "@/components/Container";
+import {
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Button, IconButton, MD3Colors } from "react-native-paper";
+import { Controller, useForm } from "react-hook-form";
+import { ChatFormSchema } from "@/types/form";
+import ProfileInput from "@/components/ProfileInput";
 
 const ChatDetailScreen = () => {
   const dispatch = useDispatch();
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<ChatFormSchema>();
 
   const { selectedChannel } = useAppSelector((store) => store.channel);
   const { user } = useAppSelector((store) => store.user);
   const { chat } = useAppSelector((store) => store.chat);
 
   const flatListRef = useRef<FlatList | null>(null);
-  const [message, setMessage] = useState("");
-
-  const editor = useEditorBridge({
-    autofocus: true,
-    avoidIosKeyboard: true,
-  });
 
   const currentChat = useMemo(() => {
     return chat.find((chat) => {
@@ -29,7 +46,9 @@ const ChatDetailScreen = () => {
     });
   }, [chat, selectedChannel]);
 
-  const onSend = async () => {
+  const onSubmit = async (data: ChatFormSchema) => {
+    const { message } = data;
+
     if (message === "") return;
 
     selectedChannel?.channelID &&
@@ -39,14 +58,14 @@ const ChatDetailScreen = () => {
         message: message,
       });
 
-    setMessage("");
+    reset();
   };
 
   useEffect(() => {
     if (flatListRef.current === null) return;
     setInterval(() => {
       if (flatListRef.current === null) return;
-      flatListRef.current.scrollToEnd();
+      // flatListRef.current.scrollToEnd();
     }, 100);
   }, [currentChat, flatListRef]);
 
@@ -66,43 +85,55 @@ const ChatDetailScreen = () => {
   }, []);
 
   return (
-    <Container
-    // title={selectedChannel?.channelname as "UNDEFINED"}
-    // backLink="/(app)/(dashboard)/chat"
-    >
+    <SafeAreaView className="h-full w-full">
       <View className="flex-1">
-        <View className="flex-1 py-4 px-3">
-          {currentChat?.chat && currentChat?.chat[0] ? (
-            <FlatList
-              data={currentChat?.chat}
-              renderItem={({ item }) => <MessageBox item={item} user={user} />}
-              keyExtractor={(_, index) => index.toString()}
-              ref={flatListRef}
-            />
-          ) : (
-            ""
-          )}
-        </View>
-
-        <View className="flex-row justify-center w-full min-h-[100px] bg-white py-8 px-4">
-          {/* <TextInput
-            className="border border-[#777777] py-2 px-4 flex-1 mr-3 rounded-3xl"
-            onChangeText={(value) => setMessage(value)}
-            value={message}
-            placeholder="Nachricht"
-          /> */}
-          <RichText editor={editor} />
-          <Pressable
-            className="px-4 bg-green-700 rounded-3xl items-center justify-center"
-            onPress={onSend}
-          >
-            <View>
-              <Text className="text-base text-white">Schicken</Text>
-            </View>
-          </Pressable>
-        </View>
+        {currentChat?.chat && currentChat?.chat[0] ? (
+          <FlatList
+            data={[
+              ...currentChat?.chat,
+              ...currentChat?.chat,
+              ...currentChat?.chat,
+            ]}
+            renderItem={({ item }) => <MessageBox item={item} user={user} />}
+            keyExtractor={(_, index) => index.toString()}
+            ref={flatListRef}
+          />
+        ) : (
+          ""
+        )}
       </View>
-    </Container>
+      <View className="flex-row justify-start items-center w-full py-2 px-2 space-x-2">
+        <View className="flex-1">
+          <Controller
+            name="message"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, value } }) => (
+              <View>
+                <ProfileInput
+                  type="textarea"
+                  value={value}
+                  placeholder="Nachricht..."
+                  onChange={onChange}
+                  numberOfLines={1}
+                  contentStyle={{
+                    paddingTop: 16,
+                  }}
+                />
+              </View>
+            )}
+          />
+        </View>
+        <IconButton
+          className="mt-2"
+          icon="send"
+          size={20}
+          onPress={handleSubmit(onSubmit)}
+          mode="contained"
+          background={""}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

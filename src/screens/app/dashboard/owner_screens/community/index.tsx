@@ -113,6 +113,30 @@ export default function CommFeedScreen() {
           ]}
           iconMap={{ [actions.heading1]: handleHead }}
         /> */}
+
+        {/* <RichToolbar
+          editor={richText}
+          selectedIconTint="#873c1e"
+          iconTint="#312921"
+          actions={[
+            actions.insertImage,
+            actions.setBold,
+            actions.setItalic,
+            actions.insertBulletsList,
+            actions.insertOrderedList,
+            actions.insertLink,
+            actions.setStrikethrough,
+            actions.setUnderline,
+          ]}
+          style={styles.richTextToolbarStyle}
+        />
+        <RichEditor
+          ref={richText}
+          onChange={richTextHandle}
+          placeholder="Message..."
+          style={styles.richTextEditorStyle}
+          initialHeight={20}
+        /> */}
         <View className="flex-row items-center justify-between mt-3">
           <View className="flex-row space-x-2">
             <Pressable>

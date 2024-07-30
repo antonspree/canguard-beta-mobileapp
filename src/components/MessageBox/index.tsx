@@ -10,7 +10,7 @@ export default function MessageBox({ item, user }: any) {
   const { width } = useWindowDimensions();
 
   return (
-    <View>
+    <View className="px-2">
       <View className={`w-full ${status ? "items-start" : "items-end"} mb-1`}>
         <View className="flex-row items-center space-x-2">
           <Ionicons

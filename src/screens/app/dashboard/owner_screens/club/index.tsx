@@ -12,46 +12,46 @@ const ClubScreen: React.FC = () => {
   return (
     <Container>
       <View className="px-5">
-        <View className="space-y-2 mb-4 py-8">
+        <View className="space-y-2 mb-5">
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
+            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
               <MaterialCommunityIcons
                 color={"#000000"}
-                size={24}
+                size={18}
                 name={"account-multiple"}
               />
               <Text>Mitglieder</Text>
             </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
+            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
               <MaterialCommunityIcons
                 color={"#000000"}
-                size={24}
+                size={18}
                 name={"cog"}
               />
               <Text>Einstellungen</Text>
             </Pressable>
           </View>
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
+            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
               <MaterialCommunityIcons
                 color={"#000000"}
-                size={24}
+                size={18}
                 name={"account-group"}
               />
               <Text>Academy</Text>
             </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
+            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
               <MaterialCommunityIcons
                 color={"#000000"}
-                size={24}
+                size={18}
                 name={"search-web"}
               />
               <Text>Clubsuche</Text>
             </Pressable>
           </View>
         </View>
-        <View className="bg-white rounded-3xl mb-4">
-          <View className="rounded-3xl overflow-hidden">
+        <View className="bg-white rounded-2xl mb-2 overflow-hidden">
+          <View className="overflow-hidden">
             <View className="bg-black pt-[25%]"></View>
             <View className="flex-row justify-start">
               <View className="w-fit p-4 inline-block">

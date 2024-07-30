@@ -7,7 +7,7 @@ export default function TabsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Community",
+          title: "Profil",
         }}
       />
     </Stack>
