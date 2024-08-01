@@ -29,7 +29,27 @@ yarn-error.*
 *.pem
 
 # local env files
-.env*.local
+.env*
+.env.local
+.env.test
 
 # typescript
 *.tsbuildinfo
+
+# React Native
+# Built files
+android/
+ios/
+build/
+*.apk
+*.aab
+
+# Misc
+*.lock
+
+# IDE files
+.vscode/
+.idea/
+
+# Coverage
+coverage/

@@ -38,6 +38,16 @@ export interface IClub {
   users?: number;
   allow_request?: boolean;
   auto_accpet?: boolean;
+  card?: {
+    cardColor: string;
+    frontBadge?: string;
+    backBadge?: string;
+    textColor: string;
+    logoColor: string;
+    position: string;
+    logoShown: boolean;
+    clubShown: boolean;
+  };
 }
 
 interface InitialStateType {

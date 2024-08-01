@@ -244,7 +244,7 @@ const ChatScreen: React.FC = () => {
                     <View>
                       <ProfileInput
                         value={value}
-                        placeholder="Título del chat*"
+                        label="Título del chat*"
                         onChange={onChange}
                       />
                     </View>
@@ -261,7 +261,7 @@ const ChatScreen: React.FC = () => {
                       <ProfileInput
                         type="textarea"
                         value={value}
-                        placeholder="Descripción del chat*"
+                        label="Descripción del chat*"
                         onChange={onChange}
                       />
                     </View>

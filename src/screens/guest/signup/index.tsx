@@ -47,7 +47,7 @@ const SignUpScreen: React.FC = () => {
             <View>
               <ProfileInput
                 value={value}
-                placeholder="E-Mail Adresse*"
+                label="E-Mail Adresse*"
                 onChange={onChange}
               />
             </View>
@@ -67,7 +67,7 @@ const SignUpScreen: React.FC = () => {
               <ProfileInput
                 value={value}
                 type="password"
-                placeholder="Passwort*"
+                label="Passwort*"
                 onChange={onChange}
               />
             </View>

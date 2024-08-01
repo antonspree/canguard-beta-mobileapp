@@ -1,8 +1,19 @@
 import React from "react";
-import { Pressable, View, Text } from "react-native";
+import { Pressable, View, Text, StyleSheet } from "react-native";
 import Container from "@/components/Container";
 import { useAppSelector } from "@/store/hook";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Button } from "react-native-paper";
+import { router } from "expo-router";
+
+const styles = StyleSheet.create({
+  button: {
+    borderColor: "#000000", // Border color
+  },
+  label: {
+    color: "#000000", // Text color (optional)
+  },
+});
 
 const ClubScreen: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);
@@ -14,40 +25,64 @@ const ClubScreen: React.FC = () => {
       <View className="px-5">
         <View className="space-y-2 mb-5">
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={18}
-                name={"account-multiple"}
-              />
-              <Text>Mitglieder</Text>
-            </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={18}
-                name={"cog"}
-              />
-              <Text>Einstellungen</Text>
-            </Pressable>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"account-multiple"}
+              textColor="black"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
+              <Text className="text-center text-sm">Mitglieder</Text>
+            </Button>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"cog"}
+              textColor="black"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
+              <Text className="text-center text-sm">Einstellungen</Text>
+            </Button>
           </View>
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={18}
-                name={"account-group"}
-              />
-              <Text>Academy</Text>
-            </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-md border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={18}
-                name={"search-web"}
-              />
-              <Text>Clubsuche</Text>
-            </Pressable>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"school"}
+              textColor="black"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
+              <Text className="text-center text-sm">Academy</Text>
+            </Button>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"search-web"}
+              textColor="black"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
+              <Text className="text-center text-sm">Clubsuche</Text>
+            </Button>
           </View>
         </View>
         <View className="bg-white rounded-2xl mb-2 overflow-hidden">

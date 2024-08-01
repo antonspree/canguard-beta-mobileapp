@@ -19,11 +19,11 @@ import {
   removeFeed,
   replyFeed,
 } from "@/actions/feed";
-// import {
-//   actions,
-//   RichEditor,
-//   RichToolbar,
-// } from "react-native-pell-rich-editor";
+import {
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
 import Toast from "react-native-toast-message";
 import {
   Menu,
@@ -44,6 +44,18 @@ export default function CommFeedScreen() {
   const [documents, setDocuments] = useState<any>([]);
   const [previewImages, setPreviewImages] = useState<any>([]);
   const [votes, setVotes] = useState<any>([]);
+  const [descHTML, setDescHTML] = useState("");
+  const [showDescError, setShowDescError] = useState(false);
+
+  const richTextHandle = (descriptionText: string) => {
+    if (descriptionText) {
+      setShowDescError(false);
+      setDescHTML(descriptionText);
+    } else {
+      setShowDescError(true);
+      setDescHTML("");
+    }
+  };
 
   const onSend = async () => {
     console.log(message, votes);
@@ -114,7 +126,7 @@ export default function CommFeedScreen() {
           iconMap={{ [actions.heading1]: handleHead }}
         /> */}
 
-        {/* <RichToolbar
+        <RichToolbar
           editor={richText}
           selectedIconTint="#873c1e"
           iconTint="#312921"
@@ -128,15 +140,13 @@ export default function CommFeedScreen() {
             actions.setStrikethrough,
             actions.setUnderline,
           ]}
-          style={styles.richTextToolbarStyle}
         />
         <RichEditor
           ref={richText}
           onChange={richTextHandle}
           placeholder="Message..."
-          style={styles.richTextEditorStyle}
           initialHeight={20}
-        /> */}
+        />
         <View className="flex-row items-center justify-between mt-3">
           <View className="flex-row space-x-2">
             <Pressable>

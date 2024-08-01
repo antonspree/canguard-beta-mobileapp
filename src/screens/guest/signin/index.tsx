@@ -91,7 +91,7 @@ const SignInScreen: React.FC = () => {
               <View>
                 <ProfileInput
                   value={value}
-                  placeholder="E-Mail Adresse*"
+                  label="E-Mail Adresse*"
                   onChange={onChange}
                 />
               </View>
@@ -113,7 +113,7 @@ const SignInScreen: React.FC = () => {
                 <ProfileInput
                   value={value}
                   type="password"
-                  placeholder="Passwort*"
+                  label="Passwort*"
                   onChange={onChange}
                 />
               </View>
