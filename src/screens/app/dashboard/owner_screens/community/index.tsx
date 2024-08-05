@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Pressable,
   Text,
@@ -9,16 +9,6 @@ import {
   Modal,
 } from "react-native";
 import RenderHTML from "react-native-render-html";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { useEffect, useRef, useState } from "react";
-import { IFeed, feedActions } from "@/store/reducers/feedReducer";
-import {
-  createFeed,
-  getFeed,
-  likesFeed,
-  removeFeed,
-  replyFeed,
-} from "@/actions/feed";
 import {
   actions,
   RichEditor,
@@ -32,6 +22,16 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Feather from "@expo/vector-icons/Feather";
+import {
+  createFeed,
+  getFeed,
+  likesFeed,
+  removeFeed,
+  replyFeed,
+} from "@/actions/feed";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { IFeed, feedActions } from "@/store/reducers/feedReducer";
 
 export default function CommFeedScreen() {
   const dispatch = useAppDispatch();
@@ -380,12 +380,7 @@ export function CommFeedItem({
               </View>
               <Menu>
                 <MenuTrigger>
-                  {/* <MoreHorizontal color={"#4C4C4C"} size={16} /> */}
-                  <MaterialCommunityIcons
-                    color={"#4C4C4C"}
-                    size={12}
-                    name={"menu-down"}
-                  />
+                  <Feather name="more-vertical" size={24} color="black" />
                 </MenuTrigger>
                 <MenuOptions
                   customStyles={{

@@ -1,8 +1,8 @@
 import React from "react";
 import { Pressable, View, Text } from "react-native";
 import { router } from "expo-router";
-import { FontAwesome } from "@expo/vector-icons";
 import QRCode from "react-qr-code";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppSelector } from "@/store/hook";
 import Container from "@/components/Container";
@@ -13,7 +13,7 @@ const ProfileScreen: React.FC = () => {
   if (!user) return null;
 
   const redirectPersonalProfile = () => {
-    router.push("/dashboard/profile/personal");
+    router.push("/(app)/(dashboard)/profile/personal");
   };
 
   return (

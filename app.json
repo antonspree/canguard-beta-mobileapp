@@ -38,6 +38,12 @@
           "useFrameworks": "static"
         }
       }
+    ],
+    [
+      "expo-document-picker",
+      {
+        "iCloudContainerEnvironment": "Production"
+      }
     ]
   ],
   "experiments": {

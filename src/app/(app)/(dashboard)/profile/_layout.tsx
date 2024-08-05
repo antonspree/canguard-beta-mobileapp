@@ -4,11 +4,10 @@ import { Stack } from "expo-router";
 export default function TabsLayout() {
   return (
     <Stack>
+      <Stack.Screen name="index" options={{ title: "Profile" }} />
       <Stack.Screen
-        name="index"
-        options={{
-          title: "Profil",
-        }}
+        name="personal"
+        options={{ title: "Personal information" }}
       />
     </Stack>
   );
