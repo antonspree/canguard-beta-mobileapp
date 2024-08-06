@@ -10,7 +10,8 @@ export const clubCardData: ClubCardPropsInterface[] = [
       "Erstelle deinen eigenen Cannabis Social Club in wenigen Sekunden und lade die ersten Mitglieder ein.",
     btnText: "Club erstellen",
     btnIcon: <FontAwesome name="plus" size={14} color="#ffffff" />,
-    route: "/club/create",
+    route: "./create",
+    iconName: "plus",
   },
   {
     title: "Social Club finden",
@@ -19,7 +20,8 @@ export const clubCardData: ClubCardPropsInterface[] = [
       "Finde Social Clubs in Deutschland, stelle eine Mitgliedsanfrage und werde Mitglied.",
     btnText: "Clubs suchen",
     btnIcon: <FontAwesome name="search" size={14} color="#ffffff" />,
-    route: "/club/search",
+    route: "./search",
+    iconName: "search",
   },
 ];
 

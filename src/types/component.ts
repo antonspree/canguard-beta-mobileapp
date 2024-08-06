@@ -24,6 +24,7 @@ export interface ClubCardPropsInterface {
   btnIcon: React.ReactNode;
   btnText: string;
   route: any;
+  iconName?: string;
 }
 
 export interface ClubPropsInterface {

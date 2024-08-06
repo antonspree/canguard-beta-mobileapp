@@ -6,11 +6,18 @@ export default function AppLayout() {
   return (
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
-      screenOptions={
-        {
-          // API Reference: https://reactnavigation.org/docs/material-bottom-tab-navigator#options
-        }
-      }
+      activeColor="#19A873"
+      inactiveColor="#C8C8C8"
+      barStyle={{
+        backgroundColor: "#ffffff",
+        borderTopColor: "#EAEAEA",
+        borderTopWidth: 1,
+      }}
+      sceneAnimationEnabled
+      sceneAnimationType="shifting"
+      activeIndicatorStyle={{
+        backgroundColor: "transparent",
+      }}
     >
       <MaterialBottomTabs.Screen
         name="index"
@@ -21,9 +28,7 @@ export default function AppLayout() {
               <MaterialCommunityIcons
                 color={props.color}
                 size={24}
-                name={
-                  props.focused ? "alpha-a-circle" : "alpha-a-circle-outline"
-                }
+                name={props.focused ? "home" : "home-outline"}
               />
             );
           },
@@ -32,14 +37,14 @@ export default function AppLayout() {
       <MaterialBottomTabs.Screen
         name="search"
         options={{
+          title: "Search",
+          tabBarLabel: "Search",
           tabBarIcon(props) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
                 size={24}
-                name={
-                  props.focused ? "alpha-b-circle" : "alpha-b-circle-outline"
-                }
+                name={props.focused ? "home-search" : "home-search-outline"}
               />
             );
           },
@@ -48,13 +53,28 @@ export default function AppLayout() {
       <MaterialBottomTabs.Screen
         name="create"
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Create",
           tabBarIcon(props) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
                 size={24}
-                name={props.focused ? "plus-circle" : "plus-outline"}
+                name={props.focused ? "plus-circle" : "plus"}
+              />
+            );
+          },
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="profile"
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon(props) {
+            return (
+              <MaterialCommunityIcons
+                color={props.color}
+                size={24}
+                name={props.focused ? "account" : "account-outline"}
               />
             );
           },
