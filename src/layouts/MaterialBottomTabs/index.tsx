@@ -1,13 +1,22 @@
 import {
   createMaterialBottomTabNavigator,
   MaterialBottomTabNavigationOptions,
-} from "@react-navigation/material-bottom-tabs";
+  MaterialBottomTabNavigationEventMap,
+} from "react-native-paper/react-navigation";
+
+import { TabNavigationState, ParamListBase } from "@react-navigation/native";
 
 import { withLayoutContext } from "expo-router";
+import {
+  BottomTabNavigationEventMap,
+  BottomTabNavigationOptions,
+} from "@react-navigation/bottom-tabs";
 
-const { Navigator } = createMaterialBottomTabNavigator();
+const BottomTabNavigator = createMaterialBottomTabNavigator().Navigator;
 
 export const MaterialBottomTabs = withLayoutContext<
-  MaterialBottomTabNavigationOptions,
-  typeof Navigator
->(Navigator);
+  MaterialBottomTabNavigationOptions | BottomTabNavigationOptions,
+  typeof BottomTabNavigator,
+  TabNavigationState<ParamListBase>,
+  MaterialBottomTabNavigationEventMap | BottomTabNavigationEventMap
+>(BottomTabNavigator);

@@ -26,12 +26,14 @@ const CreateClubScreen: React.FC = () => {
 
     message({ message: result.msg });
 
+    console.log(result);
+
     if (result.success) {
       dispatch(clubActions.setClub({ club: result.club }));
       dispatch(userActions.setUser({ user: result.user }));
       dispatch(membersActions.setMembers({ members: result.members }));
 
-      router.replace("/(main)/club/profile");
+      router.replace("/(app)/(dashboard)/setting");
     }
   };
 

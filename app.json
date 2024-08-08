@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/335cca58-fa88-448a-9f2b-79bc1021c264"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -23,10 +24,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hashi7412.canguardmobileapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "335cca58-fa88-448a-9f2b-79bc1021c264"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   },
   "plugins": [
@@ -43,6 +53,12 @@
       "expo-document-picker",
       {
         "iCloudContainerEnvironment": "Production"
+      }
+    ],
+    [
+      "expo-asset",
+      {
+        "assets": ["./src/assets/**/*"]
       }
     ]
   ],

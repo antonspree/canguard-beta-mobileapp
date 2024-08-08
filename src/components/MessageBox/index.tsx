@@ -1,8 +1,11 @@
 import React from "react";
-import { View, Text, useWindowDimensions } from "react-native";
+import { View, useWindowDimensions } from "react-native";
+import { Image } from "expo-image";
+import { Text } from "react-native-paper";
 import RenderHtml from "react-native-render-html";
-import { Ionicons } from "@expo/vector-icons";
 import TimeAgo from "react-native-timeago";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { UPLOAD_URI } from "@/config/env";
 
 export default function MessageBox({ item, user }: any) {
   const status = item.user._id !== user._id;
@@ -12,20 +15,21 @@ export default function MessageBox({ item, user }: any) {
   return (
     <View className="px-2">
       <View className={`w-full ${status ? "items-start" : "items-end"} mb-1`}>
-        <View className="flex-row items-center space-x-2">
-          <Ionicons
-            name="person-circle-outline"
-            size={30}
-            color="black"
-            className="mr-1"
-          />
+        <View className="flex-row space-x-2">
+          <View className="flex-col justify-center items-center w-8 h-8 bg-gray-100 rounded-full mt-1 overflow-hidden">
+            {item.user.avatar ? (
+              <Image source={UPLOAD_URI + user.avatar} className="w-8 h-8" />
+            ) : (
+              <Ionicons name="person" size={16} color={"#c9c9c9"} />
+            )}
+          </View>
           <View
             className={`max-w-[60%] py-1 px-2 rounded-lg mb-1 min-w-[150px] ${
               status ? "bg-white" : "bg-green-100"
             }`}
           >
             <View className="w-full flex-row justify-between">
-              <Text className="font-bold text-[10px] mb-1">
+              <Text className="font-bold text-[10px] mb-1 text-[#777777]">
                 {item.user.username}
               </Text>
               <Text className="text-[8px] mb-1 capitalize text-[#777777]">

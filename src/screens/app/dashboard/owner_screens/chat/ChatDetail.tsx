@@ -62,10 +62,9 @@ const ChatDetailScreen = () => {
   };
 
   useEffect(() => {
-    if (flatListRef.current === null) return;
-    setInterval(() => {
+    setTimeout(() => {
       if (flatListRef.current === null) return;
-      // flatListRef.current.scrollToEnd();
+      flatListRef.current.scrollToEnd();
     }, 100);
   }, [currentChat, flatListRef]);
 
@@ -77,6 +76,11 @@ const ChatDetailScreen = () => {
           chat: data.chatData,
         })
       );
+
+      setTimeout(() => {
+        if (flatListRef.current === null) return;
+        flatListRef.current.scrollToEnd();
+      }, 100);
     });
 
     return () => {
@@ -89,11 +93,7 @@ const ChatDetailScreen = () => {
       <View className="flex-1">
         {currentChat?.chat && currentChat?.chat[0] ? (
           <FlatList
-            data={[
-              ...currentChat?.chat,
-              ...currentChat?.chat,
-              ...currentChat?.chat,
-            ]}
+            data={currentChat?.chat}
             renderItem={({ item }) => <MessageBox item={item} user={user} />}
             keyExtractor={(_, index) => index.toString()}
             ref={flatListRef}

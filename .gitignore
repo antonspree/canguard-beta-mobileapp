@@ -52,4 +52,10 @@ build/
 .idea/
 
 # Coverage
+
+# Sensitive files
+app.json
+eas.json
+credential.json
+
 coverage/

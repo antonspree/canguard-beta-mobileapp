@@ -89,7 +89,9 @@ const DocumentItem = ({ item }: { item: IClubDocument }) => {
         <Ionicons name="document-text-outline" size={32} color="#808089" />
         <View className="mb-0.5">
           <Text>{item.documentname}</Text>
-          <Text className="text-[10px] text-[#808089]">{item.date}</Text>
+          <Text variant="bodySmall" className="text-[#808089]">
+            {item.date}
+          </Text>
         </View>
       </View>
       <Menu>
@@ -144,11 +146,13 @@ const DocumentsScreen = () => {
   return (
     <Container>
       <View className="px-5">
-        <View className="bg-white rounded-2xl mb-4">
+        <View className="bg-white rounded-2xl">
           <View className="px-4 py-3 border-b border-gray-100">
             <View className="">
-              <Text className="font-semibold text-lg">Dokumente</Text>
-              <Text className="text-xs text-[#808089]">
+              <Text variant="titleMedium" className="font-semibold mb-1">
+                Dokumente
+              </Text>
+              <Text variant="bodySmall" className="text-[#808089]">
                 Füge Dokumente deines Clubs hinzu, die für Mitglieder sichtbar
                 sind. Lege fest, welche Dokumente bei Mitgliedsanfragen
                 akzeptiert werden müssen.

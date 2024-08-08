@@ -23,7 +23,7 @@ export default function AppLayout() {
         name="index"
         options={{
           tabBarLabel: "Home",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
@@ -39,7 +39,7 @@ export default function AppLayout() {
         options={{
           title: "Search",
           tabBarLabel: "Search",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
@@ -54,7 +54,7 @@ export default function AppLayout() {
         name="create"
         options={{
           tabBarLabel: "Create",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
@@ -69,7 +69,7 @@ export default function AppLayout() {
         name="profile"
         options={{
           tabBarLabel: "Profile",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
                 color={props.color}

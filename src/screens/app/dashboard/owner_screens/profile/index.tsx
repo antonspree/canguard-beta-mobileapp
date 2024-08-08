@@ -1,39 +1,93 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { ImageBackground, Pressable, View } from "react-native";
 import { router } from "expo-router";
 import QRCode from "react-qr-code";
+import { Text } from "react-native-paper";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppSelector } from "@/store/hook";
 import Container from "@/components/Container";
-import { Text } from "react-native-paper";
+import { Image } from "expo-image";
+import { UPLOAD_URI } from "@/config/env";
+import LogoImg from "@/assets/images/logo.png";
+import MockCardBg from "@/assets/images/card-logo.svg";
 
 const ProfileScreen: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);
+  const { club } = useAppSelector((store) => store.club);
 
   if (!user) return null;
 
   const redirectPersonalProfile = () => {
-    router.push("./profile/personal");
+    if (user.club) {
+      router.push("/(app)/(dashboard)/profile/personal");
+    } else {
+      router.push("/(app)/(noclub)/profile/personal");
+    }
   };
 
   return (
     <Container>
       <View className="px-5">
         {user.club && (
-          <View className="flex flex-col items-center bg-white rounded-2xl mb-4 py-8">
-            <QRCode
-              size={120}
-              style={{ height: "auto", maxWidth: 50, width: 50 }}
-              value={"sdfsdfsdf"}
-              viewBox={`0 0 256 256`}
+          <ImageBackground
+            className="relative flex flex-col items-center bg-[#0C0C0C] rounded-2xl mb-4 overflow-hidden pt-[55%]"
+            source={{
+              uri: club?.badge ? UPLOAD_URI + club?.badge : undefined,
+            }}
+          >
+            <Image
+              source={MockCardBg}
+              className="absolute -right-20 -bottom-16 w-full h-auto min-w-[370px] min-h-[210px]"
+              style={{
+                objectFit: "scale-down",
+              }}
+              contentFit="contain"
             />
-          </View>
+            <View className="absolute top-4 right-4 flex-row items-center gap-1">
+              <Image source={LogoImg} className="w-4 h-4" />
+              <Text
+                variant="bodySmall"
+                className="font-bold text-[#19A873] uppercase"
+              >
+                CanGuard
+              </Text>
+            </View>
+            <View className="absolute left-0 bottom-4 w-full flex-row justify-between px-4">
+              <View>
+                <Text className="text-[#ffffff] mb-0.5">{user.username}</Text>
+                <Text variant="bodySmall" className="text-gray-400 mb-1.5">
+                  {user.alias}
+                </Text>
+                <Text variant="bodySmall" className="text-gray-400">
+                  {`${club?.clubID}-${user.memberID}`}
+                </Text>
+              </View>
+              <View className="border border-white">
+                <QRCode
+                  size={60}
+                  style={{
+                    height: "auto",
+                    backgroundColor: "#ffffff",
+                  }}
+                  value={`${club?.clubID}-${user.memberID}`}
+                  viewBox={`0 0 256 256`}
+                />
+              </View>
+            </View>
+          </ImageBackground>
         )}
         <View className="bg-white rounded-2xl mb-4">
           <View className="px-4 py-3 border-b border-gray-100">
-            <View className="flex flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2">
-              <FontAwesome name="user" color={"#8E8E8E"} size={32} />
+            <View className="flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2 overflow-hidden">
+              {user.avatar ? (
+                <Image
+                  source={UPLOAD_URI + user.avatar}
+                  className="w-20 h-20"
+                />
+              ) : (
+                <FontAwesome name="user" color={"#8E8E8E"} size={32} />
+              )}
             </View>
             <Text variant="titleMedium">{user.username}</Text>
             <Text variant="bodySmall" className="text-[#8E8E8E]">

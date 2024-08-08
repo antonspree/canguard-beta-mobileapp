@@ -24,12 +24,15 @@ const SearchClubScreen: React.FC = () => {
     <ScrollView>
       <View className="flex flex-col space-y-5 m-5">
         {/* <View className="h-[200px] bg-slate-500 rounded-md" /> */}
-        <MapView
-          style={{
-            width: "auto",
-            height: 200,
-          }}
-        />
+        <View className="rounded-md overflow-hidden">
+          <MapView
+            style={{
+              width: "auto",
+              height: 200,
+              borderRadius: 12,
+            }}
+          />
+        </View>
         <View className="py-2 border border-[#EAEAEA] rounded-md">
           <TextInput
             className="px-3 outline-none"

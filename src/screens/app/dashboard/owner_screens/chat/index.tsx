@@ -1,27 +1,28 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
   Pressable,
-  Text,
   View,
   Modal,
   useWindowDimensions,
+  LogBox,
 } from "react-native";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
+import { Button, Dialog, Text, Portal } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import RenderHtml from "react-native-render-html";
 import Toast from "react-native-toast-message";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import Container from "@/components/Container";
-import ProfileInput from "@/components/ProfileInput";
 import { getAllChannels, getChatData } from "@/actions/chat";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { IChannel, channelActions } from "@/store/reducers/channelReducer";
 import { IChat, chatActions } from "@/store/reducers/chatReducer";
+import Container from "@/components/Container";
+import ProfileInput from "@/components/ProfileInput";
 import Socket from "@/lib/socket";
+import { isEmpty } from "@/lib/function";
 import { ChannelFormSchema } from "@/types/form";
-import { LogBox } from "react-native";
-import { Button } from "react-native-paper";
 
 LogBox.ignoreLogs([
   "Warning: TRenderEngineProvider:",
@@ -32,7 +33,7 @@ LogBox.ignoreLogs([
 const ChatItem: React.FC<{ item: IChannel }> = ({ item }) => {
   const dispatch = useDispatch();
 
-  const { width } = useWindowDimensions();
+  // const { width } = useWindowDimensions();
 
   const { user } = useAppSelector((state) => state.user);
   const { chat } = useAppSelector((state) => state.chat);
@@ -97,15 +98,15 @@ const ChatItem: React.FC<{ item: IChannel }> = ({ item }) => {
     >
       <Text className="text-2xl">#</Text>
       <View>
-        <Text className="font-semibold">{item.channelname}</Text>
+        <Text variant="titleSmall">{item.channelname}</Text>
         <View className="flex flex-row">
           <View className="w-full">
-            <Text className="text-[10px]">
+            <Text variant="bodySmall" className="text-[10px] text-[#8E8E8E]">
               {currentChat?.chat &&
                 currentChat?.chat[currentChat?.chat?.length - 1].user.username}
             </Text>
           </View>
-          <View className="">
+          {/* <View className="">
             <RenderHtml
               contentWidth={width}
               source={{
@@ -115,7 +116,7 @@ const ChatItem: React.FC<{ item: IChannel }> = ({ item }) => {
                   "",
               }}
             />
-          </View>
+          </View> */}
         </View>
       </View>
     </Pressable>
@@ -204,85 +205,121 @@ const ChatScreen: React.FC = () => {
   }, [open]);
 
   return (
-    <Container>
-      <View className="px-5 mb-4">
-        <Pressable
-          onPress={() => setOpen(true)}
-          className="flex flex-row items-center space-x-1 bg-white w-[150px] px-5 py-1 border border-gray-100 rounded-full"
+    <>
+      {!isEmpty(channel) ? (
+        <Container>
+          <View className="flex-row px-5 mb-4">
+            <Button
+              mode="outlined"
+              onPress={() => setOpen(true)}
+              icon={"plus"}
+              className="border-[#EAEAEA]"
+              style={{
+                borderColor: "#EAEAEA",
+              }}
+              textColor="#000000"
+            >
+              <Text variant="bodySmall">Chat erstellen</Text>
+            </Button>
+          </View>
+          <View className="px-5">
+            {channel.map((item: any, index: number) => {
+              return <ChatItem item={item} key={index} />;
+            })}
+          </View>
+        </Container>
+      ) : (
+        <SafeAreaView
+          style={{ flex: 1, padding: 0, margin: 0 }}
+          className="flex-1 h-full w-full p-0 m-0 bg-gray-100"
         >
-          <MaterialCommunityIcons color={"#000000"} size={24} name={"plus"} />
-          <Text className="text-xs">Chat erstellen</Text>
-        </Pressable>
-      </View>
-      <View className="px-5">
-        {channel.map((item: any, index: number) => {
-          return <ChatItem item={item} key={index} />;
-        })}
-      </View>
-      <Modal
+          <View className="flex-1 justify-center items-center">
+            <Button
+              mode="contained"
+              buttonColor="#19A873"
+              onPress={() => setOpen(true)}
+              className="rounded-md"
+            >
+              <Text className="font-bold text-center text-base text-white">
+                Chat erstellen
+              </Text>
+            </Button>
+          </View>
+        </SafeAreaView>
+      )}
+      <Portal>
+        <Dialog
+          visible={open}
+          onDismiss={() => setOpen(false)}
+          style={{ backgroundColor: "white", borderRadius: 10 }}
+        >
+          <Dialog.Title>
+            <Text variant="titleMedium">Erstellen eines Chats</Text>
+          </Dialog.Title>
+          <Dialog.Content>
+            <View>
+              <Controller
+                name="channelname"
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <View>
+                    <ProfileInput
+                      value={value}
+                      label="Título del chat*"
+                      onChange={onChange}
+                    />
+                  </View>
+                )}
+              />
+            </View>
+            <View>
+              <Controller
+                name="channeldesc"
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <View>
+                    <ProfileInput
+                      type="textarea"
+                      value={value}
+                      label="Descripción del chat*"
+                      onChange={onChange}
+                    />
+                  </View>
+                )}
+              />
+            </View>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setOpen(false)} className="rounded-md">
+              <Text variant="bodyMedium" className="font-semibold">
+                Abbrechen
+              </Text>
+            </Button>
+            <Button
+              mode="contained"
+              buttonColor="#19A873"
+              onPress={handleSubmit(onSubmit)}
+              className="rounded-md"
+              contentStyle={{ paddingHorizontal: 16 }}
+            >
+              <Text variant="bodyMedium" className="font-semibold text-white">
+                Erstellen
+              </Text>
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+      {/* <Modal
         animationType="slide"
         transparent={true}
         visible={open}
         className="border border-red-600"
       >
-        <View className="h-full flex flex-col">
-          <Pressable
-            className="flex-1 w-full bg-black/50"
-            onPress={() => setOpen(false)}
-          />
-          <View className="w-full h-fit overflow-hidden flex py-8 px-5 bg-white">
-            <View className="flex flex-col w-full overflow-hidden border border-[#EAEAEA] rounded-md py-5 px-4">
-              <Text className="mb-2 text-lg font-semibold">
-                Erstellen eines Chats
-              </Text>
-              <View>
-                <Controller
-                  name="channelname"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { onChange, value } }) => (
-                    <View>
-                      <ProfileInput
-                        value={value}
-                        label="Título del chat*"
-                        onChange={onChange}
-                      />
-                    </View>
-                  )}
-                />
-              </View>
-              <View className="mb-4">
-                <Controller
-                  name="channeldesc"
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field: { onChange, value } }) => (
-                    <View>
-                      <ProfileInput
-                        type="textarea"
-                        value={value}
-                        label="Descripción del chat*"
-                        onChange={onChange}
-                      />
-                    </View>
-                  )}
-                />
-              </View>
-              <Button
-                mode="contained"
-                buttonColor="#19A873"
-                onPress={handleSubmit(onSubmit)}
-                className="rounded-md"
-              >
-                <Text className="font-bold text-center text-base text-white">
-                  Erstellen
-                </Text>
-              </Button>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </Container>
+        
+      </Modal> */}
+    </>
   );
 };
 
