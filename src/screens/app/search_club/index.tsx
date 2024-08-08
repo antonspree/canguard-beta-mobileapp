@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, TextInput, View } from "react-native";
-import { useFocusEffect } from "expo-router";
+import MapView from "react-native-maps";
 import { getAllClubs } from "@/actions/club";
 import Club from "@/components/Club";
 
@@ -8,20 +8,31 @@ const SearchClubScreen: React.FC = () => {
   const [clubData, setClubData] = useState<any>([]);
   const [search, setSearch] = useState("");
 
-  useFocusEffect(
-    React.useCallback(() => {
-      (async () => {
-        const result = await getAllClubs();
+  const fetchAllClubs = async () => {
+    const result = await getAllClubs();
 
-        setClubData(result.club);
-      })();
-    }, [])
-  );
+    if (result && typeof result === "object" && "club" in result) {
+      setClubData(result.club);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllClubs();
+  }, []);
 
   return (
     <ScrollView>
       <View className="flex flex-col space-y-5 m-5">
-        <View className="h-[200px] bg-slate-500 rounded-md" />
+        {/* <View className="h-[200px] bg-slate-500 rounded-md" /> */}
+        <View className="rounded-md overflow-hidden">
+          <MapView
+            style={{
+              width: "auto",
+              height: 200,
+              borderRadius: 12,
+            }}
+          />
+        </View>
         <View className="py-2 border border-[#EAEAEA] rounded-md">
           <TextInput
             className="px-3 outline-none"

@@ -79,11 +79,7 @@ const RegisterScreen: React.FC = () => {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <View>
-              <ProfileInput
-                value={value}
-                placeholder="Name*"
-                onChange={onChange}
-              />
+              <ProfileInput value={value} label="Name*" onChange={onChange} />
             </View>
           )}
         />
@@ -101,7 +97,7 @@ const RegisterScreen: React.FC = () => {
               <ProfileInput
                 value={value}
                 type="date"
-                placeholder="tt.mm.jjjj*"
+                label="tt.mm.jjjj*"
                 onChange={onChange}
               />
             </View>

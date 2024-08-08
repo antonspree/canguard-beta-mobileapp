@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Pressable,
   Text,
@@ -9,21 +9,11 @@ import {
   Modal,
 } from "react-native";
 import RenderHTML from "react-native-render-html";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
-import { useEffect, useRef, useState } from "react";
-import { IFeed, feedActions } from "@/store/reducers/feedReducer";
 import {
-  createFeed,
-  getFeed,
-  likesFeed,
-  removeFeed,
-  replyFeed,
-} from "@/actions/feed";
-// import {
-//   actions,
-//   RichEditor,
-//   RichToolbar,
-// } from "react-native-pell-rich-editor";
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
 import Toast from "react-native-toast-message";
 import {
   Menu,
@@ -32,6 +22,16 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Feather from "@expo/vector-icons/Feather";
+import {
+  createFeed,
+  getFeed,
+  likesFeed,
+  removeFeed,
+  replyFeed,
+} from "@/actions/feed";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { IFeed, feedActions } from "@/store/reducers/feedReducer";
 
 export default function CommFeedScreen() {
   const dispatch = useAppDispatch();
@@ -44,6 +44,18 @@ export default function CommFeedScreen() {
   const [documents, setDocuments] = useState<any>([]);
   const [previewImages, setPreviewImages] = useState<any>([]);
   const [votes, setVotes] = useState<any>([]);
+  const [descHTML, setDescHTML] = useState("");
+  const [showDescError, setShowDescError] = useState(false);
+
+  const richTextHandle = (descriptionText: string) => {
+    if (descriptionText) {
+      setShowDescError(false);
+      setDescHTML(descriptionText);
+    } else {
+      setShowDescError(true);
+      setDescHTML("");
+    }
+  };
 
   const onSend = async () => {
     console.log(message, votes);
@@ -113,6 +125,28 @@ export default function CommFeedScreen() {
           ]}
           iconMap={{ [actions.heading1]: handleHead }}
         /> */}
+
+        <RichToolbar
+          editor={richText}
+          selectedIconTint="#873c1e"
+          iconTint="#312921"
+          actions={[
+            actions.insertImage,
+            actions.setBold,
+            actions.setItalic,
+            actions.insertBulletsList,
+            actions.insertOrderedList,
+            actions.insertLink,
+            actions.setStrikethrough,
+            actions.setUnderline,
+          ]}
+        />
+        <RichEditor
+          ref={richText}
+          onChange={richTextHandle}
+          placeholder="Message..."
+          initialHeight={20}
+        />
         <View className="flex-row items-center justify-between mt-3">
           <View className="flex-row space-x-2">
             <Pressable>
@@ -346,12 +380,7 @@ export function CommFeedItem({
               </View>
               <Menu>
                 <MenuTrigger>
-                  {/* <MoreHorizontal color={"#4C4C4C"} size={16} /> */}
-                  <MaterialCommunityIcons
-                    color={"#4C4C4C"}
-                    size={12}
-                    name={"menu-down"}
-                  />
+                  <Feather name="more-vertical" size={24} color="black" />
                 </MenuTrigger>
                 <MenuOptions
                   customStyles={{

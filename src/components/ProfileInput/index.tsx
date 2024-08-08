@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, TextInput as NativeTextInput, View } from "react-native";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
 import { ProfileInputProps } from "@/types/component";
 import { formatedate, getMaxDate } from "@/lib/function";
+import { Text, TextInput } from "react-native-paper";
 
 const ProfileInput: React.FC<ProfileInputProps> = ({
   type = "text",
   value = "",
-  placeholder = "",
+  label,
   onChange,
+  numberOfLines,
+  ...rest
 }) => {
   const [isShown, setShown] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const onChangeDate = ({ type }: DateTimePickerEvent, selectedDate?: Date) => {
     if (type === "set") {
@@ -27,53 +31,104 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
     }
   };
 
+  const handleFocus = () => {
+    setFocused(true);
+  };
+
+  const handleBlur = () => {
+    setFocused(false);
+  };
+
   return (
-    <View className="flex flex-row justify-between items-center w-full py-1.5 border border-[#EAEAEA] rounded-md">
+    <>
       {type === "text" && (
         <TextInput
-          className="px-2 outline-none"
+          className="outline-none bg-white"
           value={value}
-          placeholder={placeholder}
+          label={
+            label ? (
+              <Text
+                style={{
+                  color: focused ? "black" : "#7F7F88",
+                }}
+              >
+                {label}
+              </Text>
+            ) : undefined
+          }
+          mode="outlined"
+          outlineColor="#EAEAEA"
+          activeOutlineColor="#19A873"
           onChangeText={onChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          {...rest}
         />
       )}
       {type === "password" && (
         <>
           <TextInput
-            className="flex-1 px-2 outline-none"
+            className="outline-none bg-white"
             value={value}
-            placeholder={placeholder}
+            label={
+              label ? (
+                <Text
+                  style={{
+                    color: focused ? "black" : "#7F7F88",
+                  }}
+                >
+                  {label}
+                </Text>
+              ) : undefined
+            }
+            mode="outlined"
+            outlineColor="#EAEAEA"
+            activeOutlineColor="#19A873"
             onChangeText={onChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
             secureTextEntry={type === "password" && !isShown}
+            right={
+              <TextInput.Icon
+                icon={isShown ? "eye" : "eye-off"}
+                onPress={() => {
+                  setShown((prev) => !prev);
+                }}
+              />
+            }
+            {...rest}
           />
-          {type === "password" && (
-            <Pressable
-              className="pr-3"
-              onPress={() => {
-                setShown((prev) => !prev);
-              }}
-            >
-              {isShown ? (
-                <FontAwesome name="eye" size={20} color="#777777" />
-              ) : (
-                <FontAwesome name="eye-slash" size={20} color="#777777" />
-              )}
-            </Pressable>
-          )}
         </>
       )}
       {type === "date" && (
-        <>
+        <View>
           <Pressable
             className="w-full"
             onPress={() => setShowPicker((prev) => !prev)}
           >
             <TextInput
-              className="px-2 outline-none"
+              className="outline-none"
               value={value === "" ? value : formatedate(value)}
-              placeholder={placeholder}
               editable={false}
               onPressIn={() => setShowPicker((prev) => !prev)}
+              mode="outlined"
+              label={
+                label ? (
+                  <Text
+                    style={{
+                      color: focused ? "black" : "#7F7F88",
+                    }}
+                  >
+                    {label}
+                  </Text>
+                ) : undefined
+              }
+              outlineColor="#EAEAEA"
+              activeOutlineColor="#19A873"
+              onChangeText={onChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              {...rest}
             />
           </Pressable>
           {showPicker && (
@@ -85,20 +140,37 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
               onChange={onChangeDate}
             />
           )}
-        </>
+        </View>
       )}
       {type === "textarea" && (
         <TextInput
-          className="px-2 outline-none"
+          className="outline-none"
           style={{ textAlignVertical: "top" }}
+          label={
+            label ? (
+              <Text
+                style={{
+                  color: focused ? "black" : "#7F7F88",
+                }}
+              >
+                {label}
+              </Text>
+            ) : undefined
+          }
+          mode="outlined"
+          outlineColor="#EAEAEA"
+          activeOutlineColor="#19A873"
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           multiline
-          numberOfLines={5}
+          numberOfLines={numberOfLines || 5}
           value={value}
-          placeholder={placeholder}
           onChangeText={onChange}
+          placeholderTextColor="#7F7F88"
+          {...rest}
         />
       )}
-    </View>
+    </>
   );
 };
 

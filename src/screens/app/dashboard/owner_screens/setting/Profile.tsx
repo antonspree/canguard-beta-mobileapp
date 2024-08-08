@@ -95,7 +95,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="CSC e.V."
+                      label="CSC e.V."
                       onChange={onChange}
                     />
                   </View>
@@ -113,7 +113,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://www.beispiel.de"
+                      label="https://www.beispiel.de"
                       onChange={onChange}
                     />
                   </View>
@@ -131,7 +131,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="info@beispiel.de"
+                      label="info@beispiel.de"
                       onChange={onChange}
                     />
                   </View>
@@ -149,7 +149,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="0123456789"
+                      label="0123456789"
                       onChange={onChange}
                     />
                   </View>
@@ -167,7 +167,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="Straße"
+                      label="Straße"
                       onChange={onChange}
                     />
                   </View>
@@ -182,7 +182,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="Hausnummer"
+                      label="Hausnummer"
                       onChange={onChange}
                     />
                   </View>
@@ -197,7 +197,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="Postleitzahl"
+                      label="Postleitzahl"
                       onChange={onChange}
                     />
                   </View>
@@ -212,7 +212,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="Stadt"
+                      label="Stadt"
                       onChange={onChange}
                     />
                   </View>
@@ -227,7 +227,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="Deutschland"
+                      label="Deutschland"
                       onChange={onChange}
                     />
                   </View>
@@ -260,7 +260,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="textarea"
-                      placeholder="Beschreibung"
+                      label="Beschreibung"
                       onChange={onChange}
                     />
                   </View>
@@ -285,7 +285,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="textarea"
-                      placeholder="Jugendschutz & Prävention"
+                      label="Jugendschutz & Prävention"
                       onChange={onChange}
                     />
                   </View>
@@ -303,7 +303,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://discord.gg/"
+                      label="https://discord.gg/"
                       onChange={onChange}
                     />
                   </View>
@@ -321,7 +321,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://tiktok.com/"
+                      label="https://tiktok.com/"
                       onChange={onChange}
                     />
                   </View>
@@ -339,7 +339,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://youtube.com/"
+                      label="https://youtube.com/"
                       onChange={onChange}
                     />
                   </View>
@@ -357,7 +357,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://twitch.tv/"
+                      label="https://twitch.tv/"
                       onChange={onChange}
                     />
                   </View>
@@ -375,7 +375,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://instagram.com/"
+                      label="https://instagram.com/"
                       onChange={onChange}
                     />
                   </View>
@@ -393,7 +393,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://x.com/"
+                      label="https://x.com/"
                       onChange={onChange}
                     />
                   </View>
@@ -411,7 +411,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="text"
-                      placeholder="https://facebook.com/"
+                      label="https://facebook.com/"
                       onChange={onChange}
                     />
                   </View>
@@ -433,7 +433,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={value}
                       type="textarea"
-                      placeholder="Beispiel Club e.V. Musterstraße 12A 21212 Musterstadt"
+                      label="Beispiel Club e.V. Musterstraße 12A 21212 Musterstadt"
                       onChange={onChange}
                     />
                   </View>
@@ -456,7 +456,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={(value || "").toString()}
                       type="text"
-                      placeholder="500"
+                      label="500"
                       onChange={onChange}
                     />
                   </View>
@@ -477,7 +477,7 @@ const ProfileScreen = () => {
                     <ProfileInput
                       value={(value || "").toString()}
                       type="text"
-                      placeholder="18"
+                      label="18"
                       onChange={onChange}
                     />
                   </View>

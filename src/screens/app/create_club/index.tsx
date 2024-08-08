@@ -26,12 +26,14 @@ const CreateClubScreen: React.FC = () => {
 
     message({ message: result.msg });
 
+    console.log(result);
+
     if (result.success) {
       dispatch(clubActions.setClub({ club: result.club }));
       dispatch(userActions.setUser({ user: result.user }));
       dispatch(membersActions.setMembers({ members: result.members }));
 
-      router.replace("/(main)/club/profile");
+      router.replace("/(app)/(dashboard)/setting");
     }
   };
 
@@ -61,7 +63,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="CSC e.V."
+                          label="CSC e.V."
                           onChange={onChange}
                         />
                       </View>
@@ -86,7 +88,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="Straße"
+                          label="Straße"
                           onChange={onChange}
                         />
                       </View>
@@ -108,7 +110,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="Hausnummer"
+                          label="Hausnummer"
                           onChange={onChange}
                         />
                       </View>
@@ -130,7 +132,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="Postleitzahl"
+                          label="Postleitzahl"
                           onChange={onChange}
                         />
                       </View>
@@ -152,7 +154,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="Stadt"
+                          label="Stadt"
                           onChange={onChange}
                         />
                       </View>
@@ -174,7 +176,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="text"
-                          placeholder="Deutschland"
+                          label="Deutschland"
                           onChange={onChange}
                         />
                       </View>
@@ -198,7 +200,7 @@ const CreateClubScreen: React.FC = () => {
                         <ProfileInput
                           value={value}
                           type="textarea"
-                          placeholder="Beschreibung"
+                          label="Beschreibung"
                           onChange={onChange}
                         />
                       </View>

@@ -18,10 +18,22 @@ export interface IUser {
   club?: IClub;
   role?: string;
   status?: string;
-  clubrole?: ("board" | "gardener" | "member" | "preventer")[];
+  clubrole?: {
+    rolename: string;
+    roledesc: string;
+    roleID: string;
+    rolecolor: string;
+  }[];
+  functions?: string[];
   memberID?: string;
   memberdate?: string;
   verifycontent?: string;
+  // memberships?: IMembership[];
+  memberships?: any[];
+  last_login?: Date;
+  confirmed?: boolean;
+  academy_media?: string[];
+  two_fa_status?: string;
 }
 
 interface InitialStateType {

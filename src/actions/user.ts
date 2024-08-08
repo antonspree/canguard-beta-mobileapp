@@ -76,6 +76,30 @@ const removeAccount = async () => {
   }
 };
 
+const confirmPass = async (data: any) => {
+  try {
+    const result = await axiosPrivateInstance
+      .post("/user/confirmPass", { ...data })
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const twoFARequest = async (data: any) => {
+  try {
+    const result = await axiosPrivateInstance
+      .post("/user/twoFARequest", { ...data })
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export {
   getData,
   getUser,
@@ -83,4 +107,6 @@ export {
   cancelRequest,
   terminateMember,
   removeAccount,
+  confirmPass,
+  twoFARequest,
 };
