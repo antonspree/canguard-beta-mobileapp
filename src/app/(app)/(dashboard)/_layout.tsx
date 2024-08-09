@@ -3,7 +3,6 @@ import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
-import { usePathname } from "expo-router";
 
 export default function AppLayout() {
   return (
@@ -29,9 +28,9 @@ export default function AppLayout() {
           tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
-                color={props.color}
-                size={24}
                 name="view-dashboard"
+                size={24}
+                color={props.color}
               />
             );
           },

@@ -9,7 +9,7 @@ import { useAppSelector } from "@/store/hook";
 import Container from "@/components/Container";
 import { Image } from "expo-image";
 import { UPLOAD_URI } from "@/config/env";
-import LogoImg from "@/assets/images/logo.png";
+import LogoImg from "@/assets/images/icon.svg";
 import MockCardBg from "@/assets/images/card-logo.svg";
 
 const ProfileScreen: React.FC = () => {
@@ -45,12 +45,11 @@ const ProfileScreen: React.FC = () => {
               contentFit="contain"
             />
             <View className="absolute top-4 right-4 flex-row items-center gap-1">
-              <Image source={LogoImg} className="w-4 h-4" />
-              <Text
-                variant="bodySmall"
-                className="font-bold text-[#19A873] uppercase"
-              >
-                CanGuard
+              <View className="w-2 h-4 items-center justify-center">
+                <Image source={LogoImg} className="w-12 h-12" />
+              </View>
+              <Text variant="bodySmall" className="font-bold text-[#19A873]">
+                Canify
               </Text>
             </View>
             <View className="absolute left-0 bottom-4 w-full flex-row justify-between px-4">

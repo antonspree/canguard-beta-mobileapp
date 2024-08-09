@@ -65,9 +65,9 @@ const SignInScreen: React.FC = () => {
     <View className="w-full h-full flex justify-center space-y-5 px-5">
       <View className="flex justify-center items-center space-y-2">
         <Image
-          className="w-12 h-12"
+          className="w-48 h-12"
           placeholder="logo"
-          source={require("../../../assets/images/logo.png")}
+          source={require("@/assets/images/logo.svg")}
         />
         <Text className="font-bold text-3xl">Einloggen</Text>
         <View className="flex flex-row items-center">

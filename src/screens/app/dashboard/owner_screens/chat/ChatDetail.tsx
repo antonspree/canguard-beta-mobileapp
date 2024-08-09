@@ -1,28 +1,28 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  View,
-  FlatList,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from "react-native";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { View, FlatList, Pressable, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
-import MessageBox from "@/components/MessageBox";
-import { useAppSelector } from "@/store/hook";
-import { chatActions } from "@/store/reducers/chatReducer";
-import Socket from "@/lib/socket";
-import Container from "@/components/Container";
+import { Controller, useForm } from "react-hook-form";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { IconButton } from "react-native-paper";
 import {
   actions,
   RichEditor,
   RichToolbar,
 } from "react-native-pell-rich-editor";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, IconButton, MD3Colors } from "react-native-paper";
-import { Controller, useForm } from "react-hook-form";
+import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAppSelector } from "@/store/hook";
+import { chatActions } from "@/store/reducers/chatReducer";
+import MessageBox from "@/components/MessageBox";
+import Socket from "@/lib/socket";
 import { ChatFormSchema } from "@/types/form";
-import ProfileInput from "@/components/ProfileInput";
+import InsertLinkModal from "./InsertLinkModal";
 
 const ChatDetailScreen = () => {
   const dispatch = useDispatch();
@@ -38,13 +38,22 @@ const ChatDetailScreen = () => {
   const { user } = useAppSelector((store) => store.user);
   const { chat } = useAppSelector((store) => store.chat);
 
-  const flatListRef = useRef<FlatList | null>(null);
+  const flatListRef = useRef<ScrollView | null>(null);
+  const richText = useRef<any>();
+
+  const [visibleEmoji, setVisibleEmoji] = useState(false);
+  const [visibleInserLinkModal, setVisibleInsertLinkModal] = useState(false);
 
   const currentChat = useMemo(() => {
     return chat.find((chat) => {
       return chat.channelID === selectedChannel?.channelID;
     });
   }, [chat, selectedChannel]);
+
+  const handleOnEmojiSelected = (emojiObject: EmojiType) => {
+    console.log(emojiObject);
+    richText.current?.insertText(emojiObject.emoji);
+  };
 
   const onSubmit = async (data: ChatFormSchema) => {
     const { message } = data;
@@ -59,6 +68,16 @@ const ChatDetailScreen = () => {
       });
 
     reset();
+    richText.current?.setContentHTML("");
+  };
+
+  const onInsertLink = useCallback(() => {
+    setVisibleInsertLinkModal(true);
+  }, []);
+
+  const onInsertLinkHandle = async (link: string) => {
+    console.log(link);
+    richText.current?.insertLink("link", link);
   };
 
   useEffect(() => {
@@ -89,51 +108,146 @@ const ChatDetailScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="h-full w-full">
-      <View className="flex-1">
-        {currentChat?.chat && currentChat?.chat[0] ? (
-          <FlatList
-            data={currentChat?.chat}
-            renderItem={({ item }) => <MessageBox item={item} user={user} />}
-            keyExtractor={(_, index) => index.toString()}
-            ref={flatListRef}
-          />
-        ) : (
-          ""
-        )}
-      </View>
-      <View className="flex-row justify-start items-center w-full py-2 px-2 space-x-2">
+    <>
+      <InsertLinkModal
+        visible={visibleInserLinkModal}
+        closeModal={() => setVisibleInsertLinkModal(false)}
+        onSubmit={onInsertLinkHandle}
+      />
+      <SafeAreaView className="h-full w-full bg-gray-100">
         <View className="flex-1">
-          <Controller
-            name="message"
-            control={control}
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
+          {currentChat?.chat && currentChat?.chat[0] ? (
+            <ScrollView ref={flatListRef}>
+              {currentChat?.chat.map((item) => (
+                <MessageBox item={item} user={user} />
+              ))}
+            </ScrollView>
+          ) : (
+            ""
+          )}
+        </View>
+        <View className="flex-row justify-start items-center w-full py-2 px-2 space-x-2">
+          <View className="relative flex-1">
+            {visibleEmoji ? (
+              <EmojiKeyboard
+                onEmojiSelected={handleOnEmojiSelected}
+                styles={{
+                  container: {
+                    position: "absolute",
+                    height: 320,
+                    bottom: "105%",
+                    left: 0,
+                    borderRadius: 4,
+                  },
+                }}
+                emojiSize={8}
+              />
+            ) : null}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="flex-row"
+              style={{
+                paddingTop: 10,
+                paddingLeft: 10,
+                paddingRight: 10,
+                backgroundColor: "#ffffff",
+                borderColor: "transparent",
+                height: 52,
+                borderRadius: 4,
+              }}
+            >
               <View>
-                <ProfileInput
-                  type="textarea"
-                  value={value}
-                  placeholder="Nachricht..."
-                  onChange={onChange}
-                  numberOfLines={1}
-                  contentStyle={{
-                    paddingTop: 16,
-                  }}
-                />
+                <Pressable
+                  className={`flex-row justify-center items-center w-[32px] h-[32px] mr-[4px] bg-[${
+                    visibleEmoji ? "#19A873" : "#FFFFFF"
+                  }] rounded-[4px]`}
+                  onPress={() => setVisibleEmoji((v) => !v)}
+                >
+                  <MaterialCommunityIcons
+                    color={visibleEmoji ? "#FFFFFF" : "#000000"}
+                    size={20}
+                    name={"sticker-emoji"}
+                  />
+                </Pressable>
               </View>
-            )}
+              <RichToolbar
+                editor={richText}
+                unselectedButtonStyle={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: 4,
+                  width: 32,
+                  height: 32,
+                  marginRight: 4,
+                }}
+                selectedIconTint="#ffffff"
+                selectedButtonStyle={{
+                  backgroundColor: "#19A873",
+                  borderRadius: 4,
+                  width: 32,
+                  height: 32,
+                  marginRight: 4,
+                }}
+                iconTint="#312921"
+                actions={[
+                  actions.setBold,
+                  actions.setItalic,
+                  actions.setUnderline,
+                  actions.setStrikethrough,
+                  actions.insertBulletsList,
+                  actions.insertOrderedList,
+                  actions.insertLink,
+                  actions.blockquote,
+                  actions.code,
+                  actions.undo,
+                  actions.redo,
+                ]}
+                onInsertLink={onInsertLink}
+                style={{
+                  flex: 1,
+                  backgroundColor: "transparent",
+                  borderColor: "transparent",
+                  padding: 0,
+                  paddingRight: 16,
+                  height: "auto",
+                }}
+              />
+            </ScrollView>
+            {/* <ScrollView style={{ maxHeight: 180 }}> */}
+            <Controller
+              name="message"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <RichEditor
+                  ref={richText}
+                  onChange={onChange}
+                  placeholder="Schreiben Sie Ihre Nachricht"
+                  initialHeight={32}
+                  style={{
+                    backgroundColor: "#ffffff",
+                    maxHeight: 180,
+                    overflow: "hidden",
+                  }}
+                  initialContentHTML=""
+                  initialFocus
+                  // scrollEnabled
+                />
+              )}
+            />
+            {/* </ScrollView> */}
+          </View>
+          <IconButton
+            className="mt-2"
+            icon="send"
+            size={20}
+            onPress={handleSubmit(onSubmit)}
+            mode="contained"
+            background={""}
           />
         </View>
-        <IconButton
-          className="mt-2"
-          icon="send"
-          size={20}
-          onPress={handleSubmit(onSubmit)}
-          mode="contained"
-          background={""}
-        />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 };
 
