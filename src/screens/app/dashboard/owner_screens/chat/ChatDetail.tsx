@@ -213,7 +213,6 @@ const ChatDetailScreen = () => {
                 }}
               />
             </ScrollView>
-            {/* <ScrollView style={{ maxHeight: 180 }}> */}
             <Controller
               name="message"
               control={control}
@@ -235,7 +234,6 @@ const ChatDetailScreen = () => {
                 />
               )}
             />
-            {/* </ScrollView> */}
           </View>
           <IconButton
             className="mt-2"

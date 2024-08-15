@@ -3,8 +3,24 @@ import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
+import { feedActions } from "@/store/reducers/feedReducer";
+import { getFeed } from "@/actions/feed";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 export default function AppLayout() {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    (async () => {
+      const result = await getFeed();
+
+      if (result.success) {
+        dispatch(feedActions.setFeed({ feed: result.feed }));
+      }
+    })();
+  }, [dispatch]);
+
   return (
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
@@ -76,14 +92,14 @@ export default function AppLayout() {
           tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
+                name="account-group"
                 color={props.color}
                 size={24}
-                name={props.focused ? "handshake" : "handshake-outline"}
               />
             );
           },
         }}
-        redirect
+        // redirect
       />
       <MaterialBottomTabs.Screen
         name="setting"
