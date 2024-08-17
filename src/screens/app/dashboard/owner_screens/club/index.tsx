@@ -1,64 +1,106 @@
 import React from "react";
-import { Pressable, View, Text } from "react-native";
-import Container from "@/components/Container";
+import { ImageBackground, View } from "react-native";
+import { router } from "expo-router";
+import { Button, Text } from "react-native-paper";
 import { useAppSelector } from "@/store/hook";
+import Container from "@/components/Container";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const ClubScreen: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);
+  const { club } = useAppSelector((store) => store.club);
 
-  if (!user) return null;
+  if (!user || !club) return null;
 
   return (
     <Container>
       <View className="px-5">
-        <View className="space-y-2 mb-4 py-8">
+        <View className="space-y-2 mb-5">
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={24}
-                name={"account-multiple"}
-              />
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"account-multiple"}
+              textColor="#000000"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
               <Text>Mitglieder</Text>
-            </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={24}
-                name={"cog"}
-              />
+            </Button>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/club/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"cog"}
+              textColor="#000000"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
               <Text>Einstellungen</Text>
-            </Pressable>
+            </Button>
           </View>
           <View className="flex-row space-x-2">
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={24}
-                name={"account-group"}
-              />
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"school"}
+              textColor="#000000"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
               <Text>Academy</Text>
-            </Pressable>
-            <Pressable className="w-[50%] flex-1 flex-row justify-center items-center space-x-2 px-4 py-4 bg-white rounded-xl border border-[#EFEFEF]">
-              <MaterialCommunityIcons
-                color={"#000000"}
-                size={24}
-                name={"search-web"}
-              />
+            </Button>
+            <Button
+              className="flex-1 rounded-md border"
+              mode="contained"
+              buttonColor="white"
+              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              style={{ borderColor: "#EFEFEF" }}
+              icon={"search-web"}
+              textColor="#000000"
+              contentStyle={{
+                paddingVertical: 5,
+              }}
+            >
               <Text>Clubsuche</Text>
-            </Pressable>
+            </Button>
           </View>
         </View>
-        <View className="bg-white rounded-3xl mb-4">
-          <View className="rounded-3xl overflow-hidden">
-            <View className="bg-black pt-[25%]"></View>
+        <View className="bg-white rounded-2xl mb-2 overflow-hidden">
+          <View className="overflow-hidden">
+            <ImageBackground className="relative bg-[#EAEAEA] pt-[35%]">
+              <View className="absolute top-0 left-0 bottom-0 right-0 justify-center items-center">
+                <MaterialCommunityIcons
+                  color={"#8E8E8E"}
+                  size={32}
+                  name={"home-outline"}
+                />
+              </View>
+            </ImageBackground>
+            <View className="justify-center items-center ml-4 -mt-9 w-16 h-16 bg-[#EAEAEA] rounded-full border-2 border-[#ffffff]">
+              <MaterialCommunityIcons
+                color={"#8E8E8E"}
+                size={24}
+                name={"home-outline"}
+              />
+            </View>
             <View className="flex-row justify-start">
               <View className="w-fit p-4 inline-block">
-                <Text className="font-bold text-2xl">Test 1</Text>
-                <View className="bg-[#EEEEEE] rounded-md p-1">
+                <Text className="font-bold text-2xl mb-1">{club.clubname}</Text>
+                <View className="bg-[#EEEEEE] rounded-md py-1 px-2">
                   <Text className="text-[10px] text-[#545454]">
-                    0/500 Mitglieder
+                    {club.users}/{club.maxUser} Mitglieder
                   </Text>
                 </View>
               </View>

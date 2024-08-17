@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
+import { feedActions } from "@/store/reducers/feedReducer";
+import { getFeed } from "@/actions/feed";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 
 export default function AppLayout() {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    (async () => {
+      const result = await getFeed();
+
+      if (result.success) {
+        dispatch(feedActions.setFeed({ feed: result.feed }));
+      }
+    })();
+  }, [dispatch]);
+
   return (
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
@@ -22,15 +38,15 @@ export default function AppLayout() {
       }}
     >
       <MaterialBottomTabs.Screen
-        name="index"
+        name="home"
         options={{
           tabBarLabel: "Home",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
-                color={props.color}
-                size={24}
                 name="view-dashboard"
+                size={24}
+                color={props.color}
               />
             );
           },
@@ -40,7 +56,7 @@ export default function AppLayout() {
         name="chat"
         options={{
           tabBarLabel: "Chat",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return (
               <Ionicons
                 name="chatbubble-outline"
@@ -52,19 +68,19 @@ export default function AppLayout() {
         }}
       />
       <MaterialBottomTabs.Screen
-        name="club/index"
+        name="club"
         options={{
           tabBarLabel: "Club",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return <Entypo name="home" size={24} color={props.color} />;
           },
         }}
       />
       <MaterialBottomTabs.Screen
-        name="profile/index"
+        name="profile"
         options={{
           tabBarLabel: "Profil",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
             return <Ionicons name="person" size={24} color={props.color} />;
           },
         }}
@@ -73,12 +89,44 @@ export default function AppLayout() {
         name="community"
         options={{
           tabBarLabel: "Community",
-          tabBarIcon(props) {
+          tabBarIcon(props: any) {
+            return (
+              <MaterialCommunityIcons
+                name="account-group"
+                color={props.color}
+                size={24}
+              />
+            );
+          },
+        }}
+        // redirect
+      />
+      <MaterialBottomTabs.Screen
+        name="setting"
+        options={{
+          tabBarLabel: "Setting",
+          tabBarIcon(props: any) {
             return (
               <MaterialCommunityIcons
                 color={props.color}
                 size={24}
-                name={props.focused ? "handshake" : "handshake-outline"}
+                name={props.focused ? "cog" : "cog-outline"}
+              />
+            );
+          },
+        }}
+        redirect
+      />
+      <MaterialBottomTabs.Screen
+        name="event"
+        options={{
+          tabBarLabel: "Ereignisse",
+          tabBarIcon(props: any) {
+            return (
+              <MaterialCommunityIcons
+                color={props.color}
+                size={24}
+                name={props.focused ? "calendar" : "calendar-outline"}
               />
             );
           },

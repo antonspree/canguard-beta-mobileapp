@@ -1,7 +1,7 @@
-import ClubCard from "@/components/ClubCard";
-import { clubCardData } from "@/lib/constant";
 import React from "react";
 import { View } from "react-native";
+import ClubCard from "@/components/ClubCard";
+import { clubCardData } from "@/lib/constant";
 
 const NoClubHome = () => {
   return (

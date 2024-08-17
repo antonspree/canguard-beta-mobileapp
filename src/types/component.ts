@@ -11,8 +11,10 @@ export interface DetailContainerProps {
 export interface ProfileInputProps {
   type?: "text" | "password" | "date" | "textarea";
   value?: string;
-  placeholder?: string;
+  label?: string;
   onChange: (text: string) => void;
+  numberOfLines?: number;
+  [key: string]: any;
 }
 
 export interface ClubCardPropsInterface {
@@ -22,6 +24,7 @@ export interface ClubCardPropsInterface {
   btnIcon: React.ReactNode;
   btnText: string;
   route: any;
+  iconName?: string;
 }
 
 export interface ClubPropsInterface {

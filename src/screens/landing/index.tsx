@@ -4,13 +4,14 @@ import { router } from "expo-router";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { loadData } from "@/lib/storage";
+import { Button } from "react-native-paper";
 
 const LandingScreen: React.FC = () => {
   const onPress = async () => {
     const token = await loadData("token");
 
     if (token) {
-      router.replace("/(app)/(dashboard)");
+      router.replace("/(app)/(dashboard)/home");
     } else {
       router.replace("/(guest)/signin");
     }
@@ -38,14 +39,19 @@ const LandingScreen: React.FC = () => {
               Die ideale Softwarelösung für deinen Anbauverein. Organisiere
               Mitglieder und behalte Anbau sowie Distribution stets im Blick.
             </Text>
-            <Pressable
+            {/* <Pressable
               className="py-2 bg-[#19A873] rounded-2xl"
               onPress={onPress}
             >
               <Text className="font-bold text-center text-base text-white">
                 Starten
               </Text>
-            </Pressable>
+            </Pressable> */}
+            <Button mode="contained" buttonColor="#19A873" onPress={onPress}>
+              <Text className="font-bold text-center text-base text-white">
+                Starten
+              </Text>
+            </Button>
           </View>
         </LinearGradient>
       </View>

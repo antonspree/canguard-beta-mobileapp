@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface IClubDocument {
+  doc: string;
+  documentname: string;
+  description?: string;
+  documentID: string;
+  date: string;
+}
+
 export interface IClub {
   clubname?: string;
   badge?: string;
@@ -27,17 +35,21 @@ export interface IClub {
   facebook?: string;
   imprint?: string;
   color?: string;
-  document?: {
-    doc: string;
-    documentname: string;
-    description?: string;
-    documentID: string;
-    date: string;
-  }[];
+  document?: IClubDocument[];
   clubID?: string;
   users?: number;
   allow_request?: boolean;
   auto_accpet?: boolean;
+  card?: {
+    cardColor: string;
+    frontBadge?: string;
+    backBadge?: string;
+    textColor: string;
+    logoColor: string;
+    position: string;
+    logoShown: boolean;
+    clubShown: boolean;
+  };
 }
 
 interface InitialStateType {

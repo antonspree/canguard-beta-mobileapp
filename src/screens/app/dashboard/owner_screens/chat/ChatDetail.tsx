@@ -1,27 +1,48 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { View, FlatList, Text, TextInput, Pressable } from "react-native";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { View, FlatList, Pressable, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
-import { RichText, Toolbar, useEditorBridge } from "@10play/tentap-editor";
-import MessageBox from "@/components/MessageBox";
+import { Controller, useForm } from "react-hook-form";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { IconButton } from "react-native-paper";
+import {
+  actions,
+  RichEditor,
+  RichToolbar,
+} from "react-native-pell-rich-editor";
+import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppSelector } from "@/store/hook";
 import { chatActions } from "@/store/reducers/chatReducer";
+import MessageBox from "@/components/MessageBox";
 import Socket from "@/lib/socket";
-import Container from "@/components/Container";
+import { ChatFormSchema } from "@/types/form";
+import InsertLinkModal from "./InsertLinkModal";
 
 const ChatDetailScreen = () => {
   const dispatch = useDispatch();
+
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<ChatFormSchema>();
 
   const { selectedChannel } = useAppSelector((store) => store.channel);
   const { user } = useAppSelector((store) => store.user);
   const { chat } = useAppSelector((store) => store.chat);
 
-  const flatListRef = useRef<FlatList | null>(null);
-  const [message, setMessage] = useState("");
+  const flatListRef = useRef<ScrollView | null>(null);
+  const richText = useRef<any>();
 
-  const editor = useEditorBridge({
-    autofocus: true,
-    avoidIosKeyboard: true,
-  });
+  const [visibleEmoji, setVisibleEmoji] = useState(false);
+  const [visibleInserLinkModal, setVisibleInsertLinkModal] = useState(false);
 
   const currentChat = useMemo(() => {
     return chat.find((chat) => {
@@ -29,7 +50,14 @@ const ChatDetailScreen = () => {
     });
   }, [chat, selectedChannel]);
 
-  const onSend = async () => {
+  const handleOnEmojiSelected = (emojiObject: EmojiType) => {
+    console.log(emojiObject);
+    richText.current?.insertText(emojiObject.emoji);
+  };
+
+  const onSubmit = async (data: ChatFormSchema) => {
+    const { message } = data;
+
     if (message === "") return;
 
     selectedChannel?.channelID &&
@@ -39,12 +67,21 @@ const ChatDetailScreen = () => {
         message: message,
       });
 
-    setMessage("");
+    reset();
+    richText.current?.setContentHTML("");
+  };
+
+  const onInsertLink = useCallback(() => {
+    setVisibleInsertLinkModal(true);
+  }, []);
+
+  const onInsertLinkHandle = async (link: string) => {
+    console.log(link);
+    richText.current?.insertLink("link", link);
   };
 
   useEffect(() => {
-    if (flatListRef.current === null) return;
-    setInterval(() => {
+    setTimeout(() => {
       if (flatListRef.current === null) return;
       flatListRef.current.scrollToEnd();
     }, 100);
@@ -58,6 +95,11 @@ const ChatDetailScreen = () => {
           chat: data.chatData,
         })
       );
+
+      setTimeout(() => {
+        if (flatListRef.current === null) return;
+        flatListRef.current.scrollToEnd();
+      }, 100);
     });
 
     return () => {
@@ -66,43 +108,144 @@ const ChatDetailScreen = () => {
   }, []);
 
   return (
-    <Container
-    // title={selectedChannel?.channelname as "UNDEFINED"}
-    // backLink="/(app)/(dashboard)/chat"
-    >
-      <View className="flex-1">
-        <View className="flex-1 py-4 px-3">
+    <>
+      <InsertLinkModal
+        visible={visibleInserLinkModal}
+        closeModal={() => setVisibleInsertLinkModal(false)}
+        onSubmit={onInsertLinkHandle}
+      />
+      <SafeAreaView className="h-full w-full bg-gray-100">
+        <View className="flex-1">
           {currentChat?.chat && currentChat?.chat[0] ? (
-            <FlatList
-              data={currentChat?.chat}
-              renderItem={({ item }) => <MessageBox item={item} user={user} />}
-              keyExtractor={(_, index) => index.toString()}
-              ref={flatListRef}
-            />
+            <ScrollView ref={flatListRef}>
+              {currentChat?.chat.map((item) => (
+                <MessageBox item={item} user={user} />
+              ))}
+            </ScrollView>
           ) : (
             ""
           )}
         </View>
-
-        <View className="flex-row justify-center w-full min-h-[100px] bg-white py-8 px-4">
-          {/* <TextInput
-            className="border border-[#777777] py-2 px-4 flex-1 mr-3 rounded-3xl"
-            onChangeText={(value) => setMessage(value)}
-            value={message}
-            placeholder="Nachricht"
-          /> */}
-          <RichText editor={editor} />
-          <Pressable
-            className="px-4 bg-green-700 rounded-3xl items-center justify-center"
-            onPress={onSend}
-          >
-            <View>
-              <Text className="text-base text-white">Schicken</Text>
-            </View>
-          </Pressable>
+        <View className="flex-row justify-start items-center w-full py-2 px-2 space-x-2">
+          <View className="relative flex-1">
+            {visibleEmoji ? (
+              <EmojiKeyboard
+                onEmojiSelected={handleOnEmojiSelected}
+                styles={{
+                  container: {
+                    position: "absolute",
+                    height: 320,
+                    bottom: "105%",
+                    left: 0,
+                    borderRadius: 4,
+                  },
+                }}
+                emojiSize={8}
+              />
+            ) : null}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              className="flex-row"
+              style={{
+                paddingTop: 10,
+                paddingLeft: 10,
+                paddingRight: 10,
+                backgroundColor: "#ffffff",
+                borderColor: "transparent",
+                height: 52,
+                borderRadius: 4,
+              }}
+            >
+              <View>
+                <Pressable
+                  className={`flex-row justify-center items-center w-[32px] h-[32px] mr-[4px] bg-[${
+                    visibleEmoji ? "#19A873" : "#FFFFFF"
+                  }] rounded-[4px]`}
+                  onPress={() => setVisibleEmoji((v) => !v)}
+                >
+                  <MaterialCommunityIcons
+                    color={visibleEmoji ? "#FFFFFF" : "#000000"}
+                    size={20}
+                    name={"sticker-emoji"}
+                  />
+                </Pressable>
+              </View>
+              <RichToolbar
+                editor={richText}
+                unselectedButtonStyle={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: 4,
+                  width: 32,
+                  height: 32,
+                  marginRight: 4,
+                }}
+                selectedIconTint="#ffffff"
+                selectedButtonStyle={{
+                  backgroundColor: "#19A873",
+                  borderRadius: 4,
+                  width: 32,
+                  height: 32,
+                  marginRight: 4,
+                }}
+                iconTint="#312921"
+                actions={[
+                  actions.setBold,
+                  actions.setItalic,
+                  actions.setUnderline,
+                  actions.setStrikethrough,
+                  actions.insertBulletsList,
+                  actions.insertOrderedList,
+                  actions.insertLink,
+                  actions.blockquote,
+                  actions.code,
+                  actions.undo,
+                  actions.redo,
+                ]}
+                onInsertLink={onInsertLink}
+                style={{
+                  flex: 1,
+                  backgroundColor: "transparent",
+                  borderColor: "transparent",
+                  padding: 0,
+                  paddingRight: 16,
+                  height: "auto",
+                }}
+              />
+            </ScrollView>
+            <Controller
+              name="message"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <RichEditor
+                  ref={richText}
+                  onChange={onChange}
+                  placeholder="Schreiben Sie Ihre Nachricht"
+                  initialHeight={32}
+                  style={{
+                    backgroundColor: "#ffffff",
+                    maxHeight: 180,
+                    overflow: "hidden",
+                  }}
+                  initialContentHTML=""
+                  initialFocus
+                  // scrollEnabled
+                />
+              )}
+            />
+          </View>
+          <IconButton
+            className="mt-2"
+            icon="send"
+            size={20}
+            onPress={handleSubmit(onSubmit)}
+            mode="contained"
+            background={""}
+          />
         </View>
-      </View>
-    </Container>
+      </SafeAreaView>
+    </>
   );
 };
 

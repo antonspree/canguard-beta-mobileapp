@@ -5,14 +5,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+      "@/*": ["src/*"]
+    },
+    "downlevelIteration": false
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "app.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "app.d.ts"]
 }
