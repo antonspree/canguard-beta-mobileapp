@@ -1,17 +1,21 @@
 import React from "react";
 import { Pressable, View } from "react-native";
 import { router } from "expo-router";
+import * as Linking from "expo-linking";
 import { clearData } from "@/lib/storage";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Container from "@/components/Container";
 import { Text } from "react-native-paper";
 
 const PersonalDetailScreen: React.FC = () => {
   const handleLogout = () => {
     clearData("token");
-    router.push("/(guest)/login");
+    router.replace("/(guest)/signin");
+  };
+
+  const redirectDiscord = () => {
+    Linking.openURL("https://discord.gg/TEqKDcyZ");
   };
 
   return (
@@ -58,13 +62,19 @@ const PersonalDetailScreen: React.FC = () => {
           >
             Feedback & Kontakt
           </Text>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
+          <Pressable
+            className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100"
+            onPress={redirectDiscord}
+          >
             <Feather name="send" size={14} color="#8E8E8E" />
             <Text variant="bodySmall" className="text-[#8E8E8E]">
               Fehler melden
             </Text>
           </Pressable>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
+          <Pressable
+            className="flex flex-row items-center space-x-2 px-4 py-3"
+            onPress={redirectDiscord}
+          >
             <MaterialCommunityIcons
               name="cursor-default-click-outline"
               size={14}

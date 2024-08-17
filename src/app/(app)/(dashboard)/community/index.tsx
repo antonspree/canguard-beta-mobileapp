@@ -1,6 +1,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CommFeedScreen from "@/screens/app/dashboard/owner_screens/community";
+import CommingSoon from "@/widgets/CommingSoon";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,9 +18,9 @@ export default function Community() {
       }}
     >
       <Tab.Screen name="Feed" component={CommFeedScreen} />
-      <Tab.Screen name="Profil" component={CommFeedScreen} />
-      <Tab.Screen name="Club" component={CommFeedScreen} />
-      <Tab.Screen name="Following" component={CommFeedScreen} />
+      <Tab.Screen name="Profil" component={CommingSoon} />
+      <Tab.Screen name="Club" component={CommingSoon} />
+      <Tab.Screen name="Following" component={CommingSoon} />
     </Tab.Navigator>
   );
 }

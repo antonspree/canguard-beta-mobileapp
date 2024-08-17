@@ -7,7 +7,13 @@ export default function TabsLayout() {
       <Stack.Screen name="index" options={{ title: "Profile" }} />
       <Stack.Screen
         name="personal"
-        options={{ title: "Personal information" }}
+        options={{ title: "Profil bearbeiten" }}
+      />
+      <Stack.Screen name="booking" options={{ title: "Buchungen" }} />
+      <Stack.Screen name="membership" options={{ title: "Mitgliedschaft" }} />
+      <Stack.Screen
+        name="notification"
+        options={{ title: "Benachrichtigungen" }}
       />
     </Stack>
   );

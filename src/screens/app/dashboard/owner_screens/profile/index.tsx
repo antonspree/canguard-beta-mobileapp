@@ -26,6 +26,30 @@ const ProfileScreen: React.FC = () => {
     }
   };
 
+  const redirectBooking = () => {
+    if (user.club) {
+      router.push("/(app)/(dashboard)/profile/booking");
+    } else {
+      router.push("/(app)/(noclub)/profile/booking");
+    }
+  };
+
+  const redirectMemberShip = () => {
+    if (user.club) {
+      router.push("/(app)/(dashboard)/profile/membership");
+    } else {
+      router.push("/(app)/(noclub)/profile/membership");
+    }
+  };
+
+  const redirectNotification = () => {
+    if (user.club) {
+      router.push("/(app)/(dashboard)/profile/notification");
+    } else {
+      router.push("/(app)/(noclub)/profile/notification");
+    }
+  };
+
   return (
     <Container>
       <View className="px-5">
@@ -93,7 +117,10 @@ const ProfileScreen: React.FC = () => {
               {user.email}
             </Text>
           </View>
-          <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
+          <Pressable
+            className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100"
+            onPress={redirectBooking}
+          >
             <MaterialCommunityIcons
               color={"#8E8E8E"}
               size={12}
@@ -105,7 +132,7 @@ const ProfileScreen: React.FC = () => {
           </Pressable>
           <Pressable
             className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100"
-            onPress={redirectPersonalProfile}
+            onPress={redirectMemberShip}
           >
             <MaterialCommunityIcons
               color={"#8E8E8E"}
@@ -131,7 +158,7 @@ const ProfileScreen: React.FC = () => {
           </Pressable>
           <Pressable
             className="flex flex-row items-center space-x-2 px-4 py-3"
-            onPress={redirectPersonalProfile}
+            onPress={redirectNotification}
           >
             <MaterialCommunityIcons
               color={"#8E8E8E"}

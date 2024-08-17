@@ -35,7 +35,7 @@ const ClubScreen: React.FC = () => {
               className="flex-1 rounded-md border"
               mode="contained"
               buttonColor="white"
-              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              onPress={() => router.push("/(app)/(dashboard)/club/setting")}
               style={{ borderColor: "#EFEFEF" }}
               icon={"cog"}
               textColor="#000000"
