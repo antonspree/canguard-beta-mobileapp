@@ -40,7 +40,10 @@
     "runtimeVersion": {
       "policy": "appVersion"
     },
-    "owner": "hashi7412"
+    "owner": "hashi7412",
+    "plugins": [
+      "expo-video"
+    ]
   },
   "plugins": [
     "expo-router",

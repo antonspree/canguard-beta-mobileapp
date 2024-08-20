@@ -11,6 +11,18 @@ export default function TabsLayout() {
           title: "Club",
         }}
       />
+      <Stack.Screen
+        name="academy"
+        options={{
+          title: "Academy",
+        }}
+      />
+      <Stack.Screen
+        name="setting"
+        options={{
+          title: "Club Setting",
+        }}
+      />
     </Stack>
   );
 }

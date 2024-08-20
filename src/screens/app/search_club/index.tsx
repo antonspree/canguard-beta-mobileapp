@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ScrollView, TextInput, View } from "react-native";
 import MapView from "react-native-maps";
 import { getAllClubs } from "@/actions/club";
 import Club from "@/components/Club";
 
+const INITIAL_REGION = {
+  latitude: 52.52,
+  longitude: 13.405,
+  latitudeDelta: 2,
+  longitudeDelta: 2,
+};
+
 const SearchClubScreen: React.FC = () => {
+  const mapRef = useRef<MapView>(null);
+
   const [clubData, setClubData] = useState<any>([]);
   const [search, setSearch] = useState("");
 
@@ -20,12 +29,18 @@ const SearchClubScreen: React.FC = () => {
     fetchAllClubs();
   }, []);
 
+  // useEffect(() => {
+  //   mapRef.current.
+  // })
+
   return (
     <ScrollView>
       <View className="flex flex-col space-y-5 m-5">
         {/* <View className="h-[200px] bg-slate-500 rounded-md" /> */}
         <View className="rounded-md overflow-hidden">
           <MapView
+            ref={mapRef}
+            initialRegion={INITIAL_REGION}
             style={{
               width: "auto",
               height: 200,

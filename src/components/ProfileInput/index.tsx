@@ -90,6 +90,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
             secureTextEntry={type === "password" && !isShown}
             right={
               <TextInput.Icon
+                size={18}
                 icon={isShown ? "eye" : "eye-off"}
                 onPress={() => {
                   setShown((prev) => !prev);

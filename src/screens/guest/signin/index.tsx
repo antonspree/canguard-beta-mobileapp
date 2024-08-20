@@ -53,11 +53,18 @@ const SignInScreen: React.FC = () => {
         router.push("/(app)/(noclub)");
       }
     } else {
-      Toast.show({
-        type: "error",
-        text1: "Error de inicio de sesion",
-        text2: result.msg,
-      });
+      if (result.msg) {
+        Toast.show({
+          type: "error",
+          text1: "Error de inicio de sesion",
+          text2: result.msg,
+        });
+      } else {
+        Toast.show({
+          type: "error",
+          text2: "Error de conexión de red",
+        });
+      }
     }
   };
 

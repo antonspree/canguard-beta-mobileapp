@@ -7,7 +7,7 @@ import Container from "@/components/Container";
 const CommingSoon = () => {
   return (
     <Container>
-      <View className="items-center space-y-1">
+      <View className="items-center justify-center space-y-1">
         <MaterialCommunityIcons
           name="clock-alert"
           size={24}

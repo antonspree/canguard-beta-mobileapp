@@ -54,9 +54,7 @@ build/
 # Coverage
 
 # Sensitive files
-app.json
 eas.json
-credential.json
 
 coverage/
 

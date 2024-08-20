@@ -102,50 +102,62 @@ const Club: React.FC<ClubPropsInterface> = ({
                 {email && (
                   <Pressable onPress={() => handlePress(email)}>
                     <MaterialCommunityIcons
-                      name="gmail"
-                      size={20}
+                      name="email"
+                      size={14}
                       color="#5E5E5E"
                     />
                   </Pressable>
                 )}
                 {phone && (
                   <Pressable onPress={() => handlePress(phone)}>
-                    <FontAwesome name="phone" size={20} color="#5E5E5E" />
+                    <MaterialCommunityIcons
+                      name="phone"
+                      size={14}
+                      color="#5E5E5E"
+                    />
                   </Pressable>
                 )}
                 {website && (
                   <Pressable onPress={() => handlePress(website)}>
-                    <FontAwesome name="globe" size={20} color="#5E5E5E" />
+                    <MaterialCommunityIcons
+                      name="earth"
+                      size={14}
+                      color="#5E5E5E"
+                    />
                   </Pressable>
                 )}
                 {instagram && (
                   <Pressable onPress={() => handlePress(instagram)}>
-                    <FontAwesome name="instagram" size={20} color="#5E5E5E" />
+                    <MaterialCommunityIcons
+                      name="instagram"
+                      size={14}
+                      color="#5E5E5E"
+                    />
                   </Pressable>
                 )}
                 {discord && (
                   <Pressable onPress={() => handlePress(discord)}>
                     <MaterialCommunityIcons
                       name="discord"
-                      size={20}
+                      size={14}
                       color="#5E5E5E"
                     />
                   </Pressable>
                 )}
                 {facebook && (
                   <Pressable onPress={() => handlePress(facebook)}>
-                    <FontAwesome
-                      name="facebook-square"
-                      size={20}
+                    <MaterialCommunityIcons
+                      name="facebook"
+                      size={14}
                       color="#5E5E5E"
                     />
                   </Pressable>
                 )}
                 {youtube && (
                   <Pressable onPress={() => handlePress(youtube)}>
-                    <FontAwesome
-                      name="youtube-play"
-                      size={20}
+                    <MaterialCommunityIcons
+                      name="youtube"
+                      size={14}
                       color="#5E5E5E"
                     />
                   </Pressable>

@@ -102,22 +102,6 @@ export default function AppLayout() {
         // redirect
       />
       <MaterialBottomTabs.Screen
-        name="setting"
-        options={{
-          tabBarLabel: "Setting",
-          tabBarIcon(props: any) {
-            return (
-              <MaterialCommunityIcons
-                color={props.color}
-                size={24}
-                name={props.focused ? "cog" : "cog-outline"}
-              />
-            );
-          },
-        }}
-        redirect
-      />
-      <MaterialBottomTabs.Screen
         name="event"
         options={{
           tabBarLabel: "Ereignisse",
