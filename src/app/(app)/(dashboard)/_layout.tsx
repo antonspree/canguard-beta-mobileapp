@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import * as React from "react";
+import { useEffect } from "react";
 import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { feedActions } from "@/store/reducers/feedReducer";
 import { getFeed } from "@/actions/feed";
-import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { useAppDispatch } from "@/store/hook";
 
 export default function AppLayout() {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     (async () => {

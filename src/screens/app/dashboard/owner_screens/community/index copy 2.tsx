@@ -1,14 +1,21 @@
 import React, { useRef, useState } from "react";
 import { ScrollView, useWindowDimensions, Pressable, View } from "react-native";
-import {
-  Avatar,
-  Card,
-  Dialog,
-  List,
-  Text,
-  TextInput,
-} from "react-native-paper";
+import { Image } from "expo-image";
+import { Avatar, Dialog, List, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
+import RenderHTML from "react-native-render-html";
+import {
+  RichEditor,
+  RichToolbar,
+  actions,
+} from "react-native-pell-rich-editor";
+import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Feather from "@expo/vector-icons/Feather";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
@@ -21,21 +28,8 @@ import {
   udpateFeed,
   voteFeed,
 } from "@/actions/feed";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from "react-native-popup-menu";
+import Text from "@/elements/Text";
 import { getAvatarLetters, getTimeDifferenceInGerman } from "@/lib/function";
-import { Image } from "expo-image";
-import RenderHTML from "react-native-render-html";
-import {
-  RichEditor,
-  RichToolbar,
-  actions,
-} from "react-native-pell-rich-editor";
-import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
 import { UPLOAD_URI } from "@/config/env";
 
 const CommunityFeedPage = () => {

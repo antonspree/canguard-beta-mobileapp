@@ -1,10 +1,11 @@
-import { getEvent } from "@/actions/event";
-import Container from "@/components/Container";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { getEvent } from "@/actions/event";
+import Container from "@/components/Container";
 import { getTimeDifferenceInGerman } from "@/lib/function";
+import Text from "@/elements/Text";
 
 const EventScreen = () => {
   const [eventData, setEventData] = useState<any>([]);

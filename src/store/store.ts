@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { appReducer as app } from "./reducers/appReducer";
 import { userReducer as user } from "./reducers/userReducer";
 import { clubReducer as club } from "./reducers/clubReducer";
 import { membershipReducer as membership } from "./reducers/membershipReducer";
@@ -9,6 +10,7 @@ import { feedReducer as feed } from "./reducers/feedReducer";
 
 export const store = configureStore({
   reducer: combineReducers({
+    app,
     user,
     club,
     membership,

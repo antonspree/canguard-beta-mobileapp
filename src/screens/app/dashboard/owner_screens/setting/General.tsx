@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+import { Switch } from "react-native-paper";
 import Container from "@/components/Container";
-import { Switch, Text } from "react-native-paper";
+import Text from "@/elements/Text";
 
 const GeneralScreen = () => {
   const [isRequest, setIsRequest] = useState(false);

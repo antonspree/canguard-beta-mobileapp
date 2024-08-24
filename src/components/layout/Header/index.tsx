@@ -1,7 +1,8 @@
-import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import Text from "@/elements/Text";
 import { Image } from "expo-image";
 import { User } from "lucide-react-native";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 
 const LogoImg = require("@/assets/images/logo.png");
 

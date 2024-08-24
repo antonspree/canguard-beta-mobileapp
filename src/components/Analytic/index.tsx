@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AnalyticPropsInterface } from "@/types/component";
 import Card from "../Card";
+import Text from "@/elements/Text";
 
 const Analytic: React.FC<AnalyticPropsInterface> = ({
   title,

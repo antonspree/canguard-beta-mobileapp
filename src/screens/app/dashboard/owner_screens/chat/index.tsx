@@ -9,7 +9,7 @@ import {
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
-import { Button, Dialog, Text, Portal } from "react-native-paper";
+import { Button, Dialog, Portal } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RenderHtml from "react-native-render-html";
 import Toast from "react-native-toast-message";
@@ -23,6 +23,7 @@ import ProfileInput from "@/components/ProfileInput";
 import Socket from "@/lib/socket";
 import { isEmpty } from "@/lib/function";
 import { ChannelFormSchema } from "@/types/form";
+import Text from "@/elements/Text";
 
 LogBox.ignoreLogs([
   "Warning: TRenderEngineProvider:",

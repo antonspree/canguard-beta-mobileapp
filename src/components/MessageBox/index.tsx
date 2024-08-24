@@ -1,11 +1,11 @@
 import React from "react";
 import { View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
-import { Text } from "react-native-paper";
 import RenderHtml from "react-native-render-html";
 import TimeAgo from "react-native-timeago";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { UPLOAD_URI } from "@/config/env";
+import Text from "@/elements/Text";
 
 export default function MessageBox({ item, user }: any) {
   const status = item.user._id !== user._id;

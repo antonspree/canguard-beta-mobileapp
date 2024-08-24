@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Pressable, TextInput as NativeTextInput, View } from "react-native";
+import { Pressable, View } from "react-native";
+import { TextInput } from "react-native-paper";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { FontAwesome } from "@expo/vector-icons";
-import { ProfileInputProps } from "@/types/component";
 import { formatedate, getMaxDate } from "@/lib/function";
-import { Text, TextInput } from "react-native-paper";
+import Text from "@/elements/Text";
+import { ProfileInputProps } from "@/types/component";
 
 const ProfileInput: React.FC<ProfileInputProps> = ({
   type = "text",

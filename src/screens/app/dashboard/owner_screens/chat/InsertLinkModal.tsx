@@ -1,8 +1,9 @@
-import ProfileInput from "@/components/ProfileInput";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
 import { View } from "react-native";
-import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { Controller, useForm } from "react-hook-form";
+import { Button, Dialog, Portal } from "react-native-paper";
+import ProfileInput from "@/components/ProfileInput";
+import Text from "@/elements/Text";
 
 interface InserLinkFormSchema {
   link: string;

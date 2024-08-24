@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { Button } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import { updateColor } from "@/actions/club";
@@ -7,6 +7,7 @@ import { useAppSelector } from "@/store/hook";
 import { colorData } from "@/lib/constant";
 import { useDispatch } from "react-redux";
 import { clubActions } from "@/store/reducers/clubReducer";
+import Text from "@/elements/Text";
 
 const ClubColor = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,10 @@
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DetailContainerProps } from "@/types/component";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
+import Text from "@/elements/Text";
 
 const DetailContainer: React.FC<DetailContainerProps> = ({
   children = <></>,

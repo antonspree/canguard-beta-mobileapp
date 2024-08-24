@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
-import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { Button, Dialog, Portal } from "react-native-paper";
 import ProfileInput from "@/components/ProfileInput";
 import { resetPass } from "@/actions/auth";
+import Text from "@/elements/Text";
 
 interface ChangePasswordForm {
   currentPassword: string;

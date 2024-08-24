@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { router } from "expo-router";
 import { Image } from "expo-image";
@@ -7,6 +7,7 @@ import { saveData } from "@/lib/storage";
 import ProfileInput from "@/components/ProfileInput";
 import { SignUpFormDataType } from "@/types/form";
 import { Button } from "react-native-paper";
+import Text from "@/elements/Text";
 
 const SignUpScreen: React.FC = () => {
   const {
@@ -25,9 +26,9 @@ const SignUpScreen: React.FC = () => {
     <View className="w-full h-full flex justify-center space-y-5 px-5">
       <View className="flex justify-center items-center space-y-2">
         <Image
-          className="w-12 h-12"
+          className="w-48 h-12"
           placeholder="logo"
-          source={require("../../../assets/images/logo.png")}
+          source={require("@/assets/images/logo.png")}
         />
         <Text className="font-bold text-3xl">Registrieren</Text>
         <View className="flex flex-row items-center">

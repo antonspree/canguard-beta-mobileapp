@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import { useAppSelector } from "@/store/hook";
 import { Button, RadioButton, Switch } from "react-native-paper";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { cardTextColorData } from "@/lib/constant";
 import { UPLOAD_URI } from "@/config/env";
+import Text from "@/elements/Text";
 
 const MemberCard = () => {
   const { user } = useAppSelector((store) => store.user);

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Pressable,
-  Text,
   View,
   Image,
   useWindowDimensions,
@@ -33,6 +32,7 @@ import {
 } from "@/actions/feed";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { IFeed, feedActions } from "@/store/reducers/feedReducer";
+import Text from "@/elements/Text";
 
 export default function CommFeedScreen() {
   const dispatch = useAppDispatch();

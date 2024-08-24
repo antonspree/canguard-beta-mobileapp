@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Pressable, Text, View } from "react-native";
+import { Modal, Pressable, View } from "react-native";
 import { router } from "expo-router";
 import { Image } from "expo-image";
 import * as Linking from "expo-linking";
@@ -14,6 +14,7 @@ import { isEmpty } from "@/lib/function";
 import { cn } from "@/lib/utils";
 import { UPLOAD_URI } from "@/config/env";
 import { ClubPropsInterface } from "@/types/component";
+import Text from "@/elements/Text";
 
 const Club: React.FC<ClubPropsInterface> = ({
   clubname,

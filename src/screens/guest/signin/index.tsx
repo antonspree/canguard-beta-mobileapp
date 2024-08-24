@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, View, Pressable } from "react-native";
+import React, { useEffect } from "react";
+import { View, Pressable, Alert } from "react-native";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
@@ -15,6 +15,7 @@ import { membershipActions } from "@/store/reducers/membershipReducer";
 import ProfileInput from "@/components/ProfileInput";
 import { saveData } from "@/lib/storage";
 import { SignInFormDataType } from "@/types/form";
+import Text from "@/elements/Text";
 
 const SignInScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,45 +27,52 @@ const SignInScreen: React.FC = () => {
   } = useForm<SignInFormDataType>();
 
   const onSubmit = async (data: SignInFormDataType) => {
-    const result = await signIn(data);
+    try {
+      const result = await signIn(data);
 
-    if (result.success) {
-      await saveData("token", result.token);
-      Toast.show({
-        type: "success",
-        text1: "Glückwunsch",
-        text2: result.msg,
-      });
-
-      const userData = await getData();
-
-      if (userData && userData.success) {
-        dispatch(userActions.setUser({ user: userData.user }));
-        dispatch(clubActions.setClub({ club: userData.club }));
-        dispatch(membersActions.setMembers({ members: userData.members }));
-        dispatch(
-          membershipActions.setMembership({ membership: userData.membership })
-        );
-      }
-
-      if (userData.user.club) {
-        router.push("/(app)/(dashboard)/home");
-      } else {
-        router.push("/(app)/(noclub)");
-      }
-    } else {
-      if (result.msg) {
+      if (result.success) {
+        await saveData("token", result.token);
         Toast.show({
-          type: "error",
-          text1: "Error de inicio de sesion",
+          type: "success",
+          text1: "Glückwunsch",
           text2: result.msg,
         });
+
+        const userData = await getData();
+
+        if (userData && userData.success) {
+          dispatch(userActions.setUser({ user: userData.user }));
+          dispatch(clubActions.setClub({ club: userData.club }));
+          dispatch(membersActions.setMembers({ members: userData.members }));
+          dispatch(
+            membershipActions.setMembership({ membership: userData.membership })
+          );
+        }
+
+        if (userData.user.club) {
+          router.push("/(app)/(dashboard)/home");
+        } else {
+          router.push("/(app)/(noclub)");
+        }
       } else {
-        Toast.show({
-          type: "error",
-          text2: "Error de conexión de red",
-        });
+        if (result.msg) {
+          Toast.show({
+            type: "error",
+            text1: "Error de inicio de sesion",
+            text2: result.msg,
+          });
+        } else {
+          Toast.show({
+            type: "error",
+            text2: "Error de conexión de red",
+          });
+        }
       }
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text2: "Network error",
+      });
     }
   };
 
@@ -74,7 +82,7 @@ const SignInScreen: React.FC = () => {
         <Image
           className="w-48 h-12"
           placeholder="logo"
-          source={require("@/assets/images/logo.svg")}
+          source={require("@/assets/images/logo.png")}
         />
         <Text className="font-bold text-3xl">Einloggen</Text>
         <View className="flex flex-row items-center">

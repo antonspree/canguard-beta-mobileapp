@@ -8,7 +8,8 @@ import DialogContent from "react-native-paper/lib/typescript/components/Dialog/D
 import { useDispatch } from "react-redux";
 import Toast from "react-native-toast-message";
 import ProfileInput from "@/components/ProfileInput";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import Text from "@/elements/Text";
 
 interface TwoFAPassFormSchema {
   password: string;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
@@ -7,6 +7,7 @@ import { cancelRequest } from "@/actions/user";
 import { getCleanDate } from "@/lib/function";
 import message from "@/lib/message";
 import Card from "@/components/Card";
+import Text from "@/elements/Text";
 
 const MemberScreen: React.FC = () => {
   const dispatch = useAppDispatch();

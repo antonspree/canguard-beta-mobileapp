@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useAppSelector } from "@/store/hook";
 import { useFocusEffect } from "expo-router";
 import { Feather, Ionicons } from "@expo/vector-icons";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import Analytic from "@/components/Analytic";
 import Card from "@/components/Card";
 import ClubStatus from "@/components/ClubStatus";
+import Text from "@/elements/Text";
 
 const OwnerScreen: React.FC = () => {
   const { members } = useAppSelector((state) => state.members);

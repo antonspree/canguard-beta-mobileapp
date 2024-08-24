@@ -1,7 +1,21 @@
 import React, { useRef, useState } from "react";
 import { ScrollView, useWindowDimensions, Pressable, View } from "react-native";
-import { Avatar, Dialog, Portal, Text, TextInput } from "react-native-paper";
+import { Avatar, Dialog, Portal, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from "react-native-popup-menu";
+import { Image } from "expo-image";
+import RenderHTML from "react-native-render-html";
+import {
+  RichEditor,
+  RichToolbar,
+  actions,
+} from "react-native-pell-rich-editor";
+import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Feather from "@expo/vector-icons/Feather";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
@@ -14,23 +28,10 @@ import {
   udpateFeed,
   voteFeed,
 } from "@/actions/feed";
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from "react-native-popup-menu";
 import { getAvatarLetters, getTimeDifferenceInGerman } from "@/lib/function";
-import { Image } from "expo-image";
-import RenderHTML from "react-native-render-html";
-import {
-  RichEditor,
-  RichToolbar,
-  actions,
-} from "react-native-pell-rich-editor";
-import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
 import { UPLOAD_URI } from "@/config/env";
 import { Accordion } from "@/components/Accordion";
+import Text from "@/elements/Text";
 
 const CommunityFeedPage = () => {
   const dispatch = useAppDispatch();

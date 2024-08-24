@@ -1,9 +1,10 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import { router } from "expo-router";
 import Card from "../Card";
 import { ClubCardPropsInterface } from "@/types/component";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
+import Text from "@/elements/Text";
 
 const ClubCard: React.FC<ClubCardPropsInterface> = ({
   title,

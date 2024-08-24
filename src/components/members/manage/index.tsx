@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { DataTable, MD3Colors, ProgressBar } from "react-native-paper";
+import Text from "@/elements/Text";
 
 const MemberManage = () => {
   const [page, setPage] = React.useState<number>(0);

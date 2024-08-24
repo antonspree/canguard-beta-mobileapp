@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { router, usePathname } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import {
@@ -14,6 +14,7 @@ import {
   CalendarClock,
 } from "lucide-react-native";
 import { useAppSelector } from "@/store/hook";
+import Text from "@/elements/Text";
 
 const privateNavs = [
   {

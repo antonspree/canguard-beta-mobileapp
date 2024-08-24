@@ -1,10 +1,11 @@
 import React from "react";
 import { ImageBackground, View } from "react-native";
 import { router } from "expo-router";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { useAppSelector } from "@/store/hook";
 import Container from "@/components/Container";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Text from "@/elements/Text";
 
 const ClubScreen: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);

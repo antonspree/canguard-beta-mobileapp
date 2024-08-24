@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, Dialog, IconButton, Portal, Text } from "react-native-paper";
+import { Button, Dialog, IconButton, Portal } from "react-native-paper";
 import {
   Menu,
   MenuOption,
   MenuOptions,
   MenuTrigger,
 } from "react-native-popup-menu";
+import Toast from "react-native-toast-message";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Container from "@/components/Container";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { removeDoc } from "@/actions/club";
-import Toast from "react-native-toast-message";
 import { IClubDocument, clubActions } from "@/store/reducers/clubReducer";
+import Text from "@/elements/Text";
 
 const DeleteConfirmDialog = ({
   visible,

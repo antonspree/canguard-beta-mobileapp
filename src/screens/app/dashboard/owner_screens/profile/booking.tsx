@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Container from "@/components/Container";
+import Text from "@/elements/Text";
 
 const BookingScreen = () => {
   return (

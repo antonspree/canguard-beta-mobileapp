@@ -1,11 +1,14 @@
-import React from "react";
+import * as React from "react";
 import { Redirect, Slot, useRouter, useSegments } from "expo-router";
 import { useAppSelector } from "@/store/hook";
+import MenuDrawer from "@/components/MenuDrawer";
+import Text from "@/elements/Text";
 
 export default function RootLayout() {
-  const { user } = useAppSelector((state) => state.user);
-  const segments = useSegments();
   const router = useRouter();
+  const segments = useSegments();
+
+  const { user } = useAppSelector((state) => state.user);
 
   React.useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
@@ -33,5 +36,11 @@ export default function RootLayout() {
     return <Redirect href={"/(guest)/signin"} />;
   }
 
-  return <Slot />;
+  return (
+    <>
+      <MenuDrawer>
+        <Slot />
+      </MenuDrawer>
+    </>
+  );
 }

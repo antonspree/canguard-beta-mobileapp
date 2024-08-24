@@ -2,15 +2,15 @@ import React from "react";
 import { ImageBackground, Pressable, View } from "react-native";
 import { router } from "expo-router";
 import QRCode from "react-qr-code";
-import { Text } from "react-native-paper";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppSelector } from "@/store/hook";
 import Container from "@/components/Container";
 import { Image } from "expo-image";
 import { UPLOAD_URI } from "@/config/env";
-import LogoImg from "@/assets/images/icon.svg";
+import LogoImg from "@/assets/images/icon.png";
 import MockCardBg from "@/assets/images/card-logo.svg";
+import Text from "@/elements/Text";
 
 const ProfileScreen: React.FC = () => {
   const { user } = useAppSelector((store) => store.user);

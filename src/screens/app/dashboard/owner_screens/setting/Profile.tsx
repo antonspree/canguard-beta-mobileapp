@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import Toast from "react-native-toast-message";
@@ -8,6 +8,7 @@ import ProfileInput from "@/components/ProfileInput";
 import { updateClub } from "@/actions/club";
 import { clubActions } from "@/store/reducers/clubReducer";
 import { ClubProfileFormSchema } from "@/types/form";
+import Text from "@/elements/Text";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ProfileScreen = () => {
   const [removeBadge, setRemoveBadge] = useState<any>(false);
 
   const onSubmit = async (data: ClubProfileFormSchema) => {
-		console.log(data);
+    console.log(data);
     setLoading(true);
 
     const formData = new FormData();

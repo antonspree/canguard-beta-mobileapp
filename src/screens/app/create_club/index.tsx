@@ -1,7 +1,7 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, View } from "react-native";
 import { router } from "expo-router";
+import { useForm, Controller } from "react-hook-form";
 import { useAppDispatch } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
 import { clubActions } from "@/store/reducers/clubReducer";
@@ -11,6 +11,7 @@ import message from "@/lib/message";
 import { CreateClubFormDataType } from "@/types/form";
 import ProfileInput from "@/components/ProfileInput";
 import Card from "@/components/Card";
+import Text from "@/elements/Text";
 
 const CreateClubScreen: React.FC = () => {
   const dispatch = useAppDispatch();

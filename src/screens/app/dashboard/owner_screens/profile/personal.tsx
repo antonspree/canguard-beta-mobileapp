@@ -6,8 +6,8 @@ import { clearData } from "@/lib/storage";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Container from "@/components/Container";
-import { Text } from "react-native-paper";
 import ChangePasswordDialog from "@/widgets/ChangePasswordDialog";
+import Text from "@/elements/Text";
 
 const PersonalDetailScreen: React.FC = () => {
   const [changePassVisible, setChangePassVisible] = useState<boolean>(false);

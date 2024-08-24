@@ -1,7 +1,8 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { ClubStatusPropsInterface } from "@/types/component";
+import Text from "@/elements/Text";
 
 const ClubStatus: React.FC<ClubStatusPropsInterface> = ({
   done,

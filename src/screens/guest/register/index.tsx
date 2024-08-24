@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { router } from "expo-router";
 import { useForm, Controller } from "react-hook-form";
 import { Image } from "expo-image";
@@ -9,6 +9,7 @@ import { signUp } from "@/actions/auth";
 import { clearData, loadData } from "@/lib/storage";
 import ProfileInput from "@/components/ProfileInput";
 import { RegisterFormDataType } from "@/types/form";
+import Text from "@/elements/Text";
 
 const RegisterScreen: React.FC = () => {
   const [userInfo, setUserInfo] = useState({});
