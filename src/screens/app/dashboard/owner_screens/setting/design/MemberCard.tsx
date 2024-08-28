@@ -95,7 +95,8 @@ const MemberCard = () => {
               >
                 <View className="px-5">
                   <Text className="text-center text-xs text-[#808089]">
-                    Allowed file types: .jpg, .jpeg, .png, .webp (maximum 10MB)
+                    Erlaubte Dateitypen : .jpg, .jpeg, .png, .webp (maximum
+                    10MB)
                   </Text>
                 </View>
               </Pressable>
@@ -126,7 +127,8 @@ const MemberCard = () => {
               >
                 <View className="px-5">
                   <Text className="text-center text-xs text-[#808089]">
-                    Allowed file types: .jpg, .jpeg, .png, .webp (maximum 10MB)
+                    Erlaubte Dateitypen : .jpg, .jpeg, .png, .webp (maximum
+                    10MB)
                   </Text>
                 </View>
               </Pressable>

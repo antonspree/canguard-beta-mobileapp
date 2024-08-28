@@ -51,7 +51,6 @@ const ChatDetailScreen = () => {
   }, [chat, selectedChannel]);
 
   const handleOnEmojiSelected = (emojiObject: EmojiType) => {
-    console.log(emojiObject);
     richText.current?.insertText(emojiObject.emoji);
   };
 
@@ -76,7 +75,6 @@ const ChatDetailScreen = () => {
   }, []);
 
   const onInsertLinkHandle = async (link: string) => {
-    console.log(link);
     richText.current?.insertLink("link", link);
   };
 
@@ -167,7 +165,7 @@ const ChatDetailScreen = () => {
                   <MaterialCommunityIcons
                     color={visibleEmoji ? "#FFFFFF" : "#000000"}
                     size={20}
-                    name={"sticker-emoji"}
+                    name="emoticon-happy-outline"
                   />
                 </Pressable>
               </View>

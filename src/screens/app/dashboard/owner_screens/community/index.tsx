@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { ScrollView, useWindowDimensions, Pressable, View } from "react-native";
 import { Avatar, Dialog, Portal, TextInput } from "react-native-paper";
 import Toast from "react-native-toast-message";
@@ -32,6 +32,7 @@ import { getAvatarLetters, getTimeDifferenceInGerman } from "@/lib/function";
 import { UPLOAD_URI } from "@/config/env";
 import { Accordion } from "@/components/Accordion";
 import Text from "@/elements/Text";
+import CommHtmlEditor from "@/widgets/CommHtmlEditor";
 
 const CommunityFeedPage = () => {
   const dispatch = useAppDispatch();
@@ -75,20 +76,10 @@ const CommunityFeedPage = () => {
     richText.current?.insertText(emojiObject.emoji);
   };
 
-  const handleImages = (e: any) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      setImages([...images, e.target.files && e.target.files[0]]);
-
-      const reader: any = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImages([
-          ...previewImages,
-          { name: file.name, src: reader.result },
-        ]);
-      };
-      reader.readAsDataURL(file);
+  const handleImages = (image: any) => {
+    if (image) {
+      setImages([...images, image]);
+      setPreviewImages([...previewImages, image]);
     }
   };
 
@@ -126,9 +117,11 @@ const CommunityFeedPage = () => {
     }
   };
 
-  const handleRemoveImg = (param: string) => {
-    setImages(images.filter((item: any) => item.name !== param));
-    setPreviewImages(previewImages.filter((item: any) => item.name !== param));
+  const handleRemoveImg = (param: any) => {
+    setImages(images.filter((item: any) => item.uri !== param.uri));
+    setPreviewImages(
+      previewImages.filter((item: any) => item.uri !== param.uri)
+    );
   };
 
   const handleReplyRemoveImg = (param: string) => {
@@ -357,23 +350,23 @@ const CommunityFeedPage = () => {
   return (
     <ScrollView>
       <View className="p-5">
-        <View className="space-y-2">
-          {/* <CommunityTiptap
-                message={message}
-                setMessage={setMessage}
-                disabled={
-                  user?.role !== "owner" &&
-                  !user?.functions?.includes("club-community-feed-create")
-                }
-                documents={documents}
-                setDocuments={setDocuments}
-                handleImages={handleImages}
-                votes={votes}
-                setVotes={setVotes}
-                onSend={onSend}
-                imgsCount={images.length}
-                docsCount={documents.length}
-              /> */}
+        <View className="space-y-2 mb-2">
+          <CommHtmlEditor
+            message={message}
+            setMessage={setMessage}
+            disabled={
+              user?.role !== "owner" &&
+              !user?.functions?.includes("club-community-feed-create")
+            }
+            documents={documents}
+            setDocuments={setDocuments}
+            handleImages={handleImages}
+            votes={votes}
+            setVotes={setVotes}
+            onSend={onSend}
+            imgsCount={images.length}
+            docsCount={documents.length}
+          />
           {votes.length > 0 && (
             <View className="space-y-3">
               {votes.map((item: any, key: string) => {
@@ -412,23 +405,23 @@ const CommunityFeedPage = () => {
             </View>
           )}
           {previewImages.length > 0 && (
-            <View className="flex flex-wrap gap-3">
+            <View className="flex-row flex-wrap gap-3">
               {previewImages.map((item: any, key: string) => {
                 return (
-                  <View className="relative w-44 h-32" key={key}>
+                  <View className="relative w-20 h-16" key={key}>
                     <Image
-                      className="object-cover rounded-xl"
-                      source={item.src}
+                      className="w-20 h-16 rounded-lg"
+                      source={{ uri: item.uri }}
                       alt="preview"
                     />
                     <Pressable
-                      className="absolute -top-2 -right-2 p-1 rounded-full z-10"
-                      onPress={() => handleRemoveImg(item.name)}
+                      className="absolute -top-3 -right-2 p-1 z-10"
+                      onPress={() => handleRemoveImg(item)}
                     >
                       <MaterialCommunityIcons
-                        color={"#000000"}
-                        size={20}
-                        name={"sticker-emoji"}
+                        name="delete-outline"
+                        size={16}
+                        color={"#ef4444"}
                       />
                     </Pressable>
                   </View>
@@ -440,8 +433,8 @@ const CommunityFeedPage = () => {
             <View className="flex flex-wrap gap-3">
               {documents.map((item: any, key: string) => {
                 return (
-                  <View className="relative w-44 h-16" key={key}>
-                    <View className="w-full flex justify-center items-center space-x-3 px-3 bg-[#F7F7F7] rounded-xl">
+                  <View className="relative w-20 h-16" key={key}>
+                    <View className="w-full flex justify-center items-center space-x-3 p-3 bg-[#F7F7F7] rounded-xl">
                       <MaterialCommunityIcons
                         color={"#8E8E8E"}
                         size={32}
@@ -546,6 +539,22 @@ const CommunityFeedPage = () => {
                       {item.votes && item.votes?.length > 0 && (
                         <View className="space-y-2">
                           {item.votes.map((vote, key) => {
+                            const votePercent =
+                              item.votes &&
+                              vote.voters &&
+                              vote.voters.length > 0
+                                ? Math.trunc(
+                                    (vote.voters.length /
+                                      item.votes.reduce(
+                                        (total, vote) =>
+                                          vote.voters
+                                            ? total + vote.voters.length
+                                            : total,
+                                        0
+                                      )) *
+                                      100
+                                  )
+                                : 0;
                             return (
                               <Pressable
                                 className="relative flex-row items-center justify-between pl-2 pr-2 py-2 border rounded-md overflow-hidden border-[#E4E4E7]"
@@ -555,25 +564,13 @@ const CommunityFeedPage = () => {
                                 }
                               >
                                 <View
-                                  className="absolute bg-custom h-full left-0"
-                                  style={{
-                                    width:
-                                      item.votes &&
-                                      vote.voters &&
-                                      vote.voters.length > 0
-                                        ? `${Math.trunc(
-                                            (vote.voters.length /
-                                              item.votes.reduce(
-                                                (total, vote) =>
-                                                  vote.voters
-                                                    ? total + vote.voters.length
-                                                    : total,
-                                                0
-                                              )) *
-                                              100
-                                          )}%`
-                                        : 0,
-                                  }}
+                                  className={`absolute bg-custom top-0 bottom-0 left-0 right-${
+                                    votePercent === 0
+                                      ? "100%"
+                                      : votePercent === 100
+                                      ? "0"
+                                      : `[${100 - votePercent}%]`
+                                  } bg-[#19A873]`}
                                 />
                                 <Text variant="bodySmall" className="z-10">
                                   {vote.value}
@@ -688,10 +685,10 @@ const CommunityFeedPage = () => {
                             <Text>{item.likes?.length}</Text>
                           </View>
                           <Pressable onPress={() => handleReply(item)}>
-                            <MaterialCommunityIcons
-                              color={"#000000"}
+                            <Feather
+                              name="message-circle"
                               size={16}
-                              name={"message-reply-outline"}
+                              color="#000000"
                             />
                           </Pressable>
                         </View>
@@ -1075,17 +1072,18 @@ const CommunityFeedPage = () => {
                       </View>
                     </View>
                     <View className=" space-y-3">
-                      {/* <CommunityTiptap
-                          message={replyMessage}
-                          setMessage={setReplyMessage}
-                          documents={replyDocuments}
-                          setDocuments={setReplyDocuments}
-                          handleImages={handleReplyImages}
-                          onSend={onReply}
-                          imgsCount={replyImages.length}
-                          docsCount={replyDocuments.length}
-                          voteAvailable={false}
-                        /> */}
+                      <CommHtmlEditor
+                        message={replyMessage}
+                        setMessage={setReplyMessage}
+                        documents={replyDocuments}
+                        setDocuments={setReplyDocuments}
+                        handleImages={handleReplyImages}
+                        votes={votes}
+                        setVotes={setVotes}
+                        onSend={onReply}
+                        imgsCount={replyImages.length}
+                        docsCount={replyDocuments.length}
+                      />
                       {replyPreviewImages.length > 0 && (
                         <View className="flex flex-wrap gap-3">
                           {replyPreviewImages.map((item: any, key: string) => {
