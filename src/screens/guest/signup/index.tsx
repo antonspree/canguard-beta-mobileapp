@@ -33,7 +33,7 @@ const SignUpScreen: React.FC = () => {
         <Text className="font-bold text-3xl">Registrieren</Text>
         <View className="flex flex-row items-center">
           <Text className="font-semibold text-center text-base text-[#919191]">
-            Erstelle jetzt deinen CanGuard Account. Wenn du dich bereits
+            Erstelle jetzt deinen Canify Account. Wenn du dich bereits
             registriert hast, kannst du dich ganz normal
             <Text className="text-black">{" einloggen."}</Text>
           </Text>

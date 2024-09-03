@@ -22,7 +22,7 @@ const ClubScreen: React.FC = () => {
               className="flex-1 rounded-md border"
               mode="contained"
               buttonColor="white"
-              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              onPress={() => router.push("/(app)/(dashboard)/club/setting")}
               style={{ borderColor: "#EFEFEF" }}
               icon={"account-multiple"}
               textColor="#000000"
@@ -66,7 +66,7 @@ const ClubScreen: React.FC = () => {
               className="flex-1 rounded-md border"
               mode="contained"
               buttonColor="white"
-              onPress={() => router.push("/(app)/(dashboard)/setting")}
+              onPress={() => router.push("/(app)/(dashboard)/club/search")}
               style={{ borderColor: "#EFEFEF" }}
               icon={"search-web"}
               textColor="#000000"

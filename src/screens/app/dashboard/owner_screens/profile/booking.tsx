@@ -21,7 +21,7 @@ const BookingScreen = () => {
             <Text variant="bodySmall">
               Hier findest du alle Buchungen, die dein Club für dich erstellt
               hat. Buchungen können z.B. für Aufnahmegebühren oder
-              Mitgliedsbeiträge anfallen. CanGuard informiert dich automatisch,
+              Mitgliedsbeiträge anfallen. Canify informiert dich automatisch,
               sobald eine neue Buchung erstellt wird.
             </Text>
           </View>

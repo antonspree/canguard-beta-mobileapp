@@ -66,7 +66,7 @@ const RegisterScreen: React.FC = () => {
         />
         <Text className="text-center font-bold text-3xl">
           Herzlich Willkommen
-          <Text className="text-[#19A873]">{" bei CanGuard!"}</Text>
+          <Text className="text-[#19A873]">{" bei Canify!"}</Text>
         </Text>
         <Text className="text-center font-semibold text-base text-[#919191]">
           Bitte vervollständige dein persönliches Profil und bestätige, dass du

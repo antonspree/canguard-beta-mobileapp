@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ScrollView, TextInput, View } from "react-native";
+import { FlatList, ScrollView, TextInput, View } from "react-native";
 import MapView from "react-native-maps";
-import { getAllClubs } from "@/actions/club";
-import Club from "@/components/Club";
+import { getAllClubs, getClubOfLimit } from "@/actions/club";
+import ClubList from "./clubs";
 
 const INITIAL_REGION = {
   latitude: 52.52,
@@ -17,21 +17,15 @@ const SearchClubScreen: React.FC = () => {
   const [clubData, setClubData] = useState<any>([]);
   const [search, setSearch] = useState("");
 
-  const fetchAllClubs = async () => {
-    const result = await getAllClubs();
+  const onFetch = async (page: number) => {
+    const result = await getClubOfLimit(page, 10);
 
     if (result && typeof result === "object" && "club" in result) {
       setClubData(result.club);
     }
+
+    return result;
   };
-
-  useEffect(() => {
-    fetchAllClubs();
-  }, []);
-
-  // useEffect(() => {
-  //   mapRef.current.
-  // })
 
   return (
     <ScrollView>
@@ -56,7 +50,8 @@ const SearchClubScreen: React.FC = () => {
           />
         </View>
         <View className="flex flex-col space-y-3">
-          {clubData
+          <ClubList onFetch={onFetch} />
+          {/* {clubData
             .filter(
               (f: any) =>
                 (f.city &&
@@ -87,7 +82,7 @@ const SearchClubScreen: React.FC = () => {
                   allowRequest={item.allow_request}
                 />
               </View>
-            ))}
+            ))} */}
         </View>
       </View>
     </ScrollView>

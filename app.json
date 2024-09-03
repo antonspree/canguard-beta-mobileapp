@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "canguard-mobile-app",
-    "slug": "canguard-mobile-app",
+    "name": "canify-mobile-app",
+    "slug": "canify-mobile-app",
     "version": "1.0.0",
-    "scheme": "canguard-mobile-app",
+    "scheme": "canify-mobile-app",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "userInterfaceStyle": "light",
@@ -25,7 +25,7 @@
         "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.hashi7412.canguardmobileapp"
+      "package": "com.hashi7412.canifymobileapp"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"

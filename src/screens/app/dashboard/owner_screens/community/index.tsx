@@ -72,7 +72,6 @@ const CommunityFeedPage = () => {
   const [tempData, setTempData] = useState<IFeed>();
 
   const handleOnEmojiSelected = (emojiObject: EmojiType) => {
-    console.log(emojiObject);
     richText.current?.insertText(emojiObject.emoji);
   };
 
@@ -430,37 +429,39 @@ const CommunityFeedPage = () => {
             </View>
           )}
           {documents.length > 0 && (
-            <View className="flex flex-wrap gap-3">
+            <View className="gap-3">
               {documents.map((item: any, key: string) => {
                 return (
-                  <View className="relative w-20 h-16" key={key}>
-                    <View className="w-full flex justify-center items-center space-x-3 p-3 bg-[#F7F7F7] rounded-xl">
-                      <MaterialCommunityIcons
-                        color={"#8E8E8E"}
-                        size={32}
-                        name={"file-document"}
-                      />
-                      <Text
-                        className="overflow-hidden text-sm text-content break-all"
-                        // style={{
-                        //   display: "-webkit-box",
-                        //   WebkitLineClamp: 1,
-                        //   WebkitBoxOrient: "vertical",
-                        // }}
+                  <View className="relative" key={key}>
+                    <View className="w-full flex-row items-center justify-between space-x-3 p-3 bg-[#F7F7F7] rounded-xl">
+                      <View className="flex-1 flex-row items-center space-x-3">
+                        <MaterialCommunityIcons
+                          color={"#8E8E8E"}
+                          size={32}
+                          name={"file-document"}
+                        />
+                        <Text
+                          className="overflow-hidden text-sm text-content break-all"
+                          // style={{
+                          //   display: "-webkit-box",
+                          //   WebkitLineClamp: 1,
+                          //   WebkitBoxOrient: "vertical",
+                          // }}
+                        >
+                          {item?.assets[0]?.name}
+                        </Text>
+                      </View>
+                      <Pressable
+                        className="rounded-full"
+                        onPress={() => handleRemoveDoc(item?.name)}
                       >
-                        {item?.name}
-                      </Text>
+                        <MaterialCommunityIcons
+                          name="delete-outline"
+                          size={16}
+                          color={"#ef4444"}
+                        />
+                      </Pressable>
                     </View>
-                    <Pressable
-                      className="absolute -top-2 -right-2 p-1 rounded-full z-10"
-                      onPress={() => handleRemoveDoc(item?.name)}
-                    >
-                      <MaterialCommunityIcons
-                        color={"#000000"}
-                        size={20}
-                        name={"sticker-emoji"}
-                      />
-                    </Pressable>
                   </View>
                 );
               })}

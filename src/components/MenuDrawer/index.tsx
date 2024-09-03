@@ -3,6 +3,7 @@ import { Animated, Dimensions, View } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { router, usePathname } from "expo-router";
 import { Image } from "expo-image";
+import tw from "twrnc";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useAppSelector } from "@/store/hook";
 import { UPLOAD_URI } from "@/config/env";
@@ -47,19 +48,21 @@ export default function MenuDrawer({
   }, [currentPath]);
 
   return (
-    <View className="flex-1 bg-[#EAEAEA]">
-      <View className={`relative flex-1 p-4 mr-[calc(${screenWidth}px-230px)]`}>
+    <View style={tw`flex-1 bg-[#EAEAEA]`}>
+      <View style={tw`relative flex-1 p-4 mr-[${screenWidth - 230}px]`}>
         <IconButton
-          className="absolute right-0"
+          style={tw`absolute right-0`}
           icon="close"
           onPress={() => dispatch(appActions.setVisibleDrawerMenu(false))}
         />
-        <View className="items-center pt-10">
-          <View className="flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2 overflow-hidden">
+        <View style={tw`items-center pt-10`}>
+          <View
+            style={tw`flex-col justify-center items-center w-20 h-20 bg-gray-100 rounded-full mb-2 overflow-hidden`}
+          >
             {user?.avatar ? (
               <Image
                 source={UPLOAD_URI + user.avatar}
-                className="w-20 h-20"
+                style={tw`w-20 h-20`}
                 placeholder="logo"
               />
             ) : (
@@ -67,15 +70,15 @@ export default function MenuDrawer({
             )}
           </View>
           <Text variant="titleSmall">{user?.username}</Text>
-          <Text variant="bodySmall" className="text-[808080]">
+          <Text variant="bodySmall" style={tw`text-[#808080]`}>
             {user?.email}
           </Text>
         </View>
-        <View className="flex-1 mt-8">
+        <View style={tw`flex-1 mt-8`}>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/home")}
             mode="contained"
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={currentPath === "home" ? "#FFFFFF" : "#19A873"}
             buttonColor={currentPath === "home" ? "#19A873" : "transparent"}
           >
@@ -83,7 +86,7 @@ export default function MenuDrawer({
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/chat")}
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={currentPath === "chat" ? "#FFFFFF" : "#19A873"}
             buttonColor={currentPath === "chat" ? "#19A873" : "transparent"}
           >
@@ -91,7 +94,7 @@ export default function MenuDrawer({
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/club")}
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={currentPath === "club" ? "#FFFFFF" : "#19A873"}
             buttonColor={currentPath === "club" ? "#19A873" : "transparent"}
           >
@@ -99,7 +102,7 @@ export default function MenuDrawer({
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/profile")}
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={currentPath === "profile" ? "#FFFFFF" : "#19A873"}
             buttonColor={currentPath === "profile" ? "#19A873" : "transparent"}
           >
@@ -107,7 +110,7 @@ export default function MenuDrawer({
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/community")}
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={currentPath === "community" ? "#FFFFFF" : "#19A873"}
             buttonColor={
               currentPath === "community" ? "#19A873" : "transparent"
@@ -119,7 +122,7 @@ export default function MenuDrawer({
         <View>
           <Button
             onPress={handleLogout}
-            className="rounded-lg ml-0 mr-0"
+            style={tw`rounded-lg ml-0 mr-0`}
             textColor={false ? "#FFFFFF" : "#19A873"}
           >
             Log out
@@ -127,20 +130,18 @@ export default function MenuDrawer({
         </View>
       </View>
       <Animated.View
-        className="flex-1 flex absolute top-0 bottom-0 left-0 right-0"
-        style={{
+        style={tw.style(`flex-1 flex absolute top-0 bottom-0 left-0 right-0`, {
           transform: [{ translateX: offsetValue }],
-        }}
+        })}
       >
         <Animated.View
-          style={{
-            flex: 1,
+          style={tw.style("flex-1", {
             transform: [
               {
                 translateY: closeButtonOffset,
               },
             ],
-          }}
+          })}
         >
           <View
             style={{

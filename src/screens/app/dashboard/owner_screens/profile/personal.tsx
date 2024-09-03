@@ -105,7 +105,7 @@ const PersonalDetailScreen: React.FC = () => {
                 Datenschutzerklärung
               </Text>
             </Pressable>
-            <Pressable className="flex flex-row items-center space-x-2 px-4 py-3">
+            <Pressable className="flex flex-row items-center space-x-2 px-4 py-3 border-b border-gray-100">
               <Feather name="external-link" size={14} color="#8E8E8E" />
               <Text variant="bodySmall" className="text-[#8E8E8E]">
                 Impressum

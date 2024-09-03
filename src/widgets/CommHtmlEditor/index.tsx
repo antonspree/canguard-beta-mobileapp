@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Alert, PermissionsAndroid, Pressable, View } from "react-native";
 import { RichEditor } from "react-native-pell-rich-editor";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
 
 const CommHtmlEditor = ({
   message,
@@ -32,6 +33,13 @@ const CommHtmlEditor = ({
   docsCount: number;
   voteAvailable?: boolean;
 }) => {
+  const richText = useRef<any>();
+  const [visibleEmoji, setVisibleEmoji] = useState(false);
+
+  const handleOnEmojiSelected = (emojiObject: EmojiType) => {
+    richText.current?.insertText(emojiObject.emoji);
+  };
+
   const checkPermissions = async () => {
     try {
       const result = await PermissionsAndroid.check(
@@ -68,8 +76,6 @@ const CommHtmlEditor = ({
     }
   };
 
-  const richText = useRef<any>();
-
   const pickImage = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -95,10 +101,6 @@ const CommHtmlEditor = ({
         const result = await DocumentPicker.getDocumentAsync({
           copyToCacheDirectory: false,
         });
-        console.log("console started");
-        console.log(documents);
-        console.log(result);
-        console.log("console ended");
 
         if (!result.canceled) {
           // Setting the state to show single file attributes
@@ -111,9 +113,31 @@ const CommHtmlEditor = ({
     }
   };
 
+  const onSubmit = async () => {
+    await onSend(message);
+  };
+
   return (
     <View>
-      <View className="bg-[#F8F8F8] p-2">
+      <View className="relative bg-[#F8F8F8] p-2">
+        {visibleEmoji ? (
+          <EmojiKeyboard
+            onEmojiSelected={handleOnEmojiSelected}
+            styles={{
+              container: {
+                position: "absolute",
+                height: 320,
+                top: "120%",
+                left: 0,
+                borderRadius: 4,
+                zIndex: 1000000,
+                elevation: 1000000,
+                backgroundColor: "red",
+              },
+            }}
+            emojiSize={8}
+          />
+        ) : null}
         <RichEditor
           ref={richText}
           onChange={setMessage}
@@ -128,34 +152,39 @@ const CommHtmlEditor = ({
           initialFocus
           scrollEnabled
         />
-        <View className="flex-row mt-2 space-x-1.5 px-2">
-          <Pressable onPress={pickDocument} disabled={docsCount >= 5}>
-            <MaterialCommunityIcons
-              color={"#19A873"}
-              size={16}
-              name={"plus-circle-outline"}
-            />
-          </Pressable>
-          <Pressable onPress={pickImage} disabled={imgsCount >= 10}>
-            <MaterialCommunityIcons
-              color={"#19A873"}
-              size={16}
-              name={"file-image-plus-outline"}
-            />
-          </Pressable>
-          <Pressable>
-            <MaterialCommunityIcons
-              name="emoticon-happy-outline"
-              size={16}
-              color="#19A873"
-            />
-          </Pressable>
-          <Pressable disabled={!voteAvailable}>
-            <MaterialCommunityIcons
-              color={"#19A873"}
-              size={16}
-              name={"chart-line"}
-            />
+        <View className="flex-row items-center justify-between mt-2 space-x-2 px-2">
+          <View className="flex-row space-x-1.5">
+            <Pressable onPress={pickDocument} disabled={docsCount >= 5}>
+              <MaterialCommunityIcons
+                color={"#19A873"}
+                size={16}
+                name={"plus-circle-outline"}
+              />
+            </Pressable>
+            <Pressable onPress={pickImage} disabled={imgsCount >= 10}>
+              <MaterialCommunityIcons
+                color={"#19A873"}
+                size={16}
+                name={"file-image-plus-outline"}
+              />
+            </Pressable>
+            <Pressable onPress={() => setVisibleEmoji((v) => !v)}>
+              <MaterialCommunityIcons
+                name="emoticon-happy-outline"
+                size={16}
+                color="#19A873"
+              />
+            </Pressable>
+            <Pressable disabled={!voteAvailable}>
+              <MaterialCommunityIcons
+                color={"#19A873"}
+                size={16}
+                name={"chart-line"}
+              />
+            </Pressable>
+          </View>
+          <Pressable onPress={onSubmit}>
+            <MaterialCommunityIcons color={"#19A873"} size={16} name={"send"} />
           </Pressable>
         </View>
       </View>

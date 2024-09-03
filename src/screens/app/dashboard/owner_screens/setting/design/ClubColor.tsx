@@ -50,7 +50,7 @@ const ClubColor = () => {
           <View className="mb-6 space-y-1">
             <Text className="text-sm">Akzentfarbe</Text>
             <Text className="text-[#808089] text-xs">
-              Diese Farbe wird verwendet, um bestimmte Elemente in Canguard
+              Diese Farbe wird verwendet, um bestimmte Elemente in Canify
               hervorzuheben.
             </Text>
           </View>

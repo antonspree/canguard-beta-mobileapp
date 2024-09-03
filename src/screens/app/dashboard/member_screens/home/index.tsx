@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert, Pressable, View } from "react-native";
+import tw from "twrnc";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
@@ -43,24 +44,28 @@ const MemberScreen: React.FC = () => {
     );
 
   return (
-    <View className="m-5">
+    <View style={tw`m-5`}>
       {user?.status === "pending" ? (
-        <Card className="p-0">
-          <View className="flex flex-col items-center space-y-2 p-5 border-b border-[#EAEAEA]">
-            <Text className="font-bold text-xl">Meine Mitgliedschaft</Text>
-            <Text className="text-sm text-[#919191]">
+        <Card style={tw`p-0`}>
+          <View
+            style={tw`flex flex-col items-center space-y-2 p-5 border-b border-[#EAEAEA]`}
+          >
+            <Text style={tw`font-bold text-xl`}>Meine Mitgliedschaft</Text>
+            <Text style={tw`text-sm text-[#919191]`}>
               {user?.club?.clubID} / {user?.memberID}
             </Text>
           </View>
-          <View className="space-y-5 p-5">
-            <View className="flex flex-col space-y-3">
-              <View className="flex flex-row space-x-2 p-3 bg-[#55A3FF]/20 border border-[#55A3FF] rounded-md">
+          <View style={tw`space-y-5 p-5`}>
+            <View style={tw`flex flex-col space-y-3`}>
+              <View
+                style={tw`flex flex-row space-x-2 p-3 bg-[#55A3FF]/20 border border-[#55A3FF] rounded-md`}
+              >
                 <FontAwesome name="info-circle" size={20} color="#55A3FF" />
-                <View className="flex flex-col space-y-1.5">
-                  <Text className="font-semibold text-sm text-[#3C699D]">
+                <View style={tw`flex flex-col space-y-1.5`}>
+                  <Text style={tw`font-semibold text-sm text-[#3C699D]`}>
                     Mitgliedsanfrage gestellt
                   </Text>
-                  <Text className="text-xs text-[#55A3FF]">
+                  <Text style={tw`text-xs text-[#55A3FF]`}>
                     Deine Mitgliedsanfrage ist beim Club eingegangen und wird
                     aktuell geprüft. Wir informieren dich, sobald über deine
                     Mitgliedschaft entschieden wurde.
@@ -68,38 +73,44 @@ const MemberScreen: React.FC = () => {
                 </View>
               </View>
             </View>
-            <View className="flex flex-col space-y-2">
-              <Text className="text-sm text-[#919191]">Status</Text>
-              <View className="flex flex-row space-x-2">
-                <View className="inline-flex items-center p-1 bg-[#0094FF]/25 border border-transparent rounded-md">
-                  <Text className="text-xs font-semibold text-[#1C73B2]">
+            <View style={tw`flex flex-col space-y-2`}>
+              <Text style={tw`text-sm text-[#919191]`}>Status</Text>
+              <View style={tw`flex flex-row space-x-2`}>
+                <View
+                  style={tw`inline-flex items-center p-1 bg-[#0094FF]/25 border border-transparent rounded-md`}
+                >
+                  <Text style={tw`text-xs font-semibold text-[#1C73B2]`}>
                     Angefragt
                   </Text>
                 </View>
               </View>
             </View>
-            <View className="flex flex-col space-y-2">
-              <Text className="text-sm text-[#919191]">Angefragt am</Text>
-              <Text className="text-sm font-semibold">
+            <View style={tw`flex flex-col space-y-2`}>
+              <Text style={tw`text-sm text-[#919191]`}>Angefragt am</Text>
+              <Text style={tw`text-sm font-semibold`}>
                 {getCleanDate(user?.memberdate as string, 2)}
               </Text>
             </View>
             <Pressable
-              className="w-full flex justify-center items-center py-2 bg-red-500 rounded-md"
+              style={tw`w-full flex justify-center items-center py-2 bg-red-500 rounded-md`}
               onPress={createAlert}
             >
-              <Text className="text-sm text-white">Anfrage zurückziehen</Text>
+              <Text style={tw`text-sm text-white`}>Anfrage zurückziehen</Text>
             </Pressable>
           </View>
         </Card>
       ) : (
-        <View className="w-full flex flex-col justify-center items-center space-y-5 pt-20">
+        <View
+          style={tw`w-full flex flex-col justify-center items-center space-y-5 pt-20`}
+        >
           <Feather name="check-circle" size={32} color="black" />
-          <View className="w-full flex flex-col justify-center items-center space-y-2">
-            <Text className="text-xl font-semibold text-center">
+          <View
+            style={tw`w-full flex flex-col justify-center items-center space-y-2`}
+          >
+            <Text style={tw`text-xl font-semibold text-center`}>
               Alles erledigt.
             </Text>
-            <Text className="text-base text-center">
+            <Text style={tw`text-base text-center`}>
               Neuigkeiten für dich erscheinen hier, sobald es etwas zu berichten
               gibt.
             </Text>

@@ -1,24 +1,30 @@
 import React from "react";
 import { View } from "react-native";
+import tw from "twrnc";
 import { Feather, FontAwesome } from "@expo/vector-icons";
-import { ClubStatusPropsInterface } from "@/types/component";
+import { useTheme } from "@/hooks/useThemeProvider";
 import Text from "@/elements/Text";
+import { ClubStatusPropsInterface } from "@/types/component";
 
 const ClubStatus: React.FC<ClubStatusPropsInterface> = ({
   done,
   title,
   content,
 }) => {
+  const { colors } = useTheme();
+
   return (
-    <View className="flex flex-row items-center space-x-3">
-      {done ? (
-        <Feather name="check-circle" size={24} color="#19A873" />
-      ) : (
-        <FontAwesome name="circle-thin" size={24} color="#19A873" />
-      )}
-      <View className="flex flex-col space-y-1">
-        <Text className="text-sm font-medium">{title}</Text>
-        <Text className="text-xs text-[#919191]">{content}</Text>
+    <View style={tw`flex flex-row items-center gap-3`}>
+      <View style={tw`flex items-center justify-center w-6 h-6`}>
+        {done ? (
+          <Feather name="check-circle" size={24} color={colors.bgColor} />
+        ) : (
+          <FontAwesome name="circle-thin" size={24} color={colors.bgColor} />
+        )}
+      </View>
+      <View style={tw`flex flex-col gap-1`}>
+        <Text style={tw`text-sm font-medium`}>{title}</Text>
+        <Text style={tw`text-xs text-[#919191]`}>{content}</Text>
       </View>
     </View>
   );

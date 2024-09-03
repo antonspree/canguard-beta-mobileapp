@@ -7,9 +7,11 @@ import Entypo from "@expo/vector-icons/Entypo";
 import { feedActions } from "@/store/reducers/feedReducer";
 import { getFeed } from "@/actions/feed";
 import { useAppDispatch } from "@/store/hook";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 export default function AppLayout() {
   const dispatch = useAppDispatch();
+  const { colors } = useTheme();
 
   useEffect(() => {
     (async () => {
@@ -24,8 +26,8 @@ export default function AppLayout() {
   return (
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
-      activeColor="#19A873"
-      inactiveColor="#C8C8C8"
+      activeColor={colors.bgColor}
+      inactiveColor="#32323460"
       barStyle={{
         backgroundColor: "#ffffff",
         borderTopColor: "#EAEAEA",
@@ -99,7 +101,6 @@ export default function AppLayout() {
             );
           },
         }}
-        // redirect
       />
       <MaterialBottomTabs.Screen
         name="event"

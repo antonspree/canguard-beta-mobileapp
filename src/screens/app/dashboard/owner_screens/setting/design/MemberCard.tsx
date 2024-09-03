@@ -176,9 +176,9 @@ const MemberCard = () => {
         </View>
         <View className="mb-4">
           <View className="mb-6 space-y-1">
-            <Text className="text-sm">CanGuard Logofarbe</Text>
+            <Text className="text-sm">Canify Logofarbe</Text>
             <Text className="text-[#808089] text-xs">
-              Wähle die Farbe des CanGuard Logos
+              Wähle die Farbe des Canify Logos
             </Text>
           </View>
           <View className="flex-row flex-wrap gap-1 items-center mx-auto justify-center px-4">
@@ -251,9 +251,9 @@ const MemberCard = () => {
         <View className="space-y-4">
           <View className="flex-row justify-between">
             <View className="flex-1 space-y-1">
-              <Text className="text-sm">CanGuard Hintergrundlogo</Text>
+              <Text className="text-sm">Canify Hintergrundlogo</Text>
               <Text className="text-[#808089] text-xs">
-                Wähle ob das CanGuard Logo im Hintergrund angezeigt wird.
+                Wähle ob das Canify Logo im Hintergrund angezeigt wird.
               </Text>
             </View>
             <Switch value={isLogo} onValueChange={setIsLogo} />

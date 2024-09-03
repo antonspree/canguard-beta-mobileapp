@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import { useAppSelector } from "@/store/hook";
 import { useFocusEffect } from "expo-router";
+import tw from "twrnc";
 import { Feather, Ionicons } from "@expo/vector-icons";
-import { isEmpty } from "@/lib/function";
-import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/store/hook";
+import Text from "@/elements/Text";
 import Analytic from "@/components/Analytic";
 import Card from "@/components/Card";
 import ClubStatus from "@/components/ClubStatus";
-import Text from "@/elements/Text";
+import { cn } from "@/lib/utils";
+import { isEmpty } from "@/lib/function";
 
 const OwnerScreen: React.FC = () => {
   const { members } = useAppSelector((state) => state.members);
@@ -46,8 +47,8 @@ const OwnerScreen: React.FC = () => {
 
   return (
     <ScrollView>
-      <View className="space-y-3 m-5">
-        <View className="flex flex-col space-y-3">
+      <View style={tw`gap-3 m-5`}>
+        <View style={tw`flex flex-col gap-3`}>
           <View>
             <Analytic
               title="Mitglieder"
@@ -83,10 +84,10 @@ const OwnerScreen: React.FC = () => {
             />
           </View>
         </View>
-        <Card className="space-y-3 p-5">
-          <View className="flex flex-col space-y-1">
-            <Text className="text-base font-semibold">Dein Club</Text>
-            <Text className="text-sm text-[#919191]">
+        <Card style={tw`gap-3 p-5`}>
+          <View style={tw`flex flex-col gap-1`}>
+            <Text style={tw`text-base font-semibold`}>Dein Club</Text>
+            <Text variant="bodySmall" style={tw`text-[#919191]`}>
               Erledige alle offenen Aufgaben, um Deinen Club weiter nach vorne
               zu bringen.
             </Text>
@@ -95,7 +96,7 @@ const OwnerScreen: React.FC = () => {
             <Textrogress value={progress} />
             <Text className="text-sm text-[#919191]">{progress}%</Text>
           </View> */}
-          <View className="space-y-3">
+          <View style={tw`gap-2`}>
             <View>
               <ClubStatus
                 done={!isEmpty(club?.document)}
@@ -126,7 +127,7 @@ const OwnerScreen: React.FC = () => {
                   !isEmpty(club?.facebook)
                 }
                 title="Social Media verbinden"
-                content="Verbinde deine Kanäle mit CanGuard."
+                content="Verbinde deine Kanäle mit Canify."
               />
             </View>
             <View>
@@ -145,15 +146,17 @@ const OwnerScreen: React.FC = () => {
             </View>
           </View>
         </Card>
-        <Card className="p-5">
-          <View className="flex flex-col space-y-1">
-            <Text className="text-base font-semibold">Mitglieder</Text>
-            <Text className="text-sm text-[#919191]">
+        <Card style={tw`p-5`}>
+          <View style={tw`flex flex-col space-y-1`}>
+            <Text style={tw`text-base font-semibold`}>Mitglieder</Text>
+            <Text style={tw`text-sm text-[#919191]`}>
               Lade Mitglieder in Deinen Club ein, solange du noch die
               Möglichkeit dazu hast.
             </Text>
           </View>
-          <View className="overflow-hidden relative h-48 flex justify-center items-center mt-5 rounded-xl bg-[#F5F5F5]">
+          <View
+            style={tw`overflow-hidden relative h-48 flex justify-center items-center mt-5 rounded-xl bg-[#F5F5F5]`}
+          >
             <View
               style={{
                 height: `${Math.trunc(
@@ -187,7 +190,9 @@ const OwnerScreen: React.FC = () => {
                   "bg-green-500"
               )}
             />
-            <Text className="text-sm font-medium text-center text-[#919191] z-50">
+            <Text
+              style={tw`text-sm font-medium text-center text-[#919191] z-50`}
+            >
               {club?.users as number}/{club?.maxUser}
             </Text>
           </View>

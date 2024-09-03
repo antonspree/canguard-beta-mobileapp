@@ -12,6 +12,18 @@ const getAllClubs = async () => {
   }
 };
 
+const getClubOfLimit = async (page: number, limit: number) => {
+  try {
+    const result = await axiosPrivateInstance
+      .get("/club/fetch")
+      .then((res) => res);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getClub = async () => {
   try {
     const result = await axiosPrivateInstance
@@ -130,6 +142,7 @@ const removeDoc = async (data: any) => {
 
 export {
   getAllClubs,
+  getClubOfLimit,
   getClub,
   createClub,
   joinClub,

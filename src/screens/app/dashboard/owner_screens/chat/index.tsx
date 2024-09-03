@@ -1,29 +1,22 @@
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  Pressable,
-  View,
-  Modal,
-  useWindowDimensions,
-  LogBox,
-} from "react-native";
+import { Pressable, View, LogBox } from "react-native";
 import { router } from "expo-router";
 import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Dialog, Portal } from "react-native-paper";
+import tw from "twrnc";
 import { SafeAreaView } from "react-native-safe-area-context";
-import RenderHtml from "react-native-render-html";
 import Toast from "react-native-toast-message";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { getAllChannels, getChatData } from "@/actions/chat";
 import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { IChannel, channelActions } from "@/store/reducers/channelReducer";
 import { IChat, chatActions } from "@/store/reducers/chatReducer";
+import Text from "@/elements/Text";
 import Container from "@/components/Container";
 import ProfileInput from "@/components/ProfileInput";
 import Socket from "@/lib/socket";
 import { isEmpty } from "@/lib/function";
 import { ChannelFormSchema } from "@/types/form";
-import Text from "@/elements/Text";
 
 LogBox.ignoreLogs([
   "Warning: TRenderEngineProvider:",
@@ -107,17 +100,6 @@ const ChatItem: React.FC<{ item: IChannel }> = ({ item }) => {
                 currentChat?.chat[currentChat?.chat?.length - 1].user.username}
             </Text>
           </View>
-          {/* <View className="">
-            <RenderHtml
-              contentWidth={width}
-              source={{
-                html:
-                  (currentChat?.chat &&
-                    currentChat?.chat[currentChat?.chat?.length - 1].chat) ||
-                  "",
-              }}
-            />
-          </View> */}
         </View>
       </View>
     </Pressable>
@@ -141,6 +123,8 @@ const ChatScreen: React.FC = () => {
 
   const onSubmit = async (data: ChannelFormSchema) => {
     setLoading(true);
+
+    console.log(data);
 
     Socket.emit("createChannel", {
       userID: user?._id,
@@ -214,10 +198,8 @@ const ChatScreen: React.FC = () => {
               mode="outlined"
               onPress={() => setOpen(true)}
               icon={"plus"}
-              className="border-[#EAEAEA]"
-              style={{
-                borderColor: "#EAEAEA",
-              }}
+              className=""
+              style={tw`border-[#EAEAEA]`}
               textColor="#000000"
             >
               <Text variant="bodySmall">Chat erstellen</Text>

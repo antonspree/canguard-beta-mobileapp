@@ -3,10 +3,12 @@ import { Redirect, Slot, useRouter, useSegments } from "expo-router";
 import { useAppSelector } from "@/store/hook";
 import MenuDrawer from "@/components/MenuDrawer";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 export default function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
+  const { setTheme } = useTheme();
 
   const { user } = useAppSelector((state) => state.user);
 
@@ -14,6 +16,7 @@ export default function RootLayout() {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (user && user.club) {
+      if (user.club.color) setTheme(user.club.color);
       // User is signed in and has a club, redirect to dashboard if not already there
       if (!segments.includes("(dashboard)")) {
         router.replace("/(dashboard)");
@@ -26,7 +29,7 @@ export default function RootLayout() {
     } else {
       // User is not signed in, redirect to sign-in page if not already in auth group
       if (!inAuthGroup) {
-        router.replace("/sign-in");
+        router.replace("/(guest)/signin");
       }
     }
   }, [user, segments]);
