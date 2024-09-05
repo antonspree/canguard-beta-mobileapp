@@ -51,7 +51,7 @@ const RegisterScreen: React.FC = () => {
       if (result.success) {
         await clearData("userinfo");
 
-        router.push("/guest/login");
+        router.push("/guest/signin");
       }
     }
   };

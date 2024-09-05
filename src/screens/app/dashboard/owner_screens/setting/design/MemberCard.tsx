@@ -4,19 +4,30 @@ import { useAppSelector } from "@/store/hook";
 import { Button, RadioButton, Switch } from "react-native-paper";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
+import Toast from "react-native-toast-message";
+import tw from "twrnc";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { cardTextColorData } from "@/lib/constant";
 import { UPLOAD_URI } from "@/config/env";
 import Text from "@/elements/Text";
+import { updateCard } from "@/actions/club";
+import { useDispatch } from "react-redux";
+import { clubActions } from "@/store/reducers/clubReducer";
 
 const MemberCard = () => {
+  const dispatch = useDispatch();
+
   const { user } = useAppSelector((store) => store.user);
   const { club } = useAppSelector((state) => state.club);
 
   const [frontImg, setFrontImg] = useState<string>();
   const [previewFrontImage, setPreviewFrontImage] = useState<any>();
+  const [removedFrontImg, setRemovedFrontImg] = useState<boolean>(false);
   const [backImg, setBackImg] = useState<string>();
   const [previewBackImage, setPreviewBackImage] = useState<any>();
+  const [removedBackImg, setRemovedBackImg] = useState<boolean>(false);
 
+  const [cardColor, setCardColor] = useState(cardTextColorData[0].name);
   const [textColor, setTextColor] = useState(cardTextColorData[0].name);
   const [logoColor, setLogoColor] = useState(cardTextColorData[0].name);
   const [qrPos, setQrPos] = useState<string>("left");
@@ -47,8 +58,7 @@ const MemberCard = () => {
     if (status !== "granted") {
       Alert.alert(
         "Permission Denied",
-        `Sorry, we need camera  
-                 roll permission to upload images.`
+        `Sorry, we need camera roll permission to upload images.`
       );
     } else {
       const result = await ImagePicker.launchImageLibraryAsync();
@@ -59,9 +69,47 @@ const MemberCard = () => {
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const formData = new FormData();
+    // console.log(
+    //   cardColor,
+    //   textColor,
+    //   logoColor,
+    //   frontImg,
+    //   removedFrontImg,
+    //   backImg,
+    //   removedBackImg,
+    //   qrPos,
+    //   isLogo,
+    //   isAvatar
+    // );
+
+    formData.append("cardColor", cardColor);
+    formData.append("textColor", textColor);
+    formData.append("logoColor", logoColor);
+    formData.append("frontBadge", frontImg || "");
+    formData.append("frontRemoveBadge", String(removedFrontImg));
+    formData.append("backBadge", backImg || "");
+    formData.append("backRemoveBadge", String(removedBackImg));
+    formData.append("position", qrPos);
+    formData.append("logoShown", String(isLogo));
+    formData.append("clubShown", String(isAvatar));
+
+    const result = await updateCard(formData);
+
+    Toast.show({
+      type: "success",
+      text1: "Glückwunsch",
+      text2: result.msg,
+    });
+
+    if (result.success) {
+      dispatch(clubActions.setClub({ club: result.club }));
+    }
+  };
 
   useEffect(() => {
+    setCardColor(club?.card?.cardColor as string);
     setTextColor(club?.card?.textColor as string);
     setLogoColor(club?.card?.logoColor as string);
     setFrontImg(club?.card?.frontBadge);
@@ -75,10 +123,35 @@ const MemberCard = () => {
     <View className="bg-white rounded-2xl mb-4">
       <View className="px-4 py-3 border-b border-gray-100">
         <View className="">
-          <Text className="font-semibold text-lg">Mitgliedsausweis</Text>
+          <Text className="font-semibold text-lg">Hintergrundfarbe</Text>
           <Text className="text-xs text-[#808089]">
-            Hier kannst du das Aussehen des Mitgliedsausweises anpassen.
+            Der Hintergrund des Ausweises
           </Text>
+        </View>
+      </View>
+      <View className="px-4 py-3 border-b border-gray-100">
+        <View className="mb-4">
+          <View className="mb-6 space-y-1">
+            <Text className="text-sm">Textfarbe</Text>
+            <Text className="text-[#808089] text-xs">
+              Wähle die Farbe des Textes auf deinem Ausweis
+            </Text>
+          </View>
+          <View className="flex-row flex-wrap gap-1 items-center mx-auto justify-center px-4">
+            {cardTextColorData.map((item, key) => (
+              <Pressable
+                key={key}
+                className={`w-7 h-7 ${item.bgColor}${
+                  cardColor === item.name
+                    ? ` border-4 ${item.borderColor}`
+                    : ` border-2 border-white`
+                } rounded-full`}
+                onPress={() => setTextColor(item.name)}
+              >
+                <View></View>
+              </Pressable>
+            ))}
+          </View>
         </View>
       </View>
       <View className="px-4 py-3 border-b border-gray-100">
@@ -107,6 +180,20 @@ const MemberCard = () => {
                   placeholder="background"
                   className="w-60 h-48 rounded-lg"
                 />
+                <Pressable
+                  style={tw`absolute top-2 right-2`}
+                  onPress={() => {
+                    setFrontImg(undefined);
+                    setPreviewFrontImage(undefined);
+                    setRemovedFrontImg(true);
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    color={"#ef4444"}
+                    size={16}
+                    name={"delete-outline"}
+                  />
+                </Pressable>
               </Pressable>
             ) : (
               <Pressable onPress={pickFrontImage}>
@@ -115,6 +202,20 @@ const MemberCard = () => {
                   placeholder="background"
                   className="w-60 h-48 rounded-lg"
                 />
+                <Pressable
+                  style={tw`absolute top-2 right-2`}
+                  onPress={() => {
+                    setFrontImg(undefined);
+                    setPreviewFrontImage(undefined);
+                    setRemovedFrontImg(true);
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    color={"#ef4444"}
+                    size={16}
+                    name={"delete-outline"}
+                  />
+                </Pressable>
               </Pressable>
             )}
           </View>
@@ -139,6 +240,20 @@ const MemberCard = () => {
                   placeholder="background"
                   className="w-60 h-48 rounded-lg"
                 />
+                <Pressable
+                  style={tw`absolute top-2 right-2`}
+                  onPress={() => {
+                    setBackImg(undefined);
+                    setPreviewBackImage(undefined);
+                    setRemovedBackImg(true);
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    color={"#ef4444"}
+                    size={16}
+                    name={"delete-outline"}
+                  />
+                </Pressable>
               </Pressable>
             ) : (
               <Pressable onPress={pickBackImage}>
@@ -147,6 +262,20 @@ const MemberCard = () => {
                   placeholder="background"
                   className="w-60 h-48 rounded-lg"
                 />
+                <Pressable
+                  style={tw`absolute top-2 right-2`}
+                  onPress={() => {
+                    setBackImg(undefined);
+                    setPreviewBackImage(undefined);
+                    setRemovedBackImg(true);
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    color={"#ef4444"}
+                    size={16}
+                    name={"delete-outline"}
+                  />
+                </Pressable>
               </Pressable>
             )}
           </View>
@@ -165,7 +294,9 @@ const MemberCard = () => {
               <Pressable
                 key={key}
                 className={`w-7 h-7 ${item.bgColor}${
-                  textColor === item.name ? ` border-2 ${item.borderColor}` : ``
+                  textColor === item.name
+                    ? ` border-4 ${item.borderColor}`
+                    : ` border-2 border-white`
                 } rounded-full`}
                 onPress={() => setTextColor(item.name)}
               >
@@ -186,7 +317,9 @@ const MemberCard = () => {
               <Pressable
                 key={key}
                 className={`w-7 h-7 ${item.bgColor}${
-                  logoColor === item.name ? ` border-2 ${item.borderColor}` : ``
+                  logoColor === item.name
+                    ? ` border-4 ${item.borderColor}`
+                    : ` border-2 border-white`
                 } rounded-full`}
                 onPress={() => setLogoColor(item.name)}
               >

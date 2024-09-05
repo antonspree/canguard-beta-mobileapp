@@ -112,6 +112,22 @@ const updateColor = async (data: any) => {
   }
 };
 
+const updateCard = async (data: any) => {
+  try {
+    const result = await axiosPrivateInstance
+      .post("/club/updateCard", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const uploadDoc = async (data: any) => {
   try {
     const result = await axiosPrivateInstance
@@ -150,6 +166,7 @@ export {
   updateClub,
   updateGeneral,
   updateColor,
+  updateCard,
   uploadDoc,
   removeDoc,
 };

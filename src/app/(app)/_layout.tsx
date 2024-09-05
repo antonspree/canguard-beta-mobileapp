@@ -11,12 +11,13 @@ export default function RootLayout() {
   const { setTheme } = useTheme();
 
   const { user } = useAppSelector((state) => state.user);
+  const { club } = useAppSelector((state) => state.club);
 
   React.useEffect(() => {
     const inAuthGroup = segments[0] === "(auth)";
 
     if (user && user.club) {
-      if (user.club.color) setTheme(user.club.color);
+      if (club?.color) setTheme(club?.color);
       // User is signed in and has a club, redirect to dashboard if not already there
       if (!segments.includes("(dashboard)")) {
         router.replace("/(dashboard)");
@@ -32,7 +33,7 @@ export default function RootLayout() {
         router.replace("/(guest)/signin");
       }
     }
-  }, [user, segments]);
+  }, [user, club, segments]);
 
   if (user === undefined) {
     // User is not loaded yet, do nothing

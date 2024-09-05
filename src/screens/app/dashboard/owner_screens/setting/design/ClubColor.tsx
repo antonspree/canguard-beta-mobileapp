@@ -8,11 +8,12 @@ import { colorData } from "@/lib/constant";
 import { useDispatch } from "react-redux";
 import { clubActions } from "@/store/reducers/clubReducer";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const ClubColor = () => {
   const dispatch = useDispatch();
+  const { colors } = useTheme();
 
-  const { user } = useAppSelector((store) => store.user);
   const { club } = useAppSelector((state) => state.club);
 
   const [color, setColor] = useState<string>(colorData[0].name);
@@ -59,7 +60,9 @@ const ClubColor = () => {
               <Pressable
                 key={key}
                 className={`w-7 h-7 ${item.bgColor}${
-                  color === item.name ? ` border-2 ${item.borderColor}` : ``
+                  color === item.name
+                    ? ` border-4 ${item.borderColor}`
+                    : ` border-2 border-white`
                 } rounded-full`}
                 onPress={() => setColor(item.name)}
               >
@@ -72,7 +75,7 @@ const ClubColor = () => {
       <View className="flex-row justify-end px-4 py-3">
         <Button
           mode="contained"
-          buttonColor="#19A873"
+          buttonColor={colors.bgColor}
           onPress={handleSubmit}
           className="rounded-lg"
         >

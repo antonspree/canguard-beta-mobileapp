@@ -48,20 +48,20 @@ const MemberScreen: React.FC = () => {
       {user?.status === "pending" ? (
         <Card style={tw`p-0`}>
           <View
-            style={tw`flex flex-col items-center space-y-2 p-5 border-b border-[#EAEAEA]`}
+            style={tw`flex flex-col items-center gap-2 p-5 border-b border-[#EAEAEA]`}
           >
             <Text style={tw`font-bold text-xl`}>Meine Mitgliedschaft</Text>
             <Text style={tw`text-sm text-[#919191]`}>
               {user?.club?.clubID} / {user?.memberID}
             </Text>
           </View>
-          <View style={tw`space-y-5 p-5`}>
-            <View style={tw`flex flex-col space-y-3`}>
+          <View style={tw`gap-5 p-5`}>
+            <View style={tw`flex flex-col gap-3`}>
               <View
                 style={tw`flex flex-row space-x-2 p-3 bg-[#55A3FF]/20 border border-[#55A3FF] rounded-md`}
               >
                 <FontAwesome name="info-circle" size={20} color="#55A3FF" />
-                <View style={tw`flex flex-col space-y-1.5`}>
+                <View style={tw`flex flex-col gap-1.5`}>
                   <Text style={tw`font-semibold text-sm text-[#3C699D]`}>
                     Mitgliedsanfrage gestellt
                   </Text>
@@ -73,7 +73,7 @@ const MemberScreen: React.FC = () => {
                 </View>
               </View>
             </View>
-            <View style={tw`flex flex-col space-y-2`}>
+            <View style={tw`flex flex-col gap-2`}>
               <Text style={tw`text-sm text-[#919191]`}>Status</Text>
               <View style={tw`flex flex-row space-x-2`}>
                 <View
@@ -85,7 +85,7 @@ const MemberScreen: React.FC = () => {
                 </View>
               </View>
             </View>
-            <View style={tw`flex flex-col space-y-2`}>
+            <View style={tw`flex flex-col gap-2`}>
               <Text style={tw`text-sm text-[#919191]`}>Angefragt am</Text>
               <Text style={tw`text-sm font-semibold`}>
                 {getCleanDate(user?.memberdate as string, 2)}
@@ -101,11 +101,11 @@ const MemberScreen: React.FC = () => {
         </Card>
       ) : (
         <View
-          style={tw`w-full flex flex-col justify-center items-center space-y-5 pt-20`}
+          style={tw`w-full flex flex-col justify-center items-center gap-5 pt-20`}
         >
           <Feather name="check-circle" size={32} color="black" />
           <View
-            style={tw`w-full flex flex-col justify-center items-center space-y-2`}
+            style={tw`w-full flex flex-col justify-center items-center gap-2`}
           >
             <Text style={tw`text-xl font-semibold text-center`}>
               Alles erledigt.

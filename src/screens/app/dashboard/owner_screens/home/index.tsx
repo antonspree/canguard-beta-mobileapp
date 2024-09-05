@@ -147,7 +147,7 @@ const OwnerScreen: React.FC = () => {
           </View>
         </Card>
         <Card style={tw`p-5`}>
-          <View style={tw`flex flex-col space-y-1`}>
+          <View style={tw`flex flex-col gap-1`}>
             <Text style={tw`text-base font-semibold`}>Mitglieder</Text>
             <Text style={tw`text-sm text-[#919191]`}>
               Lade Mitglieder in Deinen Club ein, solange du noch die
