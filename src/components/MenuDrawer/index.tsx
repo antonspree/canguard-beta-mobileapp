@@ -11,6 +11,7 @@ import Text from "@/elements/Text";
 import { useDispatch } from "react-redux";
 import { appActions } from "@/store/reducers/appReducer";
 import { clearData } from "@/lib/storage";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 export default function MenuDrawer({
   children,
@@ -19,6 +20,7 @@ export default function MenuDrawer({
 }) {
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const { colors } = useTheme();
 
   const screenWidth = Dimensions.get("window").width;
 
@@ -79,41 +81,49 @@ export default function MenuDrawer({
             onPress={() => router.push("/(app)/(dashboard)/home")}
             mode="contained"
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={currentPath === "home" ? "#FFFFFF" : "#19A873"}
-            buttonColor={currentPath === "home" ? "#19A873" : "transparent"}
+            textColor={currentPath === "home" ? "#FFFFFF" : colors.bgColor}
+            buttonColor={
+              currentPath === "home" ? colors.bgColor : "transparent"
+            }
           >
             Dashboard
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/chat")}
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={currentPath === "chat" ? "#FFFFFF" : "#19A873"}
-            buttonColor={currentPath === "chat" ? "#19A873" : "transparent"}
+            textColor={currentPath === "chat" ? "#FFFFFF" : colors.bgColor}
+            buttonColor={
+              currentPath === "chat" ? colors.bgColor : "transparent"
+            }
           >
             Chat
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/club")}
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={currentPath === "club" ? "#FFFFFF" : "#19A873"}
-            buttonColor={currentPath === "club" ? "#19A873" : "transparent"}
+            textColor={currentPath === "club" ? "#FFFFFF" : colors.bgColor}
+            buttonColor={
+              currentPath === "club" ? colors.bgColor : "transparent"
+            }
           >
             Club
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/profile")}
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={currentPath === "profile" ? "#FFFFFF" : "#19A873"}
-            buttonColor={currentPath === "profile" ? "#19A873" : "transparent"}
+            textColor={currentPath === "profile" ? "#FFFFFF" : colors.bgColor}
+            buttonColor={
+              currentPath === "profile" ? colors.bgColor : "transparent"
+            }
           >
             Profil
           </Button>
           <Button
             onPress={() => router.push("/(app)/(dashboard)/community")}
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={currentPath === "community" ? "#FFFFFF" : "#19A873"}
+            textColor={currentPath === "community" ? "#FFFFFF" : colors.bgColor}
             buttonColor={
-              currentPath === "community" ? "#19A873" : "transparent"
+              currentPath === "community" ? colors.bgColor : "transparent"
             }
           >
             Community
@@ -123,7 +133,7 @@ export default function MenuDrawer({
           <Button
             onPress={handleLogout}
             style={tw`rounded-lg ml-0 mr-0`}
-            textColor={false ? "#FFFFFF" : "#19A873"}
+            textColor={false ? "#FFFFFF" : colors.bgColor}
           >
             Log out
           </Button>

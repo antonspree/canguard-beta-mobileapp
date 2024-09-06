@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { View, Pressable } from "react-native";
-import { useDispatch } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import Toast from "react-native-toast-message";
-import Container from "@/components/Container";
-import ProfileInput from "@/components/ProfileInput";
+import tw from "twrnc";
 import { updateClub } from "@/actions/club";
 import { clubActions } from "@/store/reducers/clubReducer";
-import { ClubProfileFormSchema } from "@/types/form";
+import { useAppDispatch } from "@/store/hook";
+import { useTheme } from "@/hooks/useThemeProvider";
+import Container from "@/components/Container";
+import ProfileInput from "@/components/ProfileInput";
 import Text from "@/elements/Text";
+import { ClubProfileFormSchema } from "@/types/form";
 
 const ProfileScreen = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { colors } = useTheme();
 
   const {
     control,
@@ -494,7 +497,7 @@ const ProfileScreen = () => {
               <Text className="px-3">pWKt</Text>
             </View>
             <Pressable
-              className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
+              style={tw`flex justify-center items-center py-2 bg-[${colors.bgColor}] rounded-md`}
               onPress={handleSubmit(onSubmit)}
             >
               <Text className="text-base font-bold text-white">Einloggen</Text>

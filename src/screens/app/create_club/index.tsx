@@ -2,6 +2,7 @@ import React from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { router } from "expo-router";
 import { useForm, Controller } from "react-hook-form";
+import tw from "twrnc";
 import { useAppDispatch } from "@/store/hook";
 import { userActions } from "@/store/reducers/userReducer";
 import { clubActions } from "@/store/reducers/clubReducer";
@@ -12,9 +13,11 @@ import { CreateClubFormDataType } from "@/types/form";
 import ProfileInput from "@/components/ProfileInput";
 import Card from "@/components/Card";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const CreateClubScreen: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { colors } = useTheme();
 
   const {
     control,
@@ -211,7 +214,7 @@ const CreateClubScreen: React.FC = () => {
               </View>
             </View>
             <Pressable
-              className="flex justify-center items-center py-2 bg-[#19A873] rounded-md"
+              style={tw`flex justify-center items-center py-2 bg-[${colors.bgColor}] rounded-md`}
               onPress={handleSubmit(onSubmit)}
             >
               <Text className="text-base text-white">Club erstellen</Text>

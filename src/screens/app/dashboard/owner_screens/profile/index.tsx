@@ -1,18 +1,22 @@
 import React from "react";
 import { ImageBackground, Pressable, View } from "react-native";
 import { router } from "expo-router";
+import { Image } from "expo-image";
+import tw from "twrnc";
 import QRCode from "react-qr-code";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useAppSelector } from "@/store/hook";
+import { useTheme } from "@/hooks/useThemeProvider";
 import Container from "@/components/Container";
-import { Image } from "expo-image";
 import { UPLOAD_URI } from "@/config/env";
 import LogoImg from "@/assets/images/icon.png";
 import MockCardBg from "@/assets/images/card-logo.svg";
 import Text from "@/elements/Text";
 
 const ProfileScreen: React.FC = () => {
+  const { colors } = useTheme();
+
   const { user } = useAppSelector((store) => store.user);
   const { club } = useAppSelector((store) => store.club);
 
@@ -72,7 +76,10 @@ const ProfileScreen: React.FC = () => {
               <View className="w-2 h-4 items-center justify-center">
                 <Image source={LogoImg} className="w-12 h-12" />
               </View>
-              <Text variant="bodySmall" className="font-bold text-[#19A873]">
+              <Text
+                variant="bodySmall"
+                style={tw`font-bold text-[${colors.bgColor}]`}
+              >
                 Canify
               </Text>
             </View>

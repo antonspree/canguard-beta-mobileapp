@@ -17,6 +17,7 @@ import ProfileInput from "@/components/ProfileInput";
 import Socket from "@/lib/socket";
 import { isEmpty } from "@/lib/function";
 import { ChannelFormSchema } from "@/types/form";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 LogBox.ignoreLogs([
   "Warning: TRenderEngineProvider:",
@@ -108,6 +109,8 @@ const ChatItem: React.FC<{ item: IChannel }> = ({ item }) => {
 
 const ChatScreen: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { colors } = useTheme();
+
   const { user } = useAppSelector((state) => state.user);
   const { channel } = useAppSelector((state) => state.channel);
 
@@ -219,7 +222,7 @@ const ChatScreen: React.FC = () => {
           <View className="flex-1 justify-center items-center">
             <Button
               mode="contained"
-              buttonColor="#19A873"
+              buttonColor={colors.bgColor}
               onPress={() => setOpen(true)}
               className="rounded-md"
             >
@@ -282,7 +285,7 @@ const ChatScreen: React.FC = () => {
             </Button>
             <Button
               mode="contained"
-              buttonColor="#19A873"
+              buttonColor={colors.bgColor}
               onPress={handleSubmit(onSubmit)}
               className="rounded-md"
               contentStyle={{ paddingHorizontal: 16 }}

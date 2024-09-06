@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, Dialog, Portal } from "react-native-paper";
 import ProfileInput from "@/components/ProfileInput";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 interface InserLinkFormSchema {
   link: string;
@@ -18,6 +19,8 @@ const InsertLinkModal = ({
   closeModal: () => void;
   onSubmit: any;
 }) => {
+  const { colors } = useTheme();
+
   const {
     control,
     formState: { errors },
@@ -67,7 +70,7 @@ const InsertLinkModal = ({
           </Button>
           <Button
             mode="contained"
-            buttonColor="#19A873"
+            buttonColor={colors.bgColor}
             onPress={handleSubmit(onSubmitForm)}
             className="rounded-md"
             contentStyle={{ paddingHorizontal: 16 }}

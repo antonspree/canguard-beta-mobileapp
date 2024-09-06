@@ -33,9 +33,12 @@ import { UPLOAD_URI } from "@/config/env";
 import { Accordion } from "@/components/Accordion";
 import Text from "@/elements/Text";
 import CommHtmlEditor from "@/widgets/CommHtmlEditor";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const CommunityFeedPage = () => {
   const dispatch = useAppDispatch();
+  const { colors } = useTheme();
+
   const { user } = useAppSelector((state) => state.user);
   const { feed } = useAppSelector((state) => state.feed);
 
@@ -70,6 +73,10 @@ const CommunityFeedPage = () => {
 
   const [tempEditData, setTempEditData] = useState<IFeed>();
   const [tempData, setTempData] = useState<IFeed>();
+
+  const themeColor = useMemo(() => {
+    return colors;
+  }, [colors]);
 
   const handleOnEmojiSelected = (emojiObject: EmojiType) => {
     richText.current?.insertText(emojiObject.emoji);
@@ -571,7 +578,7 @@ const CommunityFeedPage = () => {
                                       : votePercent === 100
                                       ? "0"
                                       : `[${100 - votePercent}%]`
-                                  } bg-[#19A873]`}
+                                  } bg-[${colors.bgColor}]`}
                                 />
                                 <Text variant="bodySmall" className="z-10">
                                   {vote.value}
@@ -1084,6 +1091,7 @@ const CommunityFeedPage = () => {
                         onSend={onReply}
                         imgsCount={replyImages.length}
                         docsCount={replyDocuments.length}
+                        themeColor={themeColor}
                       />
                       {replyPreviewImages.length > 0 && (
                         <View className="flex flex-wrap gap-3">
@@ -1255,7 +1263,7 @@ const CommunityFeedPage = () => {
                             <View>
                               <Pressable
                                 className={`flex-row justify-center items-center w-[32px] h-[32px] mr-[4px] bg-[${
-                                  visibleEmoji ? "#19A873" : "#FFFFFF"
+                                  visibleEmoji ? colors.bgColor : "#FFFFFF"
                                 }] rounded-[4px]`}
                                 onPress={() => setVisibleEmoji((v) => !v)}
                               >

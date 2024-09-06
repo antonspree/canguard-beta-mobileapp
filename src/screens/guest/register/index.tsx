@@ -6,10 +6,10 @@ import { Image } from "expo-image";
 import Checkbox from "expo-checkbox";
 import Toast from "react-native-toast-message";
 import { signUp } from "@/actions/auth";
-import { clearData, loadData } from "@/lib/storage";
-import ProfileInput from "@/components/ProfileInput";
-import { RegisterFormDataType } from "@/types/form";
 import Text from "@/elements/Text";
+import ProfileInput from "@/components/ProfileInput";
+import { clearData, loadData } from "@/lib/storage";
+import { RegisterFormDataType } from "@/types/form";
 
 const RegisterScreen: React.FC = () => {
   const [userInfo, setUserInfo] = useState({});

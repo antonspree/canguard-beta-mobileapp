@@ -13,9 +13,11 @@ import Text from "@/elements/Text";
 import { updateCard } from "@/actions/club";
 import { useDispatch } from "react-redux";
 import { clubActions } from "@/store/reducers/clubReducer";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const MemberCard = () => {
   const dispatch = useDispatch();
+  const { colors } = useTheme();
 
   const { user } = useAppSelector((store) => store.user);
   const { club } = useAppSelector((state) => state.club);
@@ -405,7 +407,7 @@ const MemberCard = () => {
       <View className="flex-row justify-end px-4 py-3">
         <Button
           mode="contained"
-          buttonColor="#19A873"
+          buttonColor={colors.bgColor}
           onPress={handleSubmit}
           className="rounded-lg"
           disabled={

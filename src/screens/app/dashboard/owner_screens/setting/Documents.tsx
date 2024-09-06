@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { removeDoc } from "@/actions/club";
 import { IClubDocument, clubActions } from "@/store/reducers/clubReducer";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const DeleteConfirmDialog = ({
   visible,
@@ -26,6 +27,8 @@ const DeleteConfirmDialog = ({
   hideDialog: () => void;
   submit: () => void;
 }) => {
+  const { colors } = useTheme();
+
   const handleSubmit = async () => {
     await submit();
     hideDialog();
@@ -44,7 +47,11 @@ const DeleteConfirmDialog = ({
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={hideDialog}>Stornieren</Button>
-          <Button mode="contained" buttonColor="#19A873" onPress={handleSubmit}>
+          <Button
+            mode="contained"
+            buttonColor={colors.bgColor}
+            onPress={handleSubmit}
+          >
             <Text className="font-bold text-center text-sm text-white">
               Löschen
             </Text>
@@ -136,6 +143,7 @@ const DocumentItem = ({ item }: { item: IClubDocument }) => {
 
 const DocumentsScreen = () => {
   const dispatch = useAppDispatch();
+  const { colors } = useTheme();
 
   const { club } = useAppSelector((state) => state.club);
   const { user } = useAppSelector((state) => state.user);
@@ -170,7 +178,7 @@ const DocumentsScreen = () => {
           <View className="flex-row px-4 py-3">
             <Button
               mode="contained"
-              buttonColor="#19A873"
+              buttonColor={colors.bgColor}
               onPress={handleSubmit}
               className="rounded-lg"
             >

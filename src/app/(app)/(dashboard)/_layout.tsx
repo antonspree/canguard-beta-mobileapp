@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -8,6 +7,7 @@ import { feedActions } from "@/store/reducers/feedReducer";
 import { getFeed } from "@/actions/feed";
 import { useAppDispatch } from "@/store/hook";
 import { useTheme } from "@/hooks/useThemeProvider";
+import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 
 export default function AppLayout() {
   const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ export default function AppLayout() {
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
       activeColor={colors.bgColor}
-      inactiveColor="#32323460"
+      inactiveColor="#C8C8C8"
       barStyle={{
         backgroundColor: "#ffffff",
         borderTopColor: "#EAEAEA",

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Dialog, Portal } from "react-native-paper";
-import ProfileInput from "@/components/ProfileInput";
 import { resetPass } from "@/actions/auth";
+import { useTheme } from "@/hooks/useThemeProvider";
 import Text from "@/elements/Text";
+import ProfileInput from "@/components/ProfileInput";
 
 interface ChangePasswordForm {
   currentPassword: string;
@@ -19,6 +20,8 @@ const ChangePasswordDialog = ({
   visible: boolean;
   onDismiss: () => void;
 }) => {
+  const { colors } = useTheme();
+
   const {
     control,
     formState: { errors },
@@ -105,7 +108,7 @@ const ChangePasswordDialog = ({
           </Button>
           <Button
             mode="contained"
-            buttonColor="#19A873"
+            buttonColor={colors.bgColor}
             onPress={handleSubmit(onSubmit)}
             className="rounded-md"
             contentStyle={{ paddingHorizontal: 16 }}

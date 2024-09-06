@@ -73,8 +73,9 @@ const privateNavs = [
 ];
 
 const DashbordFooter: React.FC = () => {
-  const { user } = useAppSelector((state) => state.user);
   const pathname = usePathname();
+
+  const { user } = useAppSelector((state) => state.user);
 
   return user?.club ? (
     <View className="absolute bottom-0 left-0 z-10 flex flex-row items-center justify-between h-16 w-full">

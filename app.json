@@ -31,8 +31,11 @@
       "favicon": "./src/assets/images/favicon.png"
     },
     "extra": {
+      "router": {
+        "origin": false
+      },
       "eas": {
-        "projectId": "8de363d4-9d91-4d6b-81d6-e2032174839d"
+        "projectId": "a4b36bf1-829a-4c70-a800-fd4f0c313b87"
       }
     },
     "runtimeVersion": {
@@ -66,13 +69,5 @@
   ],
   "experiments": {
     "typedRoutes": true
-  },
-  "extra": {
-    "router": {
-      "origin": false
-    },
-    "eas": {
-      "projectId": "d867c814-8d30-4ce9-87f2-95483398c8e6"
-    }
   }
 }

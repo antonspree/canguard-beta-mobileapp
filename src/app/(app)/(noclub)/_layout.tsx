@@ -1,12 +1,15 @@
 import React from "react";
-import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { MaterialBottomTabs } from "@/layouts/MaterialBottomTabs";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 export default function AppLayout() {
+  const { colors } = useTheme();
+
   return (
     <MaterialBottomTabs
       safeAreaInsets={{ bottom: 0 }}
-      activeColor="#19A873"
+      activeColor={colors.bgColor}
       inactiveColor="#C8C8C8"
       barStyle={{
         backgroundColor: "#ffffff",

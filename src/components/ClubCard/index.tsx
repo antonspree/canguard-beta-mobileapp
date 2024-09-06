@@ -5,6 +5,7 @@ import Card from "../Card";
 import { ClubCardPropsInterface } from "@/types/component";
 import { Button } from "react-native-paper";
 import Text from "@/elements/Text";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const ClubCard: React.FC<ClubCardPropsInterface> = ({
   title,
@@ -15,6 +16,8 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
   route,
   iconName,
 }) => {
+  const { colors } = useTheme();
+
   return (
     <Card className="flex flex-col space-y-3">
       <View className="flex flex-col space-y-2">
@@ -34,7 +37,7 @@ const ClubCard: React.FC<ClubCardPropsInterface> = ({
 
       <Button
         mode="contained"
-        buttonColor="#19A873"
+        buttonColor={colors.bgColor}
         onPress={() => router.push(route)}
         className="w-[150px] rounded-md"
         icon={iconName}

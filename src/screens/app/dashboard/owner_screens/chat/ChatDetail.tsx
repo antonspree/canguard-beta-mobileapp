@@ -23,9 +23,11 @@ import MessageBox from "@/components/MessageBox";
 import Socket from "@/lib/socket";
 import { ChatFormSchema } from "@/types/form";
 import InsertLinkModal from "./InsertLinkModal";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const ChatDetailScreen = () => {
   const dispatch = useDispatch();
+  const { colors } = useTheme();
 
   const {
     control,
@@ -158,7 +160,7 @@ const ChatDetailScreen = () => {
               <View>
                 <Pressable
                   className={`flex-row justify-center items-center w-[32px] h-[32px] mr-[4px] bg-[${
-                    visibleEmoji ? "#19A873" : "#FFFFFF"
+                    visibleEmoji ? colors.bgColor : "#FFFFFF"
                   }] rounded-[4px]`}
                   onPress={() => setVisibleEmoji((v) => !v)}
                 >
@@ -180,7 +182,7 @@ const ChatDetailScreen = () => {
                 }}
                 selectedIconTint="#ffffff"
                 selectedButtonStyle={{
-                  backgroundColor: "#19A873",
+                  backgroundColor: colors.bgColor,
                   borderRadius: 4,
                   width: 32,
                   height: 32,

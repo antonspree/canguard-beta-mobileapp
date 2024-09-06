@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Alert, PermissionsAndroid, Pressable, View } from "react-native";
-import { RichEditor } from "react-native-pell-rich-editor";
 import * as DocumentPicker from "expo-document-picker";
 import * as ImagePicker from "expo-image-picker";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { RichEditor } from "react-native-pell-rich-editor";
 import { EmojiKeyboard, EmojiType } from "rn-emoji-keyboard";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const CommHtmlEditor = ({
   message,
@@ -19,6 +20,7 @@ const CommHtmlEditor = ({
   imgsCount,
   docsCount,
   voteAvailable,
+  themeColor,
 }: {
   message: string;
   setMessage: any;
@@ -32,7 +34,10 @@ const CommHtmlEditor = ({
   imgsCount: number;
   docsCount: number;
   voteAvailable?: boolean;
+  themeColor?: any;
 }) => {
+  const { colors } = useTheme();
+
   const richText = useRef<any>();
   const [visibleEmoji, setVisibleEmoji] = useState(false);
 
@@ -151,19 +156,24 @@ const CommHtmlEditor = ({
           initialContentHTML=""
           initialFocus
           scrollEnabled
+          disabled={disabled}
         />
         <View className="flex-row items-center justify-between mt-2 space-x-2 px-2">
           <View className="flex-row space-x-1.5">
             <Pressable onPress={pickDocument} disabled={docsCount >= 5}>
               <MaterialCommunityIcons
-                color={"#19A873"}
+                color={
+                  themeColor?.bgColor ? themeColor.bgColor : colors.bgColor
+                }
                 size={16}
                 name={"plus-circle-outline"}
               />
             </Pressable>
             <Pressable onPress={pickImage} disabled={imgsCount >= 10}>
               <MaterialCommunityIcons
-                color={"#19A873"}
+                color={
+                  themeColor?.bgColor ? themeColor.bgColor : colors.bgColor
+                }
                 size={16}
                 name={"file-image-plus-outline"}
               />
@@ -172,19 +182,27 @@ const CommHtmlEditor = ({
               <MaterialCommunityIcons
                 name="emoticon-happy-outline"
                 size={16}
-                color="#19A873"
+                color={
+                  themeColor?.bgColor ? themeColor.bgColor : colors.bgColor
+                }
               />
             </Pressable>
             <Pressable disabled={!voteAvailable}>
               <MaterialCommunityIcons
-                color={"#19A873"}
+                color={
+                  themeColor?.bgColor ? themeColor.bgColor : colors.bgColor
+                }
                 size={16}
                 name={"chart-line"}
               />
             </Pressable>
           </View>
           <Pressable onPress={onSubmit}>
-            <MaterialCommunityIcons color={"#19A873"} size={16} name={"send"} />
+            <MaterialCommunityIcons
+              color={themeColor?.bgColor ? themeColor.bgColor : colors.bgColor}
+              size={16}
+              name={"send"}
+            />
           </Pressable>
         </View>
       </View>

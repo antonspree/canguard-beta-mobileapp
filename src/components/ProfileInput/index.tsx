@@ -7,6 +7,7 @@ import DateTimePicker, {
 import { formatedate, getMaxDate } from "@/lib/function";
 import Text from "@/elements/Text";
 import { ProfileInputProps } from "@/types/component";
+import { useTheme } from "@/hooks/useThemeProvider";
 
 const ProfileInput: React.FC<ProfileInputProps> = ({
   type = "text",
@@ -16,6 +17,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
   numberOfLines,
   ...rest
 }) => {
+  const { colors } = useTheme();
   const [isShown, setShown] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -58,7 +60,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
           }
           mode="outlined"
           outlineColor="#EAEAEA"
-          activeOutlineColor="#19A873"
+          activeOutlineColor={colors.bgColor}
           onChangeText={onChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
@@ -83,7 +85,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
             }
             mode="outlined"
             outlineColor="#EAEAEA"
-            activeOutlineColor="#19A873"
+            activeOutlineColor={colors.bgColor}
             onChangeText={onChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -125,7 +127,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
                 ) : undefined
               }
               outlineColor="#EAEAEA"
-              activeOutlineColor="#19A873"
+              activeOutlineColor={colors.bgColor}
               onChangeText={onChange}
               onBlur={handleBlur}
               onFocus={handleFocus}
@@ -160,7 +162,7 @@ const ProfileInput: React.FC<ProfileInputProps> = ({
           }
           mode="outlined"
           outlineColor="#EAEAEA"
-          activeOutlineColor="#19A873"
+          activeOutlineColor={colors.bgColor}
           onBlur={handleBlur}
           onFocus={handleFocus}
           multiline
