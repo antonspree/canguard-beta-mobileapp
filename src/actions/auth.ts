@@ -1,4 +1,4 @@
-import { axiosPublicInstance } from "@/lib/axios";
+import { axiosPrivateInstance, axiosPublicInstance } from "@/lib/axios";
 
 const signIn = async (data: any) => {
   try {
@@ -50,7 +50,7 @@ const resetPass = async (data: any) => {
 
 const changePass = async (data: any) => {
   try {
-    const result = await axiosPublicInstance
+    const result = await axiosPrivateInstance
       .post("/auth/changePass", data)
       .then((res) => res.data);
 
