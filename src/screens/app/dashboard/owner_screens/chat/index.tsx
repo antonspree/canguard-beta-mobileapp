@@ -127,7 +127,10 @@ const ChatScreen: React.FC = () => {
   const onSubmit = async (data: ChannelFormSchema) => {
     setLoading(true);
 
-    console.log(data);
+    console.log({
+      userID: user?._id,
+      ...data,
+    });
 
     Socket.emit("createChannel", {
       userID: user?._id,
@@ -297,14 +300,6 @@ const ChatScreen: React.FC = () => {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-      {/* <Modal
-        animationType="slide"
-        transparent={true}
-        visible={open}
-        className="border border-red-600"
-      >
-        
-      </Modal> */}
     </>
   );
 };

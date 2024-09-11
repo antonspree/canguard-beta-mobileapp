@@ -5,14 +5,26 @@ import * as Linking from "expo-linking";
 import { clearData } from "@/lib/storage";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAppDispatch } from "@/store/hook";
 import Container from "@/components/Container";
 import ChangePasswordDialog from "@/widgets/ChangePasswordDialog";
 import Text from "@/elements/Text";
+import { userActions } from "@/store/reducers/userReducer";
+import { clubActions } from "@/store/reducers/clubReducer";
+import { membersActions } from "@/store/reducers/membersReducer";
+import { membershipActions } from "@/store/reducers/membershipReducer";
 
 const PersonalDetailScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const [changePassVisible, setChangePassVisible] = useState<boolean>(false);
+
   const handleLogout = () => {
     clearData("token");
+    dispatch(userActions.setUser({ user: null }));
+    dispatch(clubActions.setClub({ club: null }));
+    dispatch(membersActions.setMembers({ members: null }));
+    dispatch(membershipActions.setMembership({ membership: null }));
     router.replace("/(guest)/signin");
   };
 

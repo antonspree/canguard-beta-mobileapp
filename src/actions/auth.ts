@@ -48,4 +48,16 @@ const resetPass = async (data: any) => {
   }
 };
 
-export { signIn, signUp, forgotPass, resetPass };
+const changePass = async (data: any) => {
+  try {
+    const result = await axiosPublicInstance
+      .post("/auth/changePass", data)
+      .then((res) => res.data);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export { signIn, signUp, forgotPass, resetPass, changePass };

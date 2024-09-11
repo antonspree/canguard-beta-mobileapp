@@ -1,6 +1,7 @@
+import { UPLOAD_URI } from "@/config/env";
 import io from "socket.io-client";
 
-const Socket = io(process.env.EXPO_PUBLIC_UPLOAD_URI as string, {
+const Socket = io(UPLOAD_URI as string, {
   transports: ["websocket", "polling"],
 });
 

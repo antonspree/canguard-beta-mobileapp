@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Dialog, Portal } from "react-native-paper";
-import { resetPass } from "@/actions/auth";
+import Toast from "react-native-toast-message";
+import { changePass } from "@/actions/auth";
 import { useTheme } from "@/hooks/useThemeProvider";
 import Text from "@/elements/Text";
 import ProfileInput from "@/components/ProfileInput";
 
 interface ChangePasswordForm {
-  currentPassword: string;
-  password: string;
-  confirmPassword: string;
+  currentPass: string;
+  newPass: string;
+  confirmPass: string;
 }
 
 const ChangePasswordDialog = ({
@@ -34,7 +35,46 @@ const ChangePasswordDialog = ({
   const onSubmit = async (data: ChangePasswordForm) => {
     setLoading(true);
 
-    const result = await resetPass(data);
+    const { newPass, confirmPass } = data;
+
+    if (newPass.length < 8) {
+      Toast.show({
+        type: "error",
+        text1: "Benachrichtigung",
+        text2: "Das Passwort muss mindestens 8 Zeichen lang sein.",
+      });
+    }
+
+    if (newPass !== confirmPass) {
+      Toast.show({
+        type: "error",
+        text1: "Benachrichtigung",
+        text2: "Die Passwörter stimmen nicht überein.",
+      });
+
+      return;
+    }
+
+    const result = await changePass(data);
+    console.log(result);
+
+    if (result.success) {
+      Toast.show({
+        type: "success",
+        text1: "Erfolgreich",
+        text2: result.msg,
+      });
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Fehler",
+        text2: result.msg,
+      });
+    }
+
+    setLoading(false);
+
+    reset();
   };
 
   return (
@@ -50,7 +90,7 @@ const ChangePasswordDialog = ({
         <Dialog.Content>
           <View>
             <Controller
-              name="currentPassword"
+              name="currentPass"
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
@@ -67,7 +107,7 @@ const ChangePasswordDialog = ({
           </View>
           <View>
             <Controller
-              name="password"
+              name="newPass"
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
@@ -84,7 +124,7 @@ const ChangePasswordDialog = ({
           </View>
           <View>
             <Controller
-              name="confirmPassword"
+              name="confirmPass"
               control={control}
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (

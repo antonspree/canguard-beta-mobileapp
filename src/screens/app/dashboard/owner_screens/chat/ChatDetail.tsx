@@ -159,14 +159,14 @@ const ChatDetailScreen = () => {
             >
               <View>
                 <Pressable
-                  className={`flex-row justify-center items-center w-[32px] h-[32px] mr-[4px] bg-[${
+                  className={`flex-row justify-center items-center w-[24px] h-[24px] mr-[4px] bg-[${
                     visibleEmoji ? colors.bgColor : "#FFFFFF"
                   }] rounded-[4px]`}
                   onPress={() => setVisibleEmoji((v) => !v)}
                 >
                   <MaterialCommunityIcons
-                    color={visibleEmoji ? "#FFFFFF" : "#000000"}
-                    size={20}
+                    color={visibleEmoji ? "#FFFFFF" : colors.bgColor}
+                    size={14}
                     name="emoticon-happy-outline"
                   />
                 </Pressable>
@@ -176,19 +176,20 @@ const ChatDetailScreen = () => {
                 unselectedButtonStyle={{
                   backgroundColor: "#ffffff",
                   borderRadius: 4,
-                  width: 32,
-                  height: 32,
+                  width: 24,
+                  height: 24,
                   marginRight: 4,
                 }}
                 selectedIconTint="#ffffff"
                 selectedButtonStyle={{
                   backgroundColor: colors.bgColor,
                   borderRadius: 4,
-                  width: 32,
-                  height: 32,
+                  width: 24,
+                  height: 24,
                   marginRight: 4,
                 }}
-                iconTint="#312921"
+                iconTint={colors.bgColor}
+                iconSize={14}
                 actions={[
                   actions.setBold,
                   actions.setItalic,

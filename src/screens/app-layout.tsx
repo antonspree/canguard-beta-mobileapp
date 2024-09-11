@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Slot } from "expo-router";
+import { Slot, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast, {
@@ -43,6 +43,8 @@ const AppLayout = () => {
       dispatch(
         membershipActions.setMembership({ membership: userData.membership })
       );
+
+      router.replace("/(app)");
     }
   };
 

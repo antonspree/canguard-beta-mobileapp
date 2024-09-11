@@ -76,10 +76,7 @@ const ProfileScreen: React.FC = () => {
               <View className="w-2 h-4 items-center justify-center">
                 <Image source={LogoImg} className="w-12 h-12" />
               </View>
-              <Text
-                variant="bodySmall"
-                style={tw`font-bold text-[${colors.bgColor}]`}
-              >
+              <Text variant="bodySmall" style={tw`font-bold text-[#19A873]`}>
                 Canify
               </Text>
             </View>

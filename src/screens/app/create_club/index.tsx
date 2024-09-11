@@ -26,18 +26,17 @@ const CreateClubScreen: React.FC = () => {
   } = useForm<CreateClubFormDataType>();
 
   const onSubmit = async (data: CreateClubFormDataType) => {
+    console.log(data);
     const result = await createClub(data);
 
     message({ message: result.msg });
-
-    console.log(result);
 
     if (result.success) {
       dispatch(clubActions.setClub({ club: result.club }));
       dispatch(userActions.setUser({ user: result.user }));
       dispatch(membersActions.setMembers({ members: result.members }));
 
-      router.replace("/(app)/(dashboard)/setting");
+      router.replace("/(app)/(dashboard)/club/setting");
     }
   };
 
