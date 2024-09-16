@@ -58,7 +58,7 @@ const SignInScreen: React.FC = () => {
         if (result.msg) {
           Toast.show({
             type: "error",
-            text1: "Error de inicio de sesion",
+            text1: "ErrFehler beim Login",
             text2: result.msg,
           });
         } else {

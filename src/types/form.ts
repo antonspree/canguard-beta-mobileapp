@@ -13,6 +13,10 @@ interface RegisterFormDataType {
   birth: string;
 }
 
+interface ForgotPasswordFormDataType {
+  email: string;
+}
+
 interface CreateClubFormDataType {
   clubname: string;
   street: string;
@@ -62,6 +66,7 @@ export {
   SignInFormDataType,
   SignUpFormDataType,
   RegisterFormDataType,
+  ForgotPasswordFormDataType,
   CreateClubFormDataType,
   ChannelFormSchema,
   ChatFormSchema,

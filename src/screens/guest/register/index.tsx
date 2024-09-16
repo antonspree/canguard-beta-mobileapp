@@ -60,9 +60,9 @@ const RegisterScreen: React.FC = () => {
     <View className="w-full h-full flex justify-center items-center space-y-5 px-5">
       <View className="flex justify-center items-center space-y-2">
         <Image
-          source={require("../../../assets/images/logo.png")}
+          className="w-48 h-12"
           placeholder="logo"
-          className="w-12 h-12"
+          source={require("@/assets/images/logo.png")}
         />
         <Text className="text-center font-bold text-3xl">
           Herzlich Willkommen
